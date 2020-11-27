@@ -11,7 +11,10 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "dom-to-image": "^2.6.0",
+    "konva": "^7.1.9",
     "vue": "^2.6.11",
+    "vue-konva": "^2.1.6",
     "vue-router": "^3.2.0",
     "vuetify": "^2.2.11",
     "vuex": "^3.4.0"

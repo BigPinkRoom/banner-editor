@@ -21,3 +21,8 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+canvas {
+  border: 1px solid gray !important;
+}
+</style>

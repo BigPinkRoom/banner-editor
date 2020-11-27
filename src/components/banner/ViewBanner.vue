@@ -3,8 +3,8 @@
     <v-container>
       <v-row>
         <v-col>
-          <div class="view-banner_box">
-            <canvas id="canvas" width="500" height="500">sdfsd</canvas>
+          <div>
+            <banner-canvas></banner-canvas>
           </div>
         </v-col>
       </v-row>
@@ -12,18 +12,15 @@
   </div>
 </template>
 <script>
+import bannerCanvas from './testBannerCanvas';
+
 export default {
-  data() {
-    return {
-      boxWidth: 800,
-      boxHeight: 800,
-    };
+  components: {
+    bannerCanvas,
   },
-  methods: {},
+  data() {
+    return {};
+  },
 };
 </script>
-<style lang="scss" scoped>
-#canvas {
-  border: 1px solid gray;
-}
-</style>
+<style lang="scss" scoped></style>
