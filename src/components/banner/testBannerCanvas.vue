@@ -11,6 +11,7 @@
       >
         <v-layer ref="layer">
           <v-rect
+            ref="shape"
             :config="{
               x: 0,
               y: 0,
@@ -21,19 +22,25 @@
             }"
           />
 
-          <v-image :config="imageConfig" @transformend="handleTransformEnd" />
-          <v-transformer ref="transformer" />
+          <v-image
+            ref="imageCanvas"
+            :config="imageConfig"
+            @transformend="handleTransformEnd"
+          />
+          <v-transformer ref="transformer" :config="transformerConfig" />
         </v-layer>
       </v-stage>
     </div>
+    <v-btn class="blue" @click="resetImagePosition">Reset width</v-btn>
     <v-btn class="green" @click="downloadResult">Download</v-btn>
     <v-btn class="orange" @click="downloadFullResult">Download</v-btn>
+    <v-btn class="grey" @click="imagePositionByHeight">By full height</v-btn>
+    <v-btn class="teal" @click="imagePositionByWidth">By full width</v-btn>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
-import Konva from 'konva';
 import domToImage from 'dom-to-image';
 
 export default {
@@ -50,31 +57,38 @@ export default {
         x: 0,
         y: 0,
 
-        scaleX: 0.416,
-        scaleY: 0.416,
+        scaleX: 1,
+        scaleY: 1,
         image: null,
         name: 'imageName',
         draggable: true,
+      },
+      transformerConfig: {
+        centeredScaling: true,
+        borderEnabled: true,
       },
       selectedImageName: '',
     };
   },
   computed: {
     ...mapState('shared', ['loading']),
-    ...mapState('banner', ['inputImage']),
+    ...mapState('image', ['inputImage']),
   },
   watch: {
-    inputImage() {
-      this.imageConfig.rotation = 0;
-      this.imageConfig.x = 0;
-      this.imageConfig.y = 0;
-      const image = new window.Image();
-      image.src = this.inputImage.file;
-      image.onload = () => {
-        // set image only when it is loaded
-        console.log(this.width, this.height);
-        this.imageConfig.image = image;
-      };
+    inputImage: {
+      handler() {
+        let imageCanvas = this.$refs.imageCanvas.getNode();
+        imageCanvas.position({ x: 0, y: 0 });
+        this.imageConfig.rotation = 0;
+
+        this.imageConfig.scaleX = this.stageSize.width / this.inputImage.width;
+        this.imageConfig.scaleY = this.stageSize.width / this.inputImage.width;
+
+        this.imageConfig.image = this.inputImage.file;
+        this.selectedImageName = '';
+        this.updateTransformer();
+      },
+      deep: true,
     },
   },
   created() {
@@ -88,31 +102,74 @@ export default {
     };
   },
   methods: {
-    downloadFullResult() {
+    imagePositionByHeight() {
+      const imageCanvas = this.$refs.imageCanvas.getNode();
+      imageCanvas.position({ x: 0, y: 0 });
+      this.imageConfig.rotation = 0;
+
+      this.imageConfig.scaleY = this.stageSize.height / this.inputImage.height;
+
+      this.imageConfig.scaleX = this.stageSize.height / this.inputImage.height;
+
       this.selectedImageName = '';
       this.updateTransformer();
-      console.log(this);
+    },
+    imagePositionByWidth() {
+      let imageCanvas = this.$refs.imageCanvas.getNode();
+      imageCanvas.position({ x: 0, y: 0 });
+      this.imageConfig.rotation = 0;
+
+      this.imageConfig.scaleY = this.stageSize.width / this.inputImage.width;
+
+      this.imageConfig.scaleX = this.stageSize.width / this.inputImage.width;
+
+      this.selectedImageName = '';
+      this.updateTransformer();
+    },
+    resetImagePosition() {
+      let imageCanvas = this.$refs.imageCanvas.getNode();
+      imageCanvas.position({ x: 0, y: 0 });
+      this.imageConfig.rotation = 0;
+
+      this.selectedImageName = '';
+      this.updateTransformer();
+
+      // this.imageConfig.x = 0;
+      // this.imageConfig.y = 0;
+    },
+    async downloadFullResult() {
+      this.selectedImageName = '';
+
+      const transformerNode = this.$refs.transformer.getNode();
+      transformerNode.nodes([]);
+
+      transformerNode.getLayer().batchDraw();
+
+      let container = document.getElementsByClassName('v-main__wrap')[0];
+
+      await new Promise((resolve) => {
+        setTimeout(() => resolve(), 1000);
+      });
 
       // const link = document.createElement('a');
       // link.download = 'filename.png';
 
-      const node = document.getElementById('banner__container');
-      const container = document.getElementsByClassName('v-main__wrap')[0];
-      domToImage
-        .toPng(node)
-        .then(function(dataUrl) {
+      try {
+        let node = document.getElementById('banner__container');
+        let dataUrl = await domToImage.toPng(node);
+        await (function() {
           const img = new Image();
           img.src = dataUrl;
           container.appendChild(img);
+
           // link.href = dataUrl;
           // link.click();
-        })
-        .catch(function(error) {
-          console.error('something went wrong!', error);
-        });
+        })();
+      } catch (error) {
+        console.error('something went wrong!', error);
+      }
     },
     downloadResult() {
-      console.log(this);
       this.selectedImageName = '';
       this.updateTransformer();
       const link = document.createElement('a');
@@ -127,16 +184,13 @@ export default {
     handleTransformEnd(e) {
       // shape is transformed, let us save new attrs back to the node
       // find element in our state
-      const rect = this.imageConfig;
+      const image = this.imageConfig;
       // update the state
-      rect.x = e.target.x();
-      rect.y = e.target.y();
-      rect.rotation = e.target.rotation();
-      rect.scaleX = e.target.scaleX();
-      rect.scaleY = e.target.scaleY();
-
-      // change fill
-      rect.fill = Konva.Util.getRandomColor();
+      image.x = e.target.x();
+      image.y = e.target.y();
+      image.rotation = e.target.rotation();
+      image.scaleX = e.target.scaleX();
+      image.scaleY = e.target.scaleY();
     },
     handleStageMouseDown(e) {
       // clicked on stage - clear selection
@@ -153,10 +207,10 @@ export default {
         return;
       }
 
-      // find clicked rect by its name
+      // find clicked image by its name
       const name = e.target.name();
-      const rect = this.imageConfig;
-      if (rect) {
+      const image = this.imageConfig;
+      if (image) {
         this.selectedImageName = name;
       } else {
         this.selectedImageName = '';

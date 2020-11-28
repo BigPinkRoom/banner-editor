@@ -12,6 +12,7 @@
 </template>
 <script>
 import { mapActions, mapMutations } from 'vuex';
+import { InputImage } from '../../js/entities/InputImage';
 
 export default {
   data() {
@@ -19,11 +20,15 @@ export default {
   },
   methods: {
     ...mapActions('shared', ['CLEAR_ERROR', 'SET_ERROR']),
-    ...mapMutations('banner', ['CHANGE_INPUT_IMAGE']),
+    ...mapMutations('image', ['CHANGE_INPUT_IMAGE']),
 
     // event of file changed (upload image)
     async onFileChange(event) {
+      const reader = new FileReader();
+
       const file = event.target.files[0];
+
+      reader.readAsDataURL(file);
 
       await this.CLEAR_ERROR();
 
@@ -33,11 +38,25 @@ export default {
         );
         return;
       }
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.CHANGE_INPUT_IMAGE(reader.result);
+
+      reader.onload = (event) => {
+        const image = new Image();
+        let imageWidth;
+        let imageHeight;
+        image.src = event.target.result;
+        const changeInputImageLocal = this.CHANGE_INPUT_IMAGE;
+        image.onload = function() {
+          imageWidth = this.width;
+          imageHeight = this.height;
+          changeInputImageLocal(
+            new InputImage({
+              file: image,
+              width: imageWidth,
+              height: imageHeight,
+            })
+          );
+        };
       };
-      reader.readAsDataURL(file);
     },
   },
 };
