@@ -44,19 +44,19 @@
       <v-col>
         <v-tabs-items vertical v-model="tab">
           <v-tab-item>
-            <edit-size></edit-size>
+            <app-banner-edit-size></app-banner-edit-size>
           </v-tab-item>
           <v-tab-item>
-            <edit-background></edit-background>
+            <app-banner-edit-background></app-banner-edit-background>
           </v-tab-item>
           <v-tab-item>
-            <edit-input-image></edit-input-image>
+            <app-banner-edit-input-image></app-banner-edit-input-image>
           </v-tab-item>
           <v-tab-item>
-            <edit-text></edit-text>
+            <app-banner-edit-text></app-banner-edit-text>
           </v-tab-item>
           <v-tab-item>
-            <edit-frame></edit-frame>
+            <app-banner-edit-frame></app-banner-edit-frame>
           </v-tab-item>
         </v-tabs-items>
       </v-col>
@@ -64,19 +64,19 @@
   </v-navigation-drawer>
 </template>
 <script>
-import EditBackground from './BannerEditBackground';
-import EditFrame from './BannerEditFrame';
-import EditInputImage from './BannerEditInputImage';
-import EditSize from './BannerEditSize';
-import EditText from './BannerEditText';
+import AppBannerEditBackground from './BannerEditBackground';
+import AppBannerEditFrame from './BannerEditFrame';
+import AppBannerEditInputImage from './BannerEditInputImage';
+import AppBannerEditSize from './BannerEditSize';
+import AppBannerEditText from './BannerEditText';
 
 export default {
   components: {
-    EditBackground,
-    EditFrame,
-    EditInputImage,
-    EditSize,
-    EditText,
+    AppBannerEditBackground,
+    AppBannerEditFrame,
+    AppBannerEditInputImage,
+    AppBannerEditSize,
+    AppBannerEditText,
   },
   data() {
     return {

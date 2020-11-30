@@ -1,23 +1,27 @@
 <template>
   <v-app>
-    <drawer></drawer>
-    <app-bar></app-bar>
+    <app-drawer></app-drawer>
+    <app-app-bar></app-app-bar>
     <v-main>
-      <view-banner></view-banner>
+      <app-view-banner></app-view-banner>
     </v-main>
+    <app-snack-bar-error></app-snack-bar-error>
   </v-app>
 </template>
 
 <script>
-import ViewBanner from './components/banner/ViewBanner.vue';
 import AppBar from './components/appBar/AppBar';
 import Drawer from './components/drawer/Drawer';
+import SnackBarError from './components/common/SnackBarError';
+import ViewBanner from './components/banner/ViewBanner';
+
 export default {
   name: 'App',
   components: {
-    AppBar,
-    Drawer,
-    ViewBanner,
+    AppAppBar: AppBar,
+    AppDrawer: Drawer,
+    AppSnackBarError: SnackBarError,
+    AppViewBanner: ViewBanner,
   },
 };
 </script>

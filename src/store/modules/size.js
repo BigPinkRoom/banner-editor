@@ -1,13 +1,13 @@
 export default {
   namespaced: true,
   state: {
-    sizeBoxBanner: {
+    boxBanner: {
       height: 0,
       width: 0,
     },
   },
   mutations: {
-    CHANGE_SIZEBOXBANNER(state, { width, height }) {
+    CHANGE_SIZE_BOX_BANNER(state, { width, height }) {
       state.sizeBox.height = height;
       state.sizeBox.width = width;
     },

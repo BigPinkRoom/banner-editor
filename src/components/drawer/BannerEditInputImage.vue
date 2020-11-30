@@ -1,63 +1,111 @@
 <template>
   <div>
-    <v-row>
-      <v-col>
-        <input type="file" @change="onFileChange" />
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col></v-col>
-    </v-row>
+    <v-container>
+      <!-- load file to Banner Editor -->
+      <v-row class="mb-10">
+        <v-col>
+          <p>Upload image from your device:</p>
+          <v-btn
+            block
+            class="my-2 white--text mt-3"
+            color="blue-grey"
+            @click="triggerUpload"
+          >
+            Upload image
+            <v-icon dark right>
+              mdi-cloud-upload
+            </v-icon>
+          </v-btn>
+          <input
+            ref="fileInput"
+            accept="image/*"
+            name="file"
+            style="display: none;"
+            type="file"
+            @change="loadImageFile"
+          />
+        </v-col>
+      </v-row>
+
+      <!-- load file to URL to Banner Editor -->
+      <v-row>
+        <v-col>
+          <p>Upload image from URL:</p>
+          <input
+            v-model="imageUrl"
+            accept="image/*"
+            class="banner-edit-iput-image-input__url"
+            name="file"
+            placeholder="Enter your link"
+            type="url"
+            :loading="loadingURLImage"
+          />
+          <v-row>
+            <v-col class="">
+              <v-btn
+                @click="loadImageURL"
+                class="white--text"
+                color="blue-grey"
+                :loading="loadingURLImage"
+                >Upload image
+                <v-icon dark right>mdi-link-variant</v-icon>
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col></v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 <script>
-import { mapActions, mapMutations } from 'vuex';
-import { InputImage } from '../../js/entities/InputImage';
+import { mapActions } from 'vuex';
+import { convertUrlToFile } from '../../js/helpers/convertUrlToFile';
 
 export default {
   data() {
-    return {};
+    return {
+      loadingURLImage: false,
+      convertUrlToFile,
+      imageUrl: '',
+    };
   },
   methods: {
-    ...mapActions('shared', ['CLEAR_ERROR', 'SET_ERROR']),
-    ...mapMutations('image', ['CHANGE_INPUT_IMAGE']),
+    ...mapActions('image', ['submitImageToStore']),
 
-    // event of file changed (upload image)
-    async onFileChange(event) {
-      const reader = new FileReader();
+    async loadImageFile(event) {
+      const imageFile = event.target.files[0];
+      await this.submitImageToStore(imageFile);
+    },
 
-      const file = event.target.files[0];
+    async loadImageURL() {
+      this.loadingURLImage = true;
+      const urlFile = await this.convertUrlToFile(this.imageUrl);
+      this.submitImageToStore(urlFile);
+      this.loadingURLImage = false;
+    },
 
-      reader.readAsDataURL(file);
-
-      await this.CLEAR_ERROR();
-
-      if (file.size > 1024 * 1024) {
-        await this.SET_ERROR(
-          `Max upload image is 1 Mb. Your image is ${file.size / 1000} Kb`
-        );
-        return;
-      }
-
-      reader.onload = (event) => {
-        const image = new Image();
-        let imageWidth;
-        let imageHeight;
-        image.src = event.target.result;
-        const changeInputImageLocal = this.CHANGE_INPUT_IMAGE;
-        image.onload = function() {
-          imageWidth = this.width;
-          imageHeight = this.height;
-          changeInputImageLocal(
-            new InputImage({
-              file: image,
-              width: imageWidth,
-              height: imageHeight,
-            })
-          );
-        };
-      };
+    // trigger of upload image
+    triggerUpload() {
+      this.$refs.fileInput.click();
     },
   },
 };
 </script>
+<style lang="scss" scoped>
+.banner-edit-iput-image-input__url {
+  width: 100%;
+  height: 36px;
+
+  padding: 0 0 0 10px;
+
+  border: 1px solid green;
+  border-radius: 4px;
+  &:focus {
+    outline-color: green;
+  }
+}
+</style>
+scss

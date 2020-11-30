@@ -22,19 +22,20 @@ export default {
     },
   },
   actions: {
-    CLEAR_ERROR({ commit }) {
+    clearError({ commit }) {
       commit('CLEAR_ERROR');
     },
 
-    DECREASE_LOADING({ commit }) {
+    decreaseLoading({ commit }) {
       commit('DECREASE_LOADING');
     },
 
-    SET_ERROR({ commit }, payload) {
+    setError({ commit }, payload) {
       commit('SET_ERROR', payload);
+      console.error(payload);
     },
 
-    INCREASE_LOADING({ commit }) {
+    increaseLoading({ commit }) {
       commit('INCREASE_LOADING');
     },
   },
