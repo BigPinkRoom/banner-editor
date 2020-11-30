@@ -2,7 +2,7 @@ export default {
   namespaced: true,
   state: {
     error: null,
-    loading: 0,
+    loadingURLImage: 0,
   },
   mutations: {
     CLEAR_ERROR(state) {
@@ -10,7 +10,7 @@ export default {
     },
 
     DECREASE_LOADING(state) {
-      state.loading--;
+      state.loadingURLImage--;
     },
 
     SET_ERROR(state, payload) {
@@ -18,7 +18,7 @@ export default {
     },
 
     INCREASE_LOADING(state) {
-      state.loading++;
+      state.loadingURLImage++;
     },
   },
   actions: {
@@ -37,6 +37,11 @@ export default {
 
     increaseLoading({ commit }) {
       commit('INCREASE_LOADING');
+    },
+  },
+  getters: {
+    booleanloadingUrlImage(state) {
+      return Boolean(state.loadingURLImage);
     },
   },
 };

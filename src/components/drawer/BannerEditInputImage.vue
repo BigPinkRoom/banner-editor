@@ -1,14 +1,16 @@
 <template>
   <div>
     <v-container>
-      <!-- load file to Banner Editor -->
-      <v-row class="mb-10">
+      <!-- load file from user divice to 'Banner Editor' -->
+      <v-row class="mb-3">
         <v-col>
-          <p>Upload image from your device:</p>
+          <p>
+            Upload image from your <span class="font-weight-bold">device:</span>
+          </p>
           <v-btn
             block
             class="my-2 white--text mt-3"
-            color="blue-grey"
+            color="green"
             @click="triggerUpload"
           >
             Upload image
@@ -27,10 +29,12 @@
         </v-col>
       </v-row>
 
-      <!-- load file to URL to Banner Editor -->
-      <v-row>
+      <v-divider></v-divider>
+
+      <!-- load file to URL link to 'Banner Editor' -->
+      <v-row class="my-3">
         <v-col>
-          <p>Upload image from URL:</p>
+          <p>Upload image from <span class="font-weight-bold">URL</span>:</p>
           <input
             v-model="imageURL"
             :error-messages="imageURLErrors"
@@ -39,16 +43,16 @@
             name="file"
             placeholder="Enter your link"
             type="url"
-            :loading="loadingURLImage"
+            @blur="$v.imageURL.$touch()"
           />
           <v-row>
             <v-col class="">
               <v-btn
-                :disabled="$v.$invalid || !imageURL || loadingURLImage"
+                :disabled="$v.$invalid || booleanloadingUrlImage"
                 @click="loadImageURL"
                 class="white--text"
-                color="blue-grey"
-                :loading="loadingURLImage"
+                color="green"
+                :loading="booleanloadingUrlImage"
                 >Upload image
                 <v-icon dark right>mdi-link-variant</v-icon>
               </v-btn>
@@ -56,14 +60,50 @@
           </v-row>
         </v-col>
       </v-row>
-      <v-row>
-        <v-col></v-col>
+      <v-divider></v-divider>
+
+      <!-- changing image size and position -->
+      <v-row class="d-flex flex-column mt-3">
+        <!-- change image width by banner width -->
+        <v-col>
+          <p class="mb-0">Image WIDTH by banner width:</p>
+          <v-btn
+            color="blue-grey"
+            class="white--text"
+            :disabled="!isImageOnStore"
+            >By width</v-btn
+          >
+        </v-col>
+
+        <!-- change image height by banner height -->
+        <v-col>
+          <p class="mb-0">
+            Image HEIGHT by banner height (Perfect for background):
+          </p>
+          <v-btn
+            color="blue-grey"
+            class="white--text"
+            :disabled="!isImageOnStore"
+            >By height</v-btn
+          >
+        </v-col>
+
+        <!-- reset position image -->
+        <v-col>
+          <p class="mb-0">Reset position (only position):</p>
+          <v-btn
+            color="blue-grey"
+            class="white--text"
+            :disabled="!isImageOnStore"
+            >Reset position</v-btn
+          >
+        </v-col>
       </v-row>
     </v-container>
   </div>
 </template>
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 import { convertURLToFile } from '../../js/helpers/convertURLToFile';
 import { validationMixin } from 'vuelidate';
 import { validationBannerEditInputImage } from '../../js/validators/validationsRules';
@@ -77,28 +117,32 @@ export default {
 
   data() {
     return {
-      loadingURLImage: false,
       convertURLToFile,
       imageURL: '',
     };
   },
   computed: {
+    ...mapGetters('shared', ['booleanloadingUrlImage']),
+    ...mapGetters('image', ['isImageOnStore']),
+
     // VUETIFY. Validation errors
     ...validationBannerEditInputImage.errorMessages,
   },
   methods: {
     ...mapActions('image', ['submitImageToStore']),
+    ...mapMutations('shared', ['increaseLoading', 'decreaseLoading']),
 
+    // load file from user device to 'Banner Edit"
     async loadImageFile(event) {
       const imageFile = event.target.files[0];
       await this.submitImageToStore(imageFile);
     },
 
+    // load file from URL link to 'Banner Edit"
     async loadImageURL() {
-      this.loadingURLImage = true;
       const fileURL = await this.convertURLToFile(this.imageURL);
       this.submitImageToStore(fileURL);
-      this.loadingURLImage = false;
+      this.imageURL = '';
     },
 
     // trigger of upload image

@@ -53,5 +53,9 @@ export default {
       };
     },
   },
-  getters: {},
+  getters: {
+    isImageOnStore(state) {
+      return Boolean(state.inputImage.file);
+    },
+  },
 };
