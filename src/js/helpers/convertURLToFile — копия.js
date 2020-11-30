@@ -1,4 +1,5 @@
-export async function convertUrlToFile(imageUrl) {
+// converting url link to image file
+export async function convertURLToFile(imageUrl) {
   this.$store.dispatch('shared/clearError', null, { root: true });
 
   try {

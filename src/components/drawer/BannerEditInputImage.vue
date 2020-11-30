@@ -32,7 +32,8 @@
         <v-col>
           <p>Upload image from URL:</p>
           <input
-            v-model="imageUrl"
+            v-model="imageURL"
+            :error-messages="imageURLErrors"
             accept="image/*"
             class="banner-edit-iput-image-input__url"
             name="file"
@@ -43,6 +44,7 @@
           <v-row>
             <v-col class="">
               <v-btn
+                :disabled="$v.$invalid || !imageUrl || loadingURLImage"
                 @click="loadImageURL"
                 class="white--text"
                 color="blue-grey"
@@ -62,14 +64,22 @@
 </template>
 <script>
 import { mapActions } from 'vuex';
-import { convertUrlToFile } from '../../js/helpers/convertUrlToFile';
+import { convertURLToFile } from '../../js/helpers/convertURLToFile';
+import { validationMixin } from 'vuelidate';
+import { validationBannerEditInputImage } from '../../js/validators/validationsRules';
 
 export default {
+  name: 'BannerEditInputImage',
+  mixins: [validationMixin],
+
+  // VUETIFY. Validations rules
+  validations: validationBannerEditInputImage.validations,
+
   data() {
     return {
       loadingURLImage: false,
-      convertUrlToFile,
-      imageUrl: '',
+      convertURLToFile,
+      imageURL: '',
     };
   },
   methods: {
@@ -82,7 +92,7 @@ export default {
 
     async loadImageURL() {
       this.loadingURLImage = true;
-      const urlFile = await this.convertUrlToFile(this.imageUrl);
+      const urlFile = await this.convertURLToFile(this.imageUrl);
       this.submitImageToStore(urlFile);
       this.loadingURLImage = false;
     },
