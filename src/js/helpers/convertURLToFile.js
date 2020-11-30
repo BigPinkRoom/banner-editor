@@ -1,10 +1,10 @@
 // converting url link to image file
-export async function convertURLToFile(imageUrl) {
+export async function convertURLToFile(imageURL) {
   this.$store.dispatch('shared/clearError', null, { root: true });
 
   try {
     let response = await fetch(
-      `https://cors-anywhere.herokuapp.com/${imageUrl}`
+      `https://cors-anywhere.herokuapp.com/${imageURL}`
     );
     if (!response.ok) {
       throw new Error(

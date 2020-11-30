@@ -44,7 +44,7 @@
           <v-row>
             <v-col class="">
               <v-btn
-                :disabled="$v.$invalid || !imageUrl || loadingURLImage"
+                :disabled="$v.$invalid || !imageURL || loadingURLImage"
                 @click="loadImageURL"
                 class="white--text"
                 color="blue-grey"
@@ -82,6 +82,10 @@ export default {
       imageURL: '',
     };
   },
+  computed: {
+    // VUETIFY. Validation errors
+    ...validationBannerEditInputImage.errorMessages,
+  },
   methods: {
     ...mapActions('image', ['submitImageToStore']),
 
@@ -92,8 +96,8 @@ export default {
 
     async loadImageURL() {
       this.loadingURLImage = true;
-      const urlFile = await this.convertURLToFile(this.imageUrl);
-      this.submitImageToStore(urlFile);
+      const fileURL = await this.convertURLToFile(this.imageURL);
+      this.submitImageToStore(fileURL);
       this.loadingURLImage = false;
     },
 

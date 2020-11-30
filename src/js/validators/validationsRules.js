@@ -20,7 +20,7 @@ export const validationBannerEditInputImage = {
   },
   errorMessages: {
     // error messages on imageURL validation
-    imageURL() {
+    imageURLErrors() {
       const errors = [];
       if (!this.$v.imageURL.$dirty) return errors;
       !this.$v.imageURL.required && errors.push('image link is required');

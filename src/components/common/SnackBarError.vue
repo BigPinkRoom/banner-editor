@@ -4,12 +4,12 @@
     v-if="error"
     color="error"
     :timeout="20000"
-    @click.native="closeError"
+    @click.native="clearError"
     :value="true"
   >
     {{ error }}
     <template v-slot:action>
-      <v-btn class="white--text" text @click.native="closeError">
+      <v-btn class="white--text" text @click.native="clearError">
         Close
       </v-btn>
     </template>
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   data() {
@@ -25,6 +25,11 @@ export default {
   },
   computed: {
     ...mapState('shared', ['error']),
+  },
+  methods: {
+    ...mapActions('shared', {
+      clearError: 'clearError',
+    }),
   },
 };
 </script>
