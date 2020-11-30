@@ -1,15 +1,22 @@
 <template>
   <div>
     <v-container>
-      <!-- load file from user divice to 'Banner Editor' -->
-      <v-row class="mb-3">
+      <v-row>
         <v-col>
-          <p>
+          <p class="text-uppercase green--text mb-0">Image settings</p>
+          <v-divider color="green"></v-divider>
+        </v-col>
+      </v-row>
+
+      <!-- load file from user divice to 'Banner Editor' -->
+      <v-row class="mb-2">
+        <v-col>
+          <p class="mb-1">
             Upload image from your <span class="font-weight-bold">device:</span>
           </p>
           <v-btn
             block
-            class="my-2 white--text mt-3"
+            class="mb-2 white--text"
             color="green"
             @click="triggerUpload"
           >
@@ -32,9 +39,11 @@
       <v-divider></v-divider>
 
       <!-- load file to URL link to 'Banner Editor' -->
-      <v-row class="my-3">
+      <v-row class="my-2">
         <v-col>
-          <p>Upload image from <span class="font-weight-bold">URL</span>:</p>
+          <p class="mb-1">
+            Upload image from <span class="font-weight-bold">URL</span>:
+          </p>
           <input
             v-model="imageURL"
             :error-messages="imageURLErrors"
