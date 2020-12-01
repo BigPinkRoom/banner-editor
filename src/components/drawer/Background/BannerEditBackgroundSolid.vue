@@ -11,6 +11,7 @@
         mode="rgba"
         show-swatches
         swatches-max-height="250"
+        value="#999999"
         width="290"
       ></v-color-picker>
     </v-col>
@@ -18,29 +19,37 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'BannerEditBackgroundSolid',
   data() {
     return {
       colorRGBA: {
-        rgba: {
-          r: '',
-          g: '',
-          b: '',
-          a: '',
-        },
+        rgba: { r: 0, g: 0, b: 0, a: 0 },
       },
     };
   },
+  computed: {
+    ...mapState('background', ['backgroundSolidSettings']),
+  },
   watch: {
+    // watch on solid color change
     colorRGBA() {
       this.submitBackgroundSolidSettingsToStore(this.colorRGBA.rgba);
     },
   },
   methods: {
     ...mapActions('background', ['submitBackgroundSolidSettingsToStore']),
+  },
+  mounted() {
+    if (this.backgroundSolidSettings) {
+      this.colorRGBA.rgba = this.backgroundSolidSettings;
+      return;
+    }
+
+    // set default color on first load
+    this.colorRGBA.rgba = { r: 206, g: 147, b: 216, a: 1 };
   },
 };
 </script>

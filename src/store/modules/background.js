@@ -12,7 +12,6 @@ export default {
 
     SET_BACKGROUND_SOLID_COLOR(state, payload) {
       state.backgroundSolidSettings = payload;
-      console.log(state);
     },
 
     SET_BACKGROUND_GRADIENT_COLOR(state, payload) {

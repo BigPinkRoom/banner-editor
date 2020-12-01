@@ -80,12 +80,19 @@ export default {
     ...mapState('shared', ['loading']),
     ...mapState('image', ['inputImage']),
     ...mapState('size', ['bannerSize']),
-    ...mapState('background', ['backgroundGradientSettings']),
+    ...mapState('background', ['backgroundGradientSettings', 'backgroundType']),
     ...mapGetters('background', ['getBackgroundSolidRGBAString']),
   },
   watch: {
+    backgroundType() {
+      console.log(this.backgroundType);
+      if (this.backgroundType === 'solid') {
+        this.stage.container().style.background = this.getBackgroundSolidRGBAString;
+      } else {
+        this.stage.container().style.background = this.backgroundGradientSettings.style;
+      }
+    },
     getBackgroundSolidRGBAString() {
-      console.log(this.getBackgroundSolidRGBAString);
       this.stage.container().style.background = this.getBackgroundSolidRGBAString;
     },
     backgroundGradientSettings: {
