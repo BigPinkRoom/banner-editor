@@ -3,7 +3,7 @@ export default {
   state: {
     backgroundType: 'solid',
     backgroundSolidSettings: {
-      color: '#ffffff',
+      color: 'rgba',
     },
     backgroundGradientSettings: {
       gradientArray: [],
@@ -26,11 +26,13 @@ export default {
     submitBackgroundTypeToStore({ commit }, payload) {
       commit('SET_BACKGROUND_TYPE', payload);
     },
-    submitBackgroundSolidSettingsToStore({ commit }, payload) {
+    submitBackgroundSolidSettingsToStore({ commit, state }, payload) {
       commit('SET_BACKGROUND_SOLID_COLOR', payload);
+      console.log(state);
     },
-    submitBackgroundGradientSettingsToStore({ commit }, payload) {
+    submitBackgroundGradientSettingsToStore({ commit, state }, payload) {
       commit('SET_BACKGROUND_GRADIENT_COLOR', payload);
+      console.log(state);
     },
   },
   getters: {},

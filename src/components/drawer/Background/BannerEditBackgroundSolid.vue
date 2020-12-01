@@ -6,7 +6,7 @@
         dot-size="30"
         hide-inputs
         hide-mode-switch
-        mode="hexa"
+        mode="rgba"
         width="290"
         class="mx-auto"
         show-swatches
@@ -17,7 +17,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: 'BannerEditBackgroundSolid',
+};
 </script>
 
 <style></style>

@@ -26,7 +26,18 @@ export default {
 };
 </script>
 <style lang="scss">
+// canvas style
 canvas {
   border: 1px solid gray !important;
+}
+
+// gradient module. delete 'p' margin
+.gradient-degree-value > p {
+  margin-bottom: 0;
+}
+
+// gradient module. Less horizontal padding of picker area
+.ui-color-picker .picker-area {
+  padding: 0 5px;
 }
 </style>

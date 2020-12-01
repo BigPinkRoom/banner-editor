@@ -6,7 +6,12 @@
 
         <v-divider color="green"></v-divider>
 
-        <v-radio-group v-model="editBackgroundType" mandatory row>
+        <v-radio-group
+          v-model="editBackgroundType"
+          mandatory
+          row
+          @change="submitBackgroundTypeToStore(editBackgroundType)"
+        >
           <v-radio label="Solid" value="solid"></v-radio>
           <v-radio label="Gradient" value="gradient"></v-radio>
         </v-radio-group>
@@ -20,6 +25,7 @@
   </v-container>
 </template>
 <script>
+import { mapActions } from 'vuex';
 import BannerEditBackgroundSolid from './BannerEditBackgroundSolid';
 import BannerEditBackgroundGradient from './BannerEditBackroundGradient';
 
@@ -33,6 +39,9 @@ export default {
       name: 'BannerEditBackground',
       editBackgroundType: 'solid',
     };
+  },
+  methods: {
+    ...mapActions('background', ['submitBackgroundTypeToStore']),
   },
 };
 </script>
