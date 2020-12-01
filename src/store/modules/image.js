@@ -10,7 +10,7 @@ export default {
     },
   },
   mutations: {
-    CHANGE_INPUT_IMAGE(state, payload) {
+    SET_INPUT_IMAGE(state, payload) {
       state.inputImage = payload;
     },
   },
@@ -42,7 +42,7 @@ export default {
           imageHeight = this.height;
 
           commit(
-            'CHANGE_INPUT_IMAGE',
+            'SET_INPUT_IMAGE',
             new InputImage({
               file: image,
               width: imageWidth,

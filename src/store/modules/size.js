@@ -7,13 +7,13 @@ export default {
     },
   },
   mutations: {
-    CHANGE_BANNER_SIZE(state, payload) {
+    SET_BANNER_SIZE(state, payload) {
       state.bannerSize = payload;
     },
   },
   actions: {
     submitBannerSizeToStore({ commit }, payload) {
-      commit('CHANGE_BANNER_SIZE', payload);
+      commit('SET_BANNER_SIZE', payload);
     },
   },
 };
