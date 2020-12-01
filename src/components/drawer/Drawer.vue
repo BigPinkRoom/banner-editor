@@ -64,7 +64,7 @@
   </v-navigation-drawer>
 </template>
 <script>
-import AppBannerEditBackground from './BannerEditBackground';
+import AppBannerEditBackground from './Background/BannerEditBackground';
 import AppBannerEditFrame from './BannerEditFrame';
 import AppBannerEditInputImage from './BannerEditInputImage';
 import AppBannerEditSize from './BannerEditSize';
