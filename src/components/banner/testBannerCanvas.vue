@@ -85,7 +85,6 @@ export default {
   },
   watch: {
     backgroundType() {
-      console.log(this.backgroundType);
       if (this.backgroundType === 'solid') {
         this.stage.container().style.background = this.getBackgroundSolidRGBAString;
       } else {

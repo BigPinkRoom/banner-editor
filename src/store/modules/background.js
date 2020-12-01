@@ -2,7 +2,7 @@ export default {
   namespaced: true,
   state: {
     backgroundType: 'solid',
-    backgroundSolidSettings: {},
+    backgroundSolidSettings: { r: 255, g: 255, b: 255, a: 1 },
     backgroundGradientSettings: {},
   },
   mutations: {

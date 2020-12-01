@@ -43,13 +43,7 @@ export default {
     ...mapActions('background', ['submitBackgroundSolidSettingsToStore']),
   },
   mounted() {
-    if (this.backgroundSolidSettings) {
-      this.colorRGBA.rgba = this.backgroundSolidSettings;
-      return;
-    }
-
-    // set default color on first load
-    this.colorRGBA.rgba = { r: 206, g: 147, b: 216, a: 1 };
+    this.colorRGBA.rgba = this.backgroundSolidSettings;
   },
 };
 </script>

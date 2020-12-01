@@ -53,6 +53,7 @@
             placeholder="Enter your link"
             type="url"
             @blur="$v.imageURL.$touch()"
+            @keydown.enter="loadImageURL"
           />
           <v-row>
             <v-col class="">
@@ -62,7 +63,6 @@
                 class="white--text"
                 color="green"
                 @click="loadImageURL"
-                @keydown.enter="loadImageURL"
                 >Upload image
                 <v-icon dark right>mdi-link-variant</v-icon>
               </v-btn>
