@@ -15,8 +15,8 @@
             :config="{
               x: 0,
               y: 0,
-              width: 500,
-              height: 500,
+              width: stageSize.width,
+              height: stageSize.height,
               fill: 'rgb(2,0,36)',
               shadowBlur: 10,
             }"
@@ -36,6 +36,7 @@
     <v-btn class="orange" @click="downloadFullResult">Download</v-btn>
     <v-btn class="grey" @click="imagePositionByHeight">By full height</v-btn>
     <v-btn class="teal" @click="imagePositionByWidth">By full width</v-btn>
+    <v-btn @click="test">test</v-btn>
   </div>
 </template>
 
@@ -73,8 +74,16 @@ export default {
   computed: {
     ...mapState('shared', ['loading']),
     ...mapState('image', ['inputImage']),
+    ...mapState('size', ['bannerSize']),
   },
   watch: {
+    bannerSize: {
+      handler() {
+        this.stageSize.width = this.bannerSize.width;
+        this.stageSize.height = this.bannerSize.height;
+      },
+      deep: true,
+    },
     inputImage: {
       handler() {
         let imageCanvas = this.$refs.imageCanvas.getNode();
@@ -92,6 +101,8 @@ export default {
     },
   },
   created() {
+    this.stageSize.width = this.bannerSize.width;
+    this.stageSize.height = this.bannerSize.height;
     const image = new window.Image();
     image.src =
       'https://images.theconversation.com/files/93616/original/image-20150902-6700-t2axrz.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1000&fit=clip';
@@ -102,6 +113,11 @@ export default {
     };
   },
   methods: {
+    test() {
+      console.log(this.bannerSize);
+      console.log(this.bannerSize.width);
+      console.log(this.bannerSize.height);
+    },
     imagePositionByHeight() {
       const imageCanvas = this.$refs.imageCanvas.getNode();
       imageCanvas.position({ x: 0, y: 0 });
