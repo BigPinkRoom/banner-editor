@@ -3,9 +3,7 @@
     <v-container>
       <v-row>
         <v-col>
-          <div>
-            <banner-canvas></banner-canvas>
-          </div>
+          <banner-canvas></banner-canvas>
         </v-col>
       </v-row>
     </v-container>

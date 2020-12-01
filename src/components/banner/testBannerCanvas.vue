@@ -1,16 +1,16 @@
 <template>
-  <div>
-    <div id="banner__container">
-      <p id="text" class="text_on_image">Test</p>
-      <v-stage
-        id="stageContainer"
-        ref="stage"
-        :config="stageSize"
-        @mousedown="handleStageMouseDown"
-        @touchstart="handleStageMouseDown"
-      >
-        <v-layer ref="layer">
-          <v-rect
+  <div
+    :style="{ width: stageSize.width + 'px', height: stageSize.height + 'px' }"
+  >
+    <v-stage
+      id="stageContainer"
+      ref="stage"
+      :config="stageSize"
+      @mousedown="handleStageMouseDown"
+      @touchstart="handleStageMouseDown"
+    >
+      <v-layer ref="layer">
+        <!-- <v-rect
             ref="shape"
             :config="{
               x: 0,
@@ -20,17 +20,18 @@
               fill: 'rgb(2,0,36)',
               shadowBlur: 10,
             }"
-          />
+          /> -->
 
-          <v-image
-            ref="imageCanvas"
-            :config="imageConfig"
-            @transformend="handleTransformEnd"
-          />
-          <v-transformer ref="transformer" :config="transformerConfig" />
-        </v-layer>
-      </v-stage>
-    </div>
+        <v-image
+          ref="imageCanvas"
+          :config="imageConfig"
+          @transformend="handleTransformEnd"
+        />
+        <v-transformer ref="transformer" :config="transformerConfig" />
+      </v-layer>
+    </v-stage>
+    <p id="text" class="text_on_image">Test</p>
+
     <v-btn class="blue" @click="resetImagePosition">Reset width</v-btn>
     <v-btn class="green" @click="downloadResult">Download</v-btn>
     <v-btn class="orange" @click="downloadFullResult">Download</v-btn>
@@ -48,6 +49,10 @@ export default {
   data() {
     return {
       stage: null,
+      styleObject: {
+        width: 500,
+        height: 500,
+      },
       stageSize: {
         width: 500,
         height: 500,
@@ -75,12 +80,23 @@ export default {
     ...mapState('shared', ['loading']),
     ...mapState('image', ['inputImage']),
     ...mapState('size', ['bannerSize']),
+    ...mapState('background', ['backgroundGradientSettings']),
   },
   watch: {
+    backgroundGradientSettings: {
+      handler() {
+        console.log('test');
+        this.stage.container().style.background = this.backgroundGradientSettings.style;
+      },
+      deep: true,
+    },
     bannerSize: {
       handler() {
         this.stageSize.width = this.bannerSize.width;
         this.stageSize.height = this.bannerSize.height;
+
+        // this.stage.width = this.bannerSize.width;
+        // this.stage.height = this.bannerSize.height;
       },
       deep: true,
     },
@@ -113,11 +129,7 @@ export default {
     };
   },
   methods: {
-    test() {
-      console.log(this.bannerSize);
-      console.log(this.bannerSize.width);
-      console.log(this.bannerSize.height);
-    },
+    test() {},
     imagePositionByHeight() {
       const imageCanvas = this.$refs.imageCanvas.getNode();
       imageCanvas.position({ x: 0, y: 0 });

@@ -6,7 +6,7 @@ export default {
       color: 'rgba',
     },
     backgroundGradientSettings: {
-      gradientArray: [],
+      gradientArray: {},
     },
   },
   mutations: {

@@ -1,4 +1,5 @@
 <template>
+  <!-- color picker for gradient -->
   <v-row>
     <v-col class="px-0">
       <app-color-picker
@@ -48,12 +49,8 @@ export default {
   methods: {
     ...mapActions('background', ['submitBackgroundGradientSettingsToStore']),
 
-    setGradient() {
-      this.submitBackgroundGradientSettingsToStore(this.gradient);
-    },
-
-    onChange(attrs, name) {
-      console.log(name, attrs);
+    // change gradient on change in color picker
+    onChange(attrs) {
       this.submitBackgroundGradientSettingsToStore(attrs);
     },
   },

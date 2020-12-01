@@ -58,10 +58,11 @@
             <v-col class="">
               <v-btn
                 :disabled="$v.$invalid || booleanloadingUrlImage"
-                @click="loadImageURL"
+                :loading="booleanloadingUrlImage"
                 class="white--text"
                 color="green"
-                :loading="booleanloadingUrlImage"
+                @click="loadImageURL"
+                @keydown.enter="loadImageURL"
                 >Upload image
                 <v-icon dark right>mdi-link-variant</v-icon>
               </v-btn>
@@ -77,9 +78,9 @@
         <v-col>
           <p class="mb-0">Image WIDTH by banner width:</p>
           <v-btn
-            color="blue-grey"
-            class="white--text"
             :disabled="!isImageOnStore"
+            class="white--text"
+            color="blue-grey"
             >By width</v-btn
           >
         </v-col>
@@ -90,9 +91,9 @@
             Image HEIGHT by banner height (Perfect for background):
           </p>
           <v-btn
-            color="blue-grey"
-            class="white--text"
             :disabled="!isImageOnStore"
+            class="white--text"
+            color="blue-grey"
             >By height</v-btn
           >
         </v-col>
@@ -101,9 +102,9 @@
         <v-col>
           <p class="mb-0">Reset position (only position):</p>
           <v-btn
-            color="blue-grey"
-            class="white--text"
             :disabled="!isImageOnStore"
+            class="white--text"
+            color="blue-grey"
             >Reset position</v-btn
           >
         </v-col>
