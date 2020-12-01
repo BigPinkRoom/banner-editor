@@ -19,7 +19,9 @@ export default {
     bannerCanvas,
   },
   data() {
-    return {};
+    return {
+      name: 'ViewBanner',
+    };
   },
 };
 </script>

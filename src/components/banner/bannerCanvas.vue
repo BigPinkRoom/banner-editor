@@ -1,4 +1,10 @@
 <template> </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      name: 'BannerCanvas',
+    };
+  },
+};
 </script>

@@ -1,17 +1,19 @@
 export default {
   namespaced: true,
   state: {
-    boxBanner: {
+    bannerSize: {
       height: 0,
       width: 0,
     },
   },
   mutations: {
-    CHANGE_SIZE_BOX_BANNER(state, { width, height }) {
-      state.sizeBox.height = height;
-      state.sizeBox.width = width;
+    CHANGE_BANNER_SIZE(state, payload) {
+      state.bannerSize = payload;
     },
   },
-  actions: {},
-  getters: {},
+  actions: {
+    submitBannerSizeToStore({ commit }, payload) {
+      commit('CHANGE_BANNER_SIZE', payload);
+    },
+  },
 };

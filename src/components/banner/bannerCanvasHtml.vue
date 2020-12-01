@@ -10,6 +10,7 @@ import { mapState } from 'vuex';
 export default {
   data() {
     return {
+      name: 'BannerCanvasHtml',
       image: {
         src: this.inputImage,
       },

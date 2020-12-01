@@ -113,8 +113,8 @@
 </template>
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex';
-import { convertURLToFile } from '../../js/helpers/convertURLToFile';
 import { validationMixin } from 'vuelidate';
+import { convertURLToFile } from '../../js/helpers/convertURLToFile';
 import { validationBannerEditInputImage } from '../../js/validators/validationsRules';
 
 export default {
@@ -126,6 +126,7 @@ export default {
 
   data() {
     return {
+      name: 'BannerEditInputImage',
       convertURLToFile,
       imageURL: '',
     };

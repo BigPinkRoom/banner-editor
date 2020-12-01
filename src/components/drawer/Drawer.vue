@@ -80,6 +80,7 @@ export default {
   },
   data() {
     return {
+      name: 'Drawer',
       tab: null,
     };
   },

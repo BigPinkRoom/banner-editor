@@ -9,5 +9,11 @@
   </v-container>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      name: 'BannerEditFrame',
+    };
+  },
+};
 </script>
