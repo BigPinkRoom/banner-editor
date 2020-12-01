@@ -2,12 +2,8 @@ export default {
   namespaced: true,
   state: {
     backgroundType: 'solid',
-    backgroundSolidSettings: {
-      color: 'rgba',
-    },
-    backgroundGradientSettings: {
-      gradientArray: {},
-    },
+    backgroundSolidSettings: {},
+    backgroundGradientSettings: {},
   },
   mutations: {
     SET_BACKGROUND_TYPE(state, payload) {
@@ -16,6 +12,7 @@ export default {
 
     SET_BACKGROUND_SOLID_COLOR(state, payload) {
       state.backgroundSolidSettings = payload;
+      console.log(state);
     },
 
     SET_BACKGROUND_GRADIENT_COLOR(state, payload) {
@@ -26,14 +23,16 @@ export default {
     submitBackgroundTypeToStore({ commit }, payload) {
       commit('SET_BACKGROUND_TYPE', payload);
     },
-    submitBackgroundSolidSettingsToStore({ commit, state }, payload) {
+    submitBackgroundSolidSettingsToStore({ commit }, payload) {
       commit('SET_BACKGROUND_SOLID_COLOR', payload);
-      console.log(state);
     },
-    submitBackgroundGradientSettingsToStore({ commit, state }, payload) {
+    submitBackgroundGradientSettingsToStore({ commit }, payload) {
       commit('SET_BACKGROUND_GRADIENT_COLOR', payload);
-      console.log(state);
     },
   },
-  getters: {},
+  getters: {
+    getBackgroundSolidRGBAString(state) {
+      return `rgba(${state.backgroundSolidSettings.r}, ${state.backgroundSolidSettings.g}, ${state.backgroundSolidSettings.b}, ${state.backgroundSolidSettings.a})`;
+    },
+  },
 };

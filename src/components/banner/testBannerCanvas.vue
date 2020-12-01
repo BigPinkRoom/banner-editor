@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import domToImage from 'dom-to-image';
 
 export default {
@@ -81,11 +81,15 @@ export default {
     ...mapState('image', ['inputImage']),
     ...mapState('size', ['bannerSize']),
     ...mapState('background', ['backgroundGradientSettings']),
+    ...mapGetters('background', ['getBackgroundSolidRGBAString']),
   },
   watch: {
+    getBackgroundSolidRGBAString() {
+      console.log(this.getBackgroundSolidRGBAString);
+      this.stage.container().style.background = this.getBackgroundSolidRGBAString;
+    },
     backgroundGradientSettings: {
       handler() {
-        console.log('test');
         this.stage.container().style.background = this.backgroundGradientSettings.style;
       },
       deep: true,
