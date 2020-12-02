@@ -10,13 +10,13 @@ export default {
   },
   actions: {
     submitTextSettingsToStore({ commit }, payload) {
-      commit('SET_TEXT_OBJECT', payload);
+      commit('SET_TEXT_SETTINGS_ARRAY', payload);
     },
   },
   getters: {
     getTextRGBAString(state) {
       return function(textSettingsObjectId) {
-        return `rgba(${state.textSettingsArray[textSettingsObjectId].r}, ${state.textSettingsArray[textSettingsObjectId].g}, ${state.textSettingsArray[textSettingsObjectId].b}, ${state.textSettingsArray[textSettingsObjectId].a})`;
+        return `rgba(${state.textSettingsArray[textSettingsObjectId].color.selectedColorRGBA.r}, ${state.textSettingsArray[textSettingsObjectId].color.selectedColorRGBA.g}, ${state.textSettingsArray[textSettingsObjectId].color.selectedColorRGBA.b}, ${state.textSettingsArray[textSettingsObjectId].color.selectedColorRGBA.a})`;
       };
     },
   },

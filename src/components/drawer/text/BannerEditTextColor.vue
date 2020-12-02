@@ -5,7 +5,8 @@
         <v-btn
           v-bind="attrs"
           block
-          class=""
+          :color="colorRGBAToString()"
+          class="banner-edit-text-color__button"
           height="39"
           v-on="on"
           @click="colorPickerModal = true"
@@ -36,7 +37,7 @@
               block
               class="white--text"
               color="blue-grey"
-              @click="colorPickerModal = false"
+              @click="submitColorRGBAToParent"
               >Ok</v-btn
             >
           </v-col>
@@ -47,19 +48,31 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
+  props: {
+    currentEditTextModuleIndex: Number,
+  },
   data() {
     return {
       colorPickerModal: false,
       colorRGBA: {
-        r: 0,
-        g: 0,
-        b: 0,
+        r: 96,
+        g: 125,
+        b: 139,
         a: 1,
       },
     };
   },
+  computed: {
+    ...mapGetters('text', ['getTextRGBAString']),
+  },
   methods: {
+    colorRGBAToString() {
+      let func = this.getTextRGBAString;
+      return func(this.currentEditTextModuleIndex);
+    },
     submitColorRGBAToParent() {
       this.colorPickerModal = false;
       this.$emit('changeColorRGBA', { selectedColorRGBA: this.colorRGBA });
@@ -68,4 +81,4 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped></style>

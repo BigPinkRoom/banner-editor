@@ -9,8 +9,8 @@
 
     <v-row
       class="banner-edit-text__module d-flex flex-column mx-0 my-2"
-      v-for="EditTextModule in editTextModules"
-      :key="EditTextModule.id"
+      v-for="(EditTextModule, index) in editTextModules"
+      :key="index"
     >
       <v-col class="pb-0">
         <v-textarea
@@ -20,6 +20,7 @@
           label="Your text"
           outlined
           rows="1"
+          maxlength="1000"
         ></v-textarea>
       </v-col>
       <v-row class="banner-edit-text__settings ma-0">
@@ -34,6 +35,7 @@
         </v-col>
         <v-col class="col-6 py-0 pl-1">
           <app-banner-edit-text-color
+            :currentEditTextModuleIndex="index"
             @changeColorRGBA="
               (selectedColorRGBA) => (EditTextModule.color = selectedColorRGBA)
             "
@@ -42,13 +44,13 @@
       </v-row>
       <v-row class="banner-edit-text__settings ma-0">
         <v-col class="col-6 py-0 pr-1">
-          <v-text-field
+          <v-select
             v-model="EditTextModule.settings.size"
+            :items="fontSizes"
             dense
             label="Size"
             outlined
-            value="14"
-          ></v-text-field>
+          ></v-select>
         </v-col>
         <v-col class="col-6 py-0 pl-1">
           <v-select
@@ -84,6 +86,7 @@ export default {
       name: 'BannerEditText',
       editTextModules: [],
       fontFamilies: ['sans-serif', 'serif', 'monospace', 'cursive'],
+      fontSizes: [...Array(150).keys()].map((x) => ++x),
       fontWeight: [
         '100',
         '200',
@@ -100,7 +103,7 @@ export default {
   watch: {
     editTextModules: {
       handler() {
-        console.log(this.editTextModules);
+        this.submitTextSettingsToStore(this.editTextModules);
       },
       deep: true,
     },
@@ -124,10 +127,12 @@ export default {
           weight: '400',
         },
         color: {
-          r: 0,
-          g: 0,
-          b: 0,
-          a: 1,
+          selectedColorRGBA: {
+            r: 0,
+            g: 0,
+            b: 0,
+            a: 1,
+          },
         },
       });
       this.editTextModules.push(textBlock);

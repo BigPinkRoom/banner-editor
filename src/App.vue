@@ -49,4 +49,16 @@ canvas {
 .v-label {
   font-size: 14px;
 }
+
+/* banner edit tex color module */
+// add shadow to button text
+.banner-edit-text-color__button .v-btn__content {
+  color: #fff;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 1);
+}
+
+// hide before elemen (remove 'focus' darken)
+.banner-edit-text-color__button::before {
+  display: none;
+}
 </style>
