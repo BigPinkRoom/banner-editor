@@ -64,11 +64,11 @@
   </v-navigation-drawer>
 </template>
 <script>
-import AppBannerEditBackground from './Background/BannerEditBackground';
+import AppBannerEditBackground from './background/BannerEditBackground';
 import AppBannerEditFrame from './BannerEditFrame';
 import AppBannerEditInputImage from './BannerEditInputImage';
 import AppBannerEditSize from './BannerEditSize';
-import AppBannerEditText from './BannerEditText';
+import AppBannerEditText from './text/BannerEditText';
 
 export default {
   components: {
