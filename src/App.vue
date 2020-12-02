@@ -26,11 +26,13 @@ export default {
 };
 </script>
 <style lang="scss">
+/* Canvas */
 // canvas style
 canvas {
   border: 1px solid gray !important;
 }
 
+/* background module */
 // gradient module. delete 'p' margin
 .gradient-degree-value > p {
   margin-bottom: 0;
@@ -39,5 +41,12 @@ canvas {
 // gradient module. Less horizontal padding of picker area
 .ui-color-picker .picker-area {
   padding: 0 5px;
+}
+
+/* all text field */
+
+// label of all text field
+.v-label {
+  font-size: 14px;
 }
 </style>

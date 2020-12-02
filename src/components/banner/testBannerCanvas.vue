@@ -1,16 +1,22 @@
 <template>
-  <div
-    :style="{ width: stageSize.width + 'px', height: stageSize.height + 'px' }"
-  >
-    <v-stage
-      id="stageContainer"
-      ref="stage"
-      :config="stageSize"
-      @mousedown="handleStageMouseDown"
-      @touchstart="handleStageMouseDown"
+  <div>
+    <div
+      ref="bannerContainer"
+      :style="{
+        width: stageSize.width + 'px',
+        height: stageSize.height + 'px',
+      }"
     >
-      <v-layer ref="layer">
-        <!-- <v-rect
+      <p id="text" class="text_on_image">Test</p>
+      <v-stage
+        id="stageContainer"
+        ref="stage"
+        :config="stageSize"
+        @mousedown="handleStageMouseDown"
+        @touchstart="handleStageMouseDown"
+      >
+        <v-layer ref="layer">
+          <!-- <v-rect
             ref="shape"
             :config="{
               x: 0,
@@ -22,16 +28,15 @@
             }"
           /> -->
 
-        <v-image
-          ref="imageCanvas"
-          :config="imageConfig"
-          @transformend="handleTransformEnd"
-        />
-        <v-transformer ref="transformer" :config="transformerConfig" />
-      </v-layer>
-    </v-stage>
-    <p id="text" class="text_on_image">Test</p>
-
+          <v-image
+            ref="imageCanvas"
+            :config="imageConfig"
+            @transformend="handleTransformEnd"
+          />
+          <v-transformer ref="transformer" :config="transformerConfig" />
+        </v-layer>
+      </v-stage>
+    </div>
     <v-btn class="blue" @click="resetImagePosition">Reset width</v-btn>
     <v-btn class="green" @click="downloadResult">Download</v-btn>
     <v-btn class="orange" @click="downloadFullResult">Download</v-btn>
@@ -193,7 +198,7 @@ export default {
       // link.download = 'filename.png';
 
       try {
-        let node = document.getElementById('banner__container');
+        let node = this.$refs.bannerContainer;
         let dataUrl = await domToImage.toPng(node);
         await (function() {
           const img = new Image();
@@ -292,6 +297,7 @@ export default {
   left: 100px;
   font-size: 30px;
   z-index: 1000;
+  font-family: serif;
 }
 #banner__container {
   width: 500px;
