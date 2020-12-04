@@ -7,62 +7,73 @@
       </v-col>
     </v-row>
 
-    <v-row
-      class="banner-edit-text__module d-flex flex-column mx-0 my-2"
-      v-for="(EditTextModule, index) in editTextModules"
-      :key="index"
-    >
-      <v-col class="pb-0">
-        <v-textarea
-          v-model="EditTextModule.settings.text"
-          color="green"
-          dense
-          label="Your text"
-          outlined
-          rows="1"
-          maxlength="1000"
-        ></v-textarea>
-      </v-col>
-      <v-row class="banner-edit-text__settings ma-0">
-        <v-col class="col-6 py-0 pr-1">
-          <v-select
-            v-model="EditTextModule.settings.fontFamily"
-            :items="fontFamilies"
-            dense
-            label="Font family"
-            outlined
-          ></v-select>
-        </v-col>
-        <v-col class="col-6 py-0 pl-1">
-          <app-banner-edit-text-color
-            :currentEditTextModuleIndex="index"
-            @changeColorRGBA="
-              (selectedColorRGBA) => (EditTextModule.color = selectedColorRGBA)
-            "
-          />
-        </v-col>
-      </v-row>
-      <v-row class="banner-edit-text__settings ma-0">
-        <v-col class="col-6 py-0 pr-1">
-          <v-select
-            v-model="EditTextModule.settings.size"
-            :items="fontSizes"
-            dense
-            label="Size"
-            outlined
-          ></v-select>
-        </v-col>
-        <v-col class="col-6 py-0 pl-1">
-          <v-select
-            v-model="EditTextModule.settings.weight"
-            :items="fontWeight"
-            dense
-            label="Weight"
-            outlined
-          ></v-select>
-        </v-col>
-      </v-row>
-    </v-row>
+    <v-expansion-panels>
+      <v-container>
+        <v-row>
+          <v-expansion-panel
+            class="banner-edit-text__module d-flex flex-column mx-0 my-1"
+            v-for="(EditTextModule, index) in editTextModules"
+            :key="index"
+          >
+            <v-expansion-panel-header class="pb-3">
+              <v-col class="pa-0">
+                <v-textarea
+                  v-model="EditTextModule.settings.text"
+                  color="green"
+                  dense
+                  label="Your text"
+                  outlined
+                  rows="1"
+                  maxlength="1000"
+                ></v-textarea>
+              </v-col>
+            </v-expansion-panel-header>
+            <v-expansion-panel-content>
+              <v-row class="banner-edit-text__settings ma-0">
+                <v-col class="col-6 py-0 pl-0 pr-1">
+                  <v-select
+                    v-model="EditTextModule.settings.fontFamily"
+                    :items="fontFamilies"
+                    dense
+                    label="Font family"
+                    outlined
+                  ></v-select>
+                </v-col>
+                <v-col class="col-6 py-0 pl-1 pr-0">
+                  <app-banner-edit-text-color
+                    :currentEditTextModuleIndex="index"
+                    @changeColorRGBA="
+                      (selectedColorRGBA) =>
+                        (EditTextModule.color = selectedColorRGBA)
+                    "
+                  />
+                </v-col>
+              </v-row>
+              <v-row class="banner-edit-text__settings ma-0">
+                <v-col class="col-6 py-0 pl-0 pr-1">
+                  <v-select
+                    v-model="EditTextModule.settings.size"
+                    :items="fontSizes"
+                    dense
+                    label="Size"
+                    outlined
+                  ></v-select>
+                </v-col>
+                <v-col class="col-6 py-0 pl-1 pr-0">
+                  <v-select
+                    v-model="EditTextModule.settings.weight"
+                    :items="fontWeight"
+                    dense
+                    label="Weight"
+                    outlined
+                  ></v-select>
+                </v-col>
+              </v-row>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-row>
+      </v-container>
+    </v-expansion-panels>
     <v-row>
       <v-col>
         <v-btn block color="green" class="white--text" @click="addTextBlock">
@@ -144,6 +155,10 @@ export default {
 .banner-edit-text__module {
   border: 1px solid #ccc;
   border-radius: 7px;
+}
+
+.banner-edit-text__module .v-expansion-panel-header .v-text-field__details {
+  display: none;
 }
 
 .v-label {
