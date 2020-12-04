@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col>
+      <v-col class="pb-0">
         <p class="text-uppercase green--text mb-0">Background settings</p>
 
         <v-divider color="green"></v-divider>

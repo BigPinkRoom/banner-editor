@@ -1,6 +1,6 @@
 <template>
   <!-- color picker for gradient -->
-  <v-row>
+  <v-row class="banner-edit-background-gradient">
     <v-col class="px-0">
       <app-color-picker
         :gradient="gradient"

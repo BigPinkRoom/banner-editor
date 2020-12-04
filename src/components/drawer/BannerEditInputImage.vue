@@ -11,7 +11,7 @@
       <!-- load file from user divice to 'Banner Editor' -->
       <v-row class="mb-2">
         <v-col>
-          <p class="mb-1">
+          <p class="mb-1 text-subtitle-2">
             Upload image from your <span class="font-weight-bold">device:</span>
           </p>
           <v-btn
@@ -41,7 +41,7 @@
       <!-- load file to URL link to 'Banner Editor' -->
       <v-row class="my-2">
         <v-col>
-          <p class="mb-1">
+          <p class="mb-1 text-subtitle-2">
             Upload image from <span class="font-weight-bold">URL</span>:
           </p>
           <input
@@ -76,7 +76,7 @@
       <v-row class="d-flex flex-column mt-3">
         <!-- change image width by banner width -->
         <v-col>
-          <p class="mb-0">Image WIDTH by banner width:</p>
+          <p class="mb-0 text-subtitle-2">Image WIDTH by banner width:</p>
           <v-btn
             :disabled="!isImageOnStore"
             class="white--text"
@@ -87,8 +87,8 @@
 
         <!-- change image height by banner height -->
         <v-col>
-          <p class="mb-0">
-            Image HEIGHT by banner height (Perfect for background):
+          <p class="mb-0 text-subtitle-2">
+            Image HEIGHT by banner height:
           </p>
           <v-btn
             :disabled="!isImageOnStore"
@@ -100,7 +100,7 @@
 
         <!-- reset position image -->
         <v-col>
-          <p class="mb-0">Reset position (only position):</p>
+          <p class="mb-0 text-subtitle-2">Reset position (only position):</p>
           <v-btn
             :disabled="!isImageOnStore"
             class="white--text"

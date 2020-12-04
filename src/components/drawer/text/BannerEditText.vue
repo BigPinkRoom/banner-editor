@@ -16,12 +16,12 @@
             :key="index"
           >
             <v-expansion-panel-header class="pb-3">
-              <v-col class="pa-0">
+              <v-col class="py-0 pl-0">
                 <v-textarea
                   v-model="EditTextModule.settings.text"
                   color="green"
                   dense
-                  label="Your text"
+                  label="Your text (max 1000 symbols)"
                   outlined
                   rows="1"
                   maxlength="1000"
@@ -29,7 +29,7 @@
               </v-col>
             </v-expansion-panel-header>
             <v-expansion-panel-content>
-              <v-row class="banner-edit-text__settings ma-0">
+              <v-row class="banner-edit-text__settings mx-0 mb-3">
                 <v-col class="col-6 py-0 pl-0 pr-1">
                   <v-select
                     v-model="EditTextModule.settings.fontFamily"
@@ -155,13 +155,5 @@ export default {
 .banner-edit-text__module {
   border: 1px solid #ccc;
   border-radius: 7px;
-}
-
-.banner-edit-text__module .v-expansion-panel-header .v-text-field__details {
-  display: none;
-}
-
-.v-label {
-  font-size: 14px;
 }
 </style>

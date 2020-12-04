@@ -32,33 +32,70 @@ canvas {
   border: 1px solid gray !important;
 }
 
-/* background module */
-// gradient module. delete 'p' margin
-.gradient-degree-value > p {
-  margin-bottom: 0;
-}
-
-// gradient module. Less horizontal padding of picker area
-.ui-color-picker .picker-area {
-  padding: 0 5px;
+/* background gradient module */
+.banner-edit-background-gradient {
+  // gradient module. delete 'p' margin
+  & .gradient-degree-value > p {
+    margin-bottom: 0;
+  }
+  // gradient module. Less horizontal padding of picker area
+  & .ui-color-picker .picker-area {
+    padding: 0 5px;
+  }
 }
 
 /* all text field */
-
-// label of all text field
-.v-label {
+// v-input font size
+.v-input {
   font-size: 14px;
 }
 
-/* banner edit tex color module */
-// add shadow to button text
-.banner-edit-text-color__button .v-btn__content {
-  color: #fff;
-  text-shadow: 1px 1px 5px rgba(0, 0, 0, 1);
+// v-radio label font size
+.v-radio .v-label {
+  font-size: 14px;
 }
 
-// hide before elemen (remove 'focus' darken)
-.banner-edit-text-color__button::before {
-  display: none;
+/* banner edit text color module button */
+
+.banner-edit-text-color__button {
+  // add shadow to button text
+  & .v-btn__content {
+    color: #fff;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 1);
+  }
+
+  // hide before element (remove 'focus' darken)
+  &::before {
+    display: none;
+  }
+}
+
+/* banner edit text - text module */
+.banner-edit-text__module {
+  // add border to expansin panel
+  & .v-expansion-panel {
+    border: 1px solid #ddd;
+    border-radius: 7px;
+  }
+
+  // delete default top lines of expansion panel header
+  &.v-expansion-panel::after {
+    display: none;
+  }
+
+  // delete text field details (errors) in each text module
+  & .v-text-field__details {
+    display: none;
+  }
+
+  // banner edit expansion header - custom padding
+  .v-expansion-panel-header {
+    padding: 16px 10px;
+  }
+
+  // banner edit expansion content - custom padding
+  .v-expansion-panel-content__wrap {
+    padding: 0 10px 16px;
+  }
 }
 </style>
