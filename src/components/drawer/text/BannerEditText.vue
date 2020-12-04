@@ -11,20 +11,30 @@
       <v-container>
         <v-row>
           <v-expansion-panel
-            class="banner-edit-text__module d-flex flex-column mx-0 my-1"
             v-for="(EditTextModule, index) in editTextModules"
             :key="index"
+            class="banner-edit-text__module d-flex flex-column mx-0 my-1"
           >
             <v-expansion-panel-header class="pb-3">
+              <v-btn
+                absolute
+                class="banner-text-edit__close-button"
+                color="pink lighten-1"
+                dark
+                fab
+                x-small
+              >
+                <v-icon>mdi-close</v-icon>
+              </v-btn>
               <v-col class="py-0 pl-0">
                 <v-textarea
                   v-model="EditTextModule.settings.text"
                   color="green"
                   dense
                   label="Your text (max 1000 symbols)"
+                  maxlength="1000"
                   outlined
                   rows="1"
-                  maxlength="1000"
                 ></v-textarea>
               </v-col>
             </v-expansion-panel-header>
@@ -155,5 +165,13 @@ export default {
 .banner-edit-text__module {
   border: 1px solid #ccc;
   border-radius: 7px;
+}
+
+.banner-text-edit__close-button {
+  top: -5px;
+  right: -6px;
+
+  width: 22px;
+  height: 22px;
 }
 </style>
