@@ -28,9 +28,9 @@ export default {
 <style lang="scss">
 /* Canvas */
 // canvas style
-canvas {
-  border: 1px solid gray !important;
-}
+// canvas {
+//   border: 1px solid gray !important;
+// }
 
 /* background gradient module */
 .banner-edit-background-gradient {

@@ -6,6 +6,8 @@
         position: 'relative',
         width: stageSize.width + 'px',
         height: stageSize.height + 'px',
+        border: `${bannerFrame.frameSize}px solid ${getFrameColorRGBAString}`,
+        borderRadius: `${bannerFrame.frameRadius}px`,
         overflow: 'hidden',
       }"
     >
@@ -110,8 +112,10 @@ export default {
     ...mapState('size', ['bannerSize']),
     ...mapState('text', ['textSettingsArray']),
     ...mapState('background', ['backgroundGradientSettings', 'backgroundType']),
+    ...mapState('frame', ['bannerFrame']),
     ...mapGetters('background', ['getBackgroundSolidRGBAString']),
     ...mapGetters('text', ['getTextRGBAString']),
+    ...mapGetters('frame', ['getFrameColorRGBAString']),
   },
   watch: {
     backgroundType() {
@@ -330,16 +334,4 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-.text_on_image {
-  position: absolute;
-  top: 100px;
-  left: 100px;
-  font-size: 30px;
-  z-index: 1000;
-  font-family: serif;
-}
-#banner__container {
-  width: 500px;
-}
-</style>
+<style lang="scss" scoped></style>

@@ -65,7 +65,7 @@
 </template>
 <script>
 import AppBannerEditBackground from './background/BannerEditBackground';
-import AppBannerEditFrame from './BannerEditFrame';
+import AppBannerEditFrame from './frame/BannerEditFrame';
 import AppBannerEditInputImage from './BannerEditInputImage';
 import AppBannerEditSize from './BannerEditSize';
 import AppBannerEditText from './text/BannerEditText';
