@@ -20,10 +20,9 @@
 import { mapState, mapActions } from 'vuex';
 
 export default {
+  name: 'SnackBarError',
   data() {
-    return {
-      name: 'SnackBarError',
-    };
+    return {};
   },
   computed: {
     ...mapState('shared', ['error']),

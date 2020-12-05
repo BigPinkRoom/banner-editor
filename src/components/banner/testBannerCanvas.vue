@@ -21,8 +21,9 @@
           fontSize: `${textElement.settings.size}px`,
           fontFamily: textElement.settings.fontFamily,
           fontWeight: textElement.settings.weight,
-          margin: '0px',
           lineHeight: '1',
+          whiteSpace: 'nowrap',
+          cursor: 'pointer',
         }"
         :index="index"
         @mousedown.prevent="dragText"
@@ -170,7 +171,6 @@ export default {
     dragText(event) {
       let indexElement = event.target.getAttribute('index');
       console.log('indexElement', indexElement);
-      console.log(event.target.parentElement);
       dragAndDrop(event, event.target);
     },
     textRGBAString(index) {

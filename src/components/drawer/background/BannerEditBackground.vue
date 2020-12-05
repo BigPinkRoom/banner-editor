@@ -30,13 +30,13 @@ import BannerEditBackgroundSolid from './BannerEditBackgroundSolid';
 import BannerEditBackgroundGradient from './BannerEditBackroundGradient';
 
 export default {
+  name: 'BannerEditBackground',
   components: {
     AppBannerEditBackgroundSolid: BannerEditBackgroundSolid,
     AppBannerEditBackgroundGradient: BannerEditBackgroundGradient,
   },
   data() {
     return {
-      name: 'BannerEditBackground',
       editBackgroundType: 'solid',
     };
   },

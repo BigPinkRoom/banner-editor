@@ -1,30 +1,33 @@
 export function dragAndDrop(event, dragElement) {
-  dragElement.ondragstart = function() {
-    console.log('ondgarstart');
-  };
-
+  // initial parent element
   const parent = event.target.parentElement;
+
+  // initial parent element coordinates by getBoundingClientRect object
   let parentCoords = parent.getBoundingClientRect();
 
-  let parentBottomEdge = parentCoords.top + parent.offsetHeight;
+  // initial parent edges
   let parentTopEdge = parentCoords.top;
-  let parentLeftEdge = parentCoords.left;
   let parentRightEdge = parentCoords.left + parent.offsetWidth;
+  let parentBottomEdge = parentCoords.top + parent.offsetHeight;
+  let parentLeftEdge = parentCoords.left;
 
-  console.log(parentTopEdge, parentRightEdge, parentBottomEdge, parentLeftEdge);
-
+  // initial correct (with position on drag element) mouse coordinates
   let shiftX, shiftY;
 
+  // function to start drag
   startDrag(dragElement, event.clientX, event.clientY);
 
+  // function to mouse up
   function onMouseUp() {
     finishDrag();
   }
 
+  // function to mouse move
   function onMouseMove(event) {
     moveAt(event.clientX, event.clientY);
   }
 
+  // events to start drag element
   function startDrag(element, clientX, clientY) {
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
@@ -32,40 +35,44 @@ export function dragAndDrop(event, dragElement) {
     shiftX = clientX - element.getBoundingClientRect().left;
     shiftY = clientY - element.getBoundingClientRect().top;
 
-    element.style.position = 'fixed';
-
     moveAt(clientX, clientY);
   }
 
+  // events to finish drag element
   function finishDrag() {
-    dragElement.style.top =
-      parseInt(dragElement.style.top) - parentTopEdge + pageYOffset + 'px';
-    dragElement.style.left =
-      parseInt(dragElement.style.left) - parentLeftEdge + 'px';
-    dragElement.style.position = 'absolute';
+    dragElement.style.top = parseInt(dragElement.style.top) + 'px';
+    dragElement.style.left = parseInt(dragElement.style.left) + 'px';
 
     document.removeEventListener('mousemove', onMouseMove);
     document.removeEventListener('mouseup', onMouseUp);
   }
 
+  // events to move drag element
   function moveAt(clientX, clientY) {
     let newX = clientX - shiftX;
     let newY = clientY - shiftY;
 
-    if (newY + dragElement.offsetHeight >= parentBottomEdge) {
-      newY = parentBottomEdge - dragElement.offsetHeight;
+    // top owerflow behaviour
+    if (newY + dragElement.offsetHeight / 2 <= parentTopEdge) {
+      newY = parentTopEdge - dragElement.offsetHeight / 2;
     }
 
-    if (newY + dragElement.offsetHeight <= parentTopEdge) {
-      newY = parentTopEdge + dragElement.offsetHeight;
+    // left owerflow behaviour
+    if (newX + dragElement.offsetWidth / 8 < parentLeftEdge) {
+      newX = parentLeftEdge - dragElement.offsetWidth / 8;
     }
 
-    if (newX < parentLeftEdge) newX = parentLeftEdge;
-    if (newX > parentRightEdge - dragElement.offsetWidth) {
-      newX = parentRightEdge - dragElement.offsetWidth;
+    // bottom owerflow behaviour
+    if (newY + dragElement.offsetHeight / 2 >= parentBottomEdge) {
+      newY = parentBottomEdge - dragElement.offsetHeight / 2;
     }
 
-    dragElement.style.left = newX + 'px';
-    dragElement.style.top = newY + 'px';
+    // right owerflow behaviour
+    if (newX + dragElement.offsetWidth / 1.1 > parentRightEdge) {
+      newX = parentRightEdge - dragElement.offsetWidth / 1.1;
+    }
+
+    dragElement.style.left = newX - parentLeftEdge + 'px';
+    dragElement.style.top = newY - parentTopEdge + 'px';
   }
 }

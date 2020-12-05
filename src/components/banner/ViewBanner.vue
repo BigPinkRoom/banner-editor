@@ -13,13 +13,12 @@
 import bannerCanvas from './testBannerCanvas';
 
 export default {
+  name: 'ViewBanner',
   components: {
     bannerCanvas,
   },
   data() {
-    return {
-      name: 'ViewBanner',
-    };
+    return {};
   },
 };
 </script>

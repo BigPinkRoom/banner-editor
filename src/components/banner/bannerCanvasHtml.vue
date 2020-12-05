@@ -8,9 +8,9 @@
 import { mapState } from 'vuex';
 
 export default {
+  name: 'BannerCanvasHtml',
   data() {
     return {
-      name: 'BannerCanvasHtml',
       image: {
         src: this.inputImage,
       },

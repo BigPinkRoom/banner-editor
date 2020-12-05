@@ -10,10 +10,9 @@
 </template>
 <script>
 export default {
+  name: 'BannerEditFrame',
   data() {
-    return {
-      name: 'BannerEditFrame',
-    };
+    return {};
   },
 };
 </script>

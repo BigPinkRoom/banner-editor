@@ -71,6 +71,7 @@ import AppBannerEditSize from './BannerEditSize';
 import AppBannerEditText from './text/BannerEditText';
 
 export default {
+  name: 'Drawer',
   components: {
     AppBannerEditBackground,
     AppBannerEditFrame,
@@ -80,7 +81,6 @@ export default {
   },
   data() {
     return {
-      name: 'Drawer',
       tab: null,
     };
   },

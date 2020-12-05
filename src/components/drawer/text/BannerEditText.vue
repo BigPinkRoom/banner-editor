@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <!-- banner-edit-text: title -->
     <v-row>
       <v-col>
         <p class="text-uppercase green--text mb-0">Banner text settings</p>
@@ -7,15 +8,19 @@
       </v-col>
     </v-row>
 
+    <!-- banner-edit-text: text modules container -->
     <v-expansion-panels>
       <v-container>
         <v-row>
+          <!-- banner-edit-text: text module -->
           <v-expansion-panel
             v-for="(EditTextModule, index) in editTextModules"
             :key="index"
             class="banner-edit-text__module d-flex flex-column mx-0 my-1"
           >
+            <!-- banner-edit-text: text module header (allways shown) -->
             <v-expansion-panel-header class="pb-3">
+              <!-- banner-edit-text: text module remove button -->
               <v-btn
                 absolute
                 class="banner-text-edit__close-button"
@@ -27,6 +32,8 @@
               >
                 <v-icon>mdi-close</v-icon>
               </v-btn>
+
+              <!-- banner-edit-text: text module textarea-->
               <v-col class="py-0 pl-0">
                 <v-textarea
                   v-model="EditTextModule.settings.text"
@@ -39,7 +46,10 @@
                 ></v-textarea>
               </v-col>
             </v-expansion-panel-header>
+
+            <!-- banner-edit-text: extra settings for text module -->
             <v-expansion-panel-content>
+              <!-- banner-edit-text: font family -->
               <v-row class="banner-edit-text__settings mx-0 mb-3">
                 <v-col class="col-6 py-0 pl-0 pr-1">
                   <v-select
@@ -60,6 +70,8 @@
                   />
                 </v-col>
               </v-row>
+
+              <!-- banner-edit-text: font size -->
               <v-row class="banner-edit-text__settings ma-0">
                 <v-col class="col-6 py-0 pl-0 pr-1">
                   <v-select
@@ -70,6 +82,8 @@
                     outlined
                   ></v-select>
                 </v-col>
+
+                <!-- banner-edit-text: font weight -->
                 <v-col class="col-6 py-0 pl-1 pr-0">
                   <v-select
                     v-model="EditTextModule.settings.weight"
@@ -85,6 +99,8 @@
         </v-row>
       </v-container>
     </v-expansion-panels>
+
+    <!-- banner-edit-text: button to add new text module -->
     <v-row>
       <v-col>
         <v-btn block color="green" class="white--text" @click="addTextBlock">
@@ -100,15 +116,15 @@ import BannerEditTextColor from './BannerEditTextColor';
 import { TextBlock } from '../../../js/entities/textBlock';
 
 export default {
+  name: 'BannerEditText',
   components: {
     AppBannerEditTextColor: BannerEditTextColor,
   },
   data() {
     return {
-      name: 'BannerEditText',
       editTextModules: [],
       fontFamilies: ['sans-serif', 'serif', 'monospace', 'cursive'],
-      fontSizes: [...Array(150).keys()].map((x) => ++x),
+      fontSizes: [...Array(250).keys()].map((x) => ++x),
       fontWeight: [
         '100',
         '200',
@@ -136,6 +152,7 @@ export default {
   methods: {
     ...mapActions('text', ['submitTextSettingsToStore']),
 
+    // add new text block to 'editTextModules' array
     addTextBlock() {
       let textBlock = new TextBlock({
         position: {
@@ -159,6 +176,8 @@ export default {
       });
       this.editTextModules.push(textBlock);
     },
+
+    // delete text block (to index)
     deleteTextBlock(indexTextModule) {
       this.editTextModules.splice(indexTextModule, 1);
     },
