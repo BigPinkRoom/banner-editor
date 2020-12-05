@@ -1,7 +1,7 @@
 export class TextBlock {
-  constructor({ color = {}, settings = {}, tag = {} }) {
+  constructor({ color = {}, settings = {}, position = {} }) {
     this.color = color;
     this.settings = settings;
-    this.tag = tag;
+    this.position = position;
   }
 }

@@ -3,11 +3,32 @@
     <div
       ref="bannerContainer"
       :style="{
+        position: 'relative',
         width: stageSize.width + 'px',
         height: stageSize.height + 'px',
+        overflow: 'hidden',
       }"
     >
-      <p id="text" class="text_on_image">Test</p>
+      <p
+        v-for="(textElement, index) in textSettingsArray"
+        :key="index"
+        :style="{
+          position: 'absolute',
+          zIndex: 1,
+          top: textElement.position.y,
+          left: textElement.position.x,
+          color: textRGBAString(index),
+          fontSize: `${textElement.settings.size}px`,
+          fontFamily: textElement.settings.fontFamily,
+          fontWeight: textElement.settings.weight,
+          margin: '0px',
+          lineHeight: '1',
+        }"
+        :index="index"
+        @mousedown.prevent="dragText"
+      >
+        {{ textElement.settings.text }}
+      </p>
       <v-stage
         id="stageContainer"
         ref="stage"
@@ -42,13 +63,13 @@
     <v-btn class="orange" @click="downloadFullResult">Download</v-btn>
     <v-btn class="grey" @click="imagePositionByHeight">By full height</v-btn>
     <v-btn class="teal" @click="imagePositionByWidth">By full width</v-btn>
-    <v-btn @click="test">test</v-btn>
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters } from 'vuex';
 import domToImage from 'dom-to-image';
+import { dragAndDrop } from '../../js/utils/dragAndDrop';
 
 export default {
   data() {
@@ -85,8 +106,10 @@ export default {
     ...mapState('shared', ['loading']),
     ...mapState('image', ['inputImage']),
     ...mapState('size', ['bannerSize']),
+    ...mapState('text', ['textSettingsArray']),
     ...mapState('background', ['backgroundGradientSettings', 'backgroundType']),
     ...mapGetters('background', ['getBackgroundSolidRGBAString']),
+    ...mapGetters('text', ['getTextRGBAString']),
   },
   watch: {
     backgroundType() {
@@ -144,7 +167,16 @@ export default {
     };
   },
   methods: {
-    test() {},
+    dragText(event) {
+      let indexElement = event.target.getAttribute('index');
+      console.log('indexElement', indexElement);
+      console.log(event.target.parentElement);
+      dragAndDrop(event, event.target);
+    },
+    textRGBAString(index) {
+      const textRGBAFunction = this.getTextRGBAString;
+      return textRGBAFunction(index);
+    },
     imagePositionByHeight() {
       const imageCanvas = this.$refs.imageCanvas.getNode();
       imageCanvas.position({ x: 0, y: 0 });

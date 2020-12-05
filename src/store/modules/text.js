@@ -6,11 +6,18 @@ export default {
   mutations: {
     SET_TEXT_SETTINGS_ARRAY(state, payload) {
       state.textSettingsArray = payload;
+      console.log(state);
+    },
+    SET_TEXT_SETTINGS_ELEMENT_POSITION(state, payload) {
+      state.textSettingsArray[payload.numberArray] = payload.position;
     },
   },
   actions: {
     submitTextSettingsToStore({ commit }, payload) {
       commit('SET_TEXT_SETTINGS_ARRAY', payload);
+    },
+    submitElementPositionToStore({ commit }, payload) {
+      commit('SET_TEXT_SETTINGS_ELEMENT_POSITION', payload);
     },
   },
   getters: {

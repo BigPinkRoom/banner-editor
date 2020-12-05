@@ -19,10 +19,11 @@
               <v-btn
                 absolute
                 class="banner-text-edit__close-button"
-                color="pink lighten-1"
+                color="blue-grey"
                 dark
                 fab
                 x-small
+                @click.stop="deleteTextBlock(index)"
               >
                 <v-icon>mdi-close</v-icon>
               </v-btn>
@@ -137,7 +138,7 @@ export default {
 
     addTextBlock() {
       let textBlock = new TextBlock({
-        tag: {
+        position: {
           x: 0,
           y: 0,
         },
@@ -157,6 +158,9 @@ export default {
         },
       });
       this.editTextModules.push(textBlock);
+    },
+    deleteTextBlock(indexTextModule) {
+      this.editTextModules.splice(indexTextModule, 1);
     },
   },
 };
