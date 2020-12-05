@@ -2,12 +2,12 @@ export default {
   namespaced: true,
   state: {
     bannerFrame: {
-      frameSize: 0,
-      frameRadius: 0,
+      frameSize: 1,
+      frameRadius: 7,
       frameColorRGBA: {
-        r: 0,
-        g: 0,
-        b: 0,
+        r: 210,
+        g: 210,
+        b: 210,
         a: 1,
       },
     },
@@ -23,6 +23,7 @@ export default {
     },
   },
   getters: {
+    // convert RGBA color object to string
     getFrameColorRGBAString(state) {
       return `rgba(${state.bannerFrame.frameColorRGBA.r}, ${state.bannerFrame.frameColorRGBA.g}, ${state.bannerFrame.frameColorRGBA.b}, ${state.bannerFrame.frameColorRGBA.a})`;
     },

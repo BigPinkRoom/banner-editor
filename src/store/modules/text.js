@@ -21,6 +21,7 @@ export default {
     },
   },
   getters: {
+    // convert text color of text module (on id) to string
     getTextRGBAString(state) {
       return function(textSettingsObjectId) {
         return `rgba(${state.textSettingsArray[textSettingsObjectId].color.selectedColorRGBA.r}, ${state.textSettingsArray[textSettingsObjectId].color.selectedColorRGBA.g}, ${state.textSettingsArray[textSettingsObjectId].color.selectedColorRGBA.b}, ${state.textSettingsArray[textSettingsObjectId].color.selectedColorRGBA.a})`;

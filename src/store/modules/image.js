@@ -18,6 +18,7 @@ export default {
     submitImageToStore({ commit, dispatch }, payload) {
       dispatch('shared/clearError', null, { root: true });
 
+      // check file size (~4mb)
       if (payload.size > 2048 * 2048) {
         dispatch(
           'shared/setError',
@@ -54,6 +55,7 @@ export default {
     },
   },
   getters: {
+    // return boolean - is image on store
     isImageOnStore(state) {
       return Boolean(state.inputImage.file);
     },

@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app flat color="grey lighten-4" dark>
+  <v-app-bar app flat color="grey lighten-3" height="67" dark>
     <v-spacer></v-spacer>
     <v-btn color="blue" outlined class="mr-2">
       Json

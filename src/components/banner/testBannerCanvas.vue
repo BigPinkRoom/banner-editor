@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="d-flex justify-center align-center">
     <div
       ref="bannerContainer"
       :style="{
@@ -9,6 +9,7 @@
         border: `${bannerFrame.frameSize}px solid ${getFrameColorRGBAString}`,
         borderRadius: `${bannerFrame.frameRadius}px`,
         overflow: 'hidden',
+        backgroundColor: '#ffffff',
       }"
     >
       <p
@@ -62,11 +63,13 @@
         </v-layer>
       </v-stage>
     </div>
-    <v-btn class="blue" @click="resetImagePosition">Reset width</v-btn>
-    <v-btn class="green" @click="downloadResult">Download</v-btn>
-    <v-btn class="orange" @click="downloadFullResult">Download</v-btn>
-    <v-btn class="grey" @click="imagePositionByHeight">By full height</v-btn>
-    <v-btn class="teal" @click="imagePositionByWidth">By full width</v-btn>
+    <div class="d-none">
+      <v-btn class="blue" @click="resetImagePosition">Reset width</v-btn>
+      <v-btn class="green" @click="downloadResult">Download</v-btn>
+      <v-btn class="orange" @click="downloadFullResult">Download</v-btn>
+      <v-btn class="grey" @click="imagePositionByHeight">By full height</v-btn>
+      <v-btn class="teal" @click="imagePositionByWidth">By full width</v-btn>
+    </div>
   </div>
 </template>
 
@@ -163,14 +166,6 @@ export default {
   created() {
     this.stageSize.width = this.bannerSize.width;
     this.stageSize.height = this.bannerSize.height;
-    const image = new window.Image();
-    image.src =
-      'https://images.theconversation.com/files/93616/original/image-20150902-6700-t2axrz.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1000&fit=clip';
-    image.crossOrigin = 'Anonymous';
-    image.onload = () => {
-      // set image only when it is loaded
-      this.imageConfig.image = image;
-    };
   },
   methods: {
     ...mapActions('text', ['submitElementPositionToStore']),

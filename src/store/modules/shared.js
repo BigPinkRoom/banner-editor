@@ -40,6 +40,7 @@ export default {
     },
   },
   getters: {
+    // convert number to boolean status loading image to url
     booleanloadingUrlImage(state) {
       return Boolean(state.loadingURLImage);
     },

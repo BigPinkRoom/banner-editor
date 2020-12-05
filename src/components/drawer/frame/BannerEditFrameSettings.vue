@@ -62,8 +62,8 @@ export default {
   data() {
     return {
       bannerFrame: {
-        frameSize: 0,
-        frameRadius: 0,
+        frameSize: 1,
+        frameRadius: 7,
         frameColorRGBA: {
           r: 0,
           g: 0,

@@ -2,7 +2,7 @@
   <v-app>
     <app-drawer></app-drawer>
     <app-app-bar></app-app-bar>
-    <v-main>
+    <v-main class="app__v-main">
       <app-view-banner></app-view-banner>
     </v-main>
     <app-snack-bar-error></app-snack-bar-error>
@@ -26,11 +26,11 @@ export default {
 };
 </script>
 <style lang="scss">
-/* Canvas */
-// canvas style
-// canvas {
-//   border: 1px solid gray !important;
-// }
+/* main */
+// v-main
+.app__v-main {
+  background-color: rgb(250, 250, 250);
+}
 
 /* background gradient module */
 .banner-edit-background-gradient {

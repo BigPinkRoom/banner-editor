@@ -1,7 +1,7 @@
 <template>
   <v-navigation-drawer app permanent width="400">
     <!-- logo -->
-    <v-list-item class="">
+    <v-list-item class="elevation-3">
       <v-list-item-content>
         <v-list-item-title class="title text-uppercase"
           >Banner-editor</v-list-item-title

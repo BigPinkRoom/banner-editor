@@ -30,6 +30,7 @@ export default {
     },
   },
   getters: {
+    // convert RGBA color object to string
     getBackgroundSolidRGBAString(state) {
       return `rgba(${state.backgroundSolidSettings.r}, ${state.backgroundSolidSettings.g}, ${state.backgroundSolidSettings.b}, ${state.backgroundSolidSettings.a})`;
     },
