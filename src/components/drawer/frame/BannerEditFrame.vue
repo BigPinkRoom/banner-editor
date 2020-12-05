@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <!-- title -->
     <v-row>
       <v-col>
         <p class="text-uppercase green--text mb-0">Banner frame settings</p>

@@ -5,11 +5,13 @@ export function dragAndDrop(event, dragElement) {
   // initial parent element coordinates by getBoundingClientRect object
   let parentCoords = parent.getBoundingClientRect();
 
-  // initial parent edges
-  let parentTopEdge = parentCoords.top;
-  let parentRightEdge = parentCoords.left + parent.offsetWidth;
-  let parentBottomEdge = parentCoords.top + parent.offsetHeight;
-  let parentLeftEdge = parentCoords.left;
+  // initial parent edges (with border)
+  let parentTopEdge = parentCoords.top + parent.clientTop;
+  let parentRightEdge =
+    parentCoords.left + parent.offsetWidth - parent.clientLeft;
+  let parentBottomEdge =
+    parentCoords.top + parent.offsetHeight - parent.clientTop;
+  let parentLeftEdge = parentCoords.left + parent.clientLeft;
 
   // initial correct (with position on drag element) mouse coordinates
   let shiftX, shiftY;

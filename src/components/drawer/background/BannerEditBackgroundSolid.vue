@@ -1,5 +1,5 @@
 <template>
-  <!-- Picker for solid color -->
+  <!-- picker for solid color -->
   <v-row>
     <v-col class="px-0">
       <v-color-picker

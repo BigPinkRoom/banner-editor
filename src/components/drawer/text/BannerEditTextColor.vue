@@ -1,9 +1,9 @@
 <template>
   <div>
-    <!-- banned-edit-text-color: modal window -->
+    <!-- modal window -->
     <v-dialog eager width="320" v-model="colorPickerModal">
       <template v-slot:activator="{ on, attrs }">
-        <!-- banned-edit-text-color: activete button -->
+        <!-- activete button -->
         <v-btn
           v-bind="attrs"
           :color="colorRGBAToString()"
@@ -17,9 +17,9 @@
         >
       </template>
 
-      <!-- banned-edit-text-color: color picker container -->
+      <!-- color picker container -->
       <v-container>
-        <!-- banned-edit-text-color: color picker -->
+        <!-- color picker -->
         <v-row class="d-flex flex-column">
           <v-col
             ><p class="text-uppercase white--text mb-0">
@@ -37,7 +37,7 @@
           </v-col>
         </v-row>
 
-        <!-- banned-edit-text-color: submit button -->
+        <!-- submit button -->
         <v-row>
           <v-col>
             <v-btn

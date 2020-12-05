@@ -1,11 +1,14 @@
 <template>
   <v-container>
     <v-row class="d-flex flex-column">
+      <!-- title -->
       <v-col class="mr-5">
         <p class="text-uppercase green--text mb-0">Banner size settings</p>
         <v-divider color="green"></v-divider>
       </v-col>
+
       <v-col class="mr-5">
+        <!-- change banner width -->
         <v-text-field
           v-model.trim="bannerWidth"
           :error-messages="bannerWidthErrors"
@@ -15,6 +18,8 @@
           type="number"
           @keydown.enter="changeBannerSize"
         ></v-text-field>
+
+        <!-- change banner height -->
         <v-text-field
           v-model.trim="bannerHeight"
           :error-messages="bannerHeightErrors"
@@ -25,6 +30,8 @@
           @keydown.enter="changeBannerSize"
         ></v-text-field>
       </v-col>
+
+      <!-- change banner size button -->
       <v-col class="pt-0">
         <v-btn class="white--text" color="green" @click="changeBannerSize"
           >Change size</v-btn
@@ -61,6 +68,7 @@ export default {
   methods: {
     ...mapActions('size', ['submitBannerSizeToStore']),
 
+    // validate and submit banner size to store
     changeBannerSize() {
       this.$v.bannerWidth.$touch();
       this.$v.bannerHeight.$touch();

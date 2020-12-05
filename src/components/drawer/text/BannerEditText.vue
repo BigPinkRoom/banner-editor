@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <!-- banner-edit-text: title -->
+    <!-- title -->
     <v-row>
       <v-col>
         <p class="text-uppercase green--text mb-0">Banner text settings</p>
@@ -8,19 +8,19 @@
       </v-col>
     </v-row>
 
-    <!-- banner-edit-text: text modules container -->
+    <!-- text modules container -->
     <v-expansion-panels>
       <v-container>
         <v-row>
-          <!-- banner-edit-text: text module -->
+          <!-- text module -->
           <v-expansion-panel
             v-for="(EditTextModule, index) in editTextModules"
             :key="index"
             class="banner-edit-text__module d-flex flex-column mx-0 my-1"
           >
-            <!-- banner-edit-text: text module header (allways shown) -->
+            <!-- text module header (allways shown) -->
             <v-expansion-panel-header class="pb-3">
-              <!-- banner-edit-text: text module remove button -->
+              <!-- text module remove button -->
               <v-btn
                 absolute
                 class="banner-text-edit__close-button"
@@ -33,7 +33,7 @@
                 <v-icon>mdi-close</v-icon>
               </v-btn>
 
-              <!-- banner-edit-text: text module textarea-->
+              <!-- text module textarea-->
               <v-col class="py-0 pl-0">
                 <v-textarea
                   v-model="EditTextModule.settings.text"
@@ -47,9 +47,9 @@
               </v-col>
             </v-expansion-panel-header>
 
-            <!-- banner-edit-text: extra settings for text module -->
+            <!-- extra settings for text module -->
             <v-expansion-panel-content>
-              <!-- banner-edit-text: font family -->
+              <!-- font family -->
               <v-row class="banner-edit-text__settings mx-0 mb-3">
                 <v-col class="col-6 py-0 pl-0 pr-1">
                   <v-select
@@ -71,7 +71,7 @@
                 </v-col>
               </v-row>
 
-              <!-- banner-edit-text: font size -->
+              <!-- font size -->
               <v-row class="banner-edit-text__settings ma-0">
                 <v-col class="col-6 py-0 pl-0 pr-1">
                   <v-select
@@ -84,7 +84,7 @@
                   ></v-select>
                 </v-col>
 
-                <!-- banner-edit-text: font weight -->
+                <!-- font weight -->
                 <v-col class="col-6 py-0 pl-1 pr-0">
                   <v-select
                     v-model="EditTextModule.settings.weight"
@@ -101,7 +101,7 @@
       </v-container>
     </v-expansion-panels>
 
-    <!-- banner-edit-text: button to add new text module -->
+    <!-- button to add new text module -->
     <v-row>
       <v-col>
         <v-btn block color="green" class="white--text" @click="addTextBlock">
@@ -139,6 +139,8 @@ export default {
       ],
     };
   },
+
+  // watch to change text modules
   watch: {
     editTextModules: {
       handler() {
@@ -182,12 +184,13 @@ export default {
     deleteTextBlock(indexTextModule) {
       this.editTextModules.splice(indexTextModule, 1);
     },
+
+    // correct text module position after change font size
     correctPositionTextModule(textModule) {
       if (textModule.position.x < 0 || textModule.position.y < 0) {
         textModule.position.x = 0;
         textModule.position.y = 0;
       }
-      console.log(textModule.position);
     },
   },
 };

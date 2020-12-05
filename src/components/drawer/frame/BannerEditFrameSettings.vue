@@ -1,5 +1,6 @@
 <template>
   <v-container class="banner-edit-frame-settings py-1">
+    <!-- frame size  -->
     <v-row>
       <v-col class="pa-0">
         <v-subheader class="banner-edit-frame-settings__subheader"
@@ -14,6 +15,8 @@
         ></v-slider>
       </v-col>
     </v-row>
+
+    <!-- frame radius  -->
     <v-row>
       <v-col class="pa-0">
         <v-subheader class="banner-edit-frame-settings__subheader"
@@ -28,6 +31,8 @@
         ></v-slider>
       </v-col>
     </v-row>
+
+    <!-- frame color  -->
     <v-row>
       <v-col class="pa-0">
         <v-subheader class="banner-edit-frame-settings__subheader"
@@ -69,6 +74,7 @@ export default {
     };
   },
   watch: {
+    // watch to change frame settings
     bannerFrame: {
       handler() {
         this.submitBannerFrameToStore(this.bannerFrame);

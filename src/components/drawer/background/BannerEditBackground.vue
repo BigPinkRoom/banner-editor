@@ -2,10 +2,12 @@
   <v-container>
     <v-row>
       <v-col class="pb-0">
+        <!-- title -->
         <p class="text-uppercase green--text mb-0">Background settings</p>
 
         <v-divider color="green"></v-divider>
 
+        <!-- change type background -->
         <v-radio-group
           v-model="editBackgroundType"
           mandatory
@@ -18,7 +20,10 @@
       </v-col>
     </v-row>
 
+    <!-- solid background module -->
     <app-banner-edit-background-solid v-if="editBackgroundType === 'solid'" />
+
+    <!-- gradient background module -->
     <app-banner-edit-background-gradient
       v-if="editBackgroundType === 'gradient'"
     />
