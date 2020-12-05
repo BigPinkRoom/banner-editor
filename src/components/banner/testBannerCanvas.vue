@@ -27,6 +27,7 @@
         }"
         :index="index"
         @mousedown.prevent="dragText"
+        @mouseup="submitPosition"
       >
         {{ textElement.settings.text }}
       </p>
@@ -68,7 +69,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
+import { mapState, mapGetters, mapActions } from 'vuex';
 import domToImage from 'dom-to-image';
 import { dragAndDrop } from '../../js/utils/dragAndDrop';
 
@@ -168,10 +169,17 @@ export default {
     };
   },
   methods: {
+    ...mapActions('text', ['submitElementPositionToStore']),
+
     dragText(event) {
-      let indexElement = event.target.getAttribute('index');
-      console.log('indexElement', indexElement);
       dragAndDrop(event, event.target);
+    },
+    submitPosition(event) {
+      this.submitElementPositionToStore({
+        numberArray: event.target.getAttribute('index'),
+        x: parseInt(event.target.style.left),
+        y: parseInt(event.target.style.top),
+      });
     },
     textRGBAString(index) {
       const textRGBAFunction = this.getTextRGBAString;

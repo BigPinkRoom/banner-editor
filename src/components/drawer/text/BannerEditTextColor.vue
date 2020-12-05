@@ -66,9 +66,9 @@ export default {
     return {
       colorPickerModal: false,
       colorRGBA: {
-        r: 96,
-        g: 125,
-        b: 139,
+        r: 1,
+        g: 195,
+        b: 195,
         a: 1,
       },
     };

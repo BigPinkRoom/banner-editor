@@ -53,8 +53,8 @@ export function dragAndDrop(event, dragElement) {
     let newY = clientY - shiftY;
 
     // top owerflow behaviour
-    if (newY + dragElement.offsetHeight / 2 <= parentTopEdge) {
-      newY = parentTopEdge - dragElement.offsetHeight / 2;
+    if (newY + dragElement.offsetHeight / 2.5 <= parentTopEdge) {
+      newY = parentTopEdge - dragElement.offsetHeight / 2.5;
     }
 
     // left owerflow behaviour
@@ -63,8 +63,8 @@ export function dragAndDrop(event, dragElement) {
     }
 
     // bottom owerflow behaviour
-    if (newY + dragElement.offsetHeight / 2 >= parentBottomEdge) {
-      newY = parentBottomEdge - dragElement.offsetHeight / 2;
+    if (newY + dragElement.offsetHeight / 1.5 >= parentBottomEdge) {
+      newY = parentBottomEdge - dragElement.offsetHeight / 1.5;
     }
 
     // right owerflow behaviour

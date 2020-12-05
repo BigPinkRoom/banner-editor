@@ -6,10 +6,10 @@ export default {
   mutations: {
     SET_TEXT_SETTINGS_ARRAY(state, payload) {
       state.textSettingsArray = payload;
-      console.log(state);
     },
     SET_TEXT_SETTINGS_ELEMENT_POSITION(state, payload) {
-      state.textSettingsArray[payload.numberArray] = payload.position;
+      state.textSettingsArray[payload.numberArray].position.x = payload.x;
+      state.textSettingsArray[payload.numberArray].position.y = payload.y;
     },
   },
   actions: {

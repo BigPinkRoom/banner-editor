@@ -80,6 +80,7 @@
                     dense
                     label="Size"
                     outlined
+                    @input="correctPositionTextModule(EditTextModule)"
                   ></v-select>
                 </v-col>
 
@@ -160,16 +161,16 @@ export default {
           y: 0,
         },
         settings: {
-          text: 'Test text',
+          text: 'Your text',
           fontFamily: 'sans-serif',
-          size: 14,
+          size: 30,
           weight: '400',
         },
         color: {
           selectedColorRGBA: {
-            r: 0,
-            g: 0,
-            b: 0,
+            r: 1,
+            g: 195,
+            b: 195,
             a: 1,
           },
         },
@@ -180,6 +181,13 @@ export default {
     // delete text block (to index)
     deleteTextBlock(indexTextModule) {
       this.editTextModules.splice(indexTextModule, 1);
+    },
+    correctPositionTextModule(textModule) {
+      if (textModule.position.x < 0 || textModule.position.y < 0) {
+        textModule.position.x = 0;
+        textModule.position.y = 0;
+      }
+      console.log(textModule.position);
     },
   },
 };
