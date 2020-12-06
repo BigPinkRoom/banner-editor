@@ -27,9 +27,16 @@ export default {
 </script>
 <style lang="scss">
 /* main */
-// v-main
+// v-main background
 .app__v-main {
   background-color: rgb(250, 250, 250);
+}
+
+// center content in main wrap
+.v-main__wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* background gradient module */

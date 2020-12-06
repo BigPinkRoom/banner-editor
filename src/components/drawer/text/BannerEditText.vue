@@ -163,7 +163,7 @@ export default {
           y: 0,
         },
         settings: {
-          text: 'Your text',
+          text: `Your text ${this.editTextModules.length + 1}`,
           fontFamily: 'sans-serif',
           size: 30,
           weight: '400',

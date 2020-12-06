@@ -55,7 +55,7 @@ export default {
 
   data() {
     return {
-      bannerWidth: 800,
+      bannerWidth: 450,
       bannerHeight: 600,
     };
   },

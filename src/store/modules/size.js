@@ -2,8 +2,8 @@ export default {
   namespaced: true,
   state: {
     bannerSize: {
-      height: 800,
-      width: 600,
+      height: 600,
+      width: 450,
     },
   },
   mutations: {
