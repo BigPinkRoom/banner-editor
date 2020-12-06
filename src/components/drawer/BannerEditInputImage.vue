@@ -108,6 +108,17 @@
             >Reset position</v-btn
           >
         </v-col>
+        <v-col>
+          <p class="mb-0 text-subtitle-2">Remove image from canvas:</p>
+          <v-btn
+            :disabled="!isImageOnStore"
+            color="red"
+            class="white--text"
+            @click="removeImageInStore"
+          >
+            Remove image
+          </v-btn>
+        </v-col>
       </v-row>
     </v-container>
   </div>
@@ -140,7 +151,7 @@ export default {
     ...validationBannerEditInputImage.errorMessages,
   },
   methods: {
-    ...mapActions('image', ['submitImageToStore']),
+    ...mapActions('image', ['submitImageToStore', 'removeImageInStore']),
     ...mapMutations('shared', ['increaseLoading', 'decreaseLoading']),
 
     // load file from user device to 'Banner Edit"

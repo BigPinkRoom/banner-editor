@@ -13,6 +13,13 @@ export default {
     SET_INPUT_IMAGE(state, payload) {
       state.inputImage = payload;
     },
+    REMOVE_INPUT_IMAGE(state) {
+      state.inputImage = {
+        file: '',
+        width: 0,
+        height: 0,
+      };
+    },
   },
   actions: {
     submitImageToStore({ commit, dispatch }, payload) {
@@ -53,7 +60,12 @@ export default {
         };
       };
     },
+
+    removeImageInStore({ commit }) {
+      commit('REMOVE_INPUT_IMAGE');
+    },
   },
+
   getters: {
     // return boolean - is image on store
     isImageOnStore(state) {
