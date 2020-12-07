@@ -85,16 +85,8 @@ export default {
     },
     inputImage: {
       handler() {
-        let imageCanvas = this.$refs.imageCanvas.getNode();
-        imageCanvas.position({ x: 0, y: 0 });
-        this.imageConfig.rotation = 0;
-
-        this.imageConfig.scaleX = this.bannerSize.width / this.inputImage.width;
-        this.imageConfig.scaleY = this.bannerSize.width / this.inputImage.width;
-
         this.imageConfig.image = this.inputImage.file;
-        this.selectedImageName = '';
-        this.updateTransformer();
+        this.changeImagePosition('byWidth');
       },
       deep: true,
     },
@@ -105,23 +97,12 @@ export default {
   mounted() {
     this.stage = this.$refs.stage.getNode();
 
-    this.$root.$on('resetImagePosition', () => {
-      this.resetImagePosition();
-    });
-
-    this.$root.$on('imagePositionByHeight', () => {
-      this.imagePositionByHeight();
-    });
-
-    this.$root.$on('imagePositionByWidth', () => {
-      this.imagePositionByWidth();
+    this.$root.$on('changeImagePosition', (positionType) => {
+      this.changeImagePosition(positionType);
     });
   },
   beforeDestroy() {
-    this.$root.$off('resetImagePosition');
-    this.$root.$off('imagePositionByHeight');
-    this.$root.$off('imagePositionByWidth');
-    this.$root.$off('downloadResult');
+    this.$root.$off('changeImagePosition');
   },
   methods: {
     handleTransformEnd,
@@ -129,40 +110,28 @@ export default {
     updateTransformer,
     unselectTransformer,
 
-    imagePositionByHeight() {
+    changeImagePosition(positionType) {
+      const that = this;
       const imageCanvas = this.$refs.imageCanvas.getNode();
       imageCanvas.position({ x: 0, y: 0 });
       this.imageConfig.rotation = 0;
 
-      this.imageConfig.scaleY = this.bannerSize.height / this.inputImage.height;
-
-      this.imageConfig.scaleX = this.bannerSize.height / this.inputImage.height;
-
-      this.selectedImageName = '';
-      this.updateTransformer();
-    },
-    imagePositionByWidth() {
-      let imageCanvas = this.$refs.imageCanvas.getNode();
-      imageCanvas.position({ x: 0, y: 0 });
-      this.imageConfig.rotation = 0;
-
-      this.imageConfig.scaleY = this.bannerSize.width / this.inputImage.width;
-
-      this.imageConfig.scaleX = this.bannerSize.width / this.inputImage.width;
-
-      this.selectedImageName = '';
-      this.updateTransformer();
-    },
-    resetImagePosition() {
-      let imageCanvas = this.$refs.imageCanvas.getNode();
-      imageCanvas.position({ x: 0, y: 0 });
-      this.imageConfig.rotation = 0;
-
-      this.selectedImageName = '';
-      this.updateTransformer();
-
-      // this.imageConfig.x = 0;
-      // this.imageConfig.y = 0;
+      const imagePositionTypes = {
+        byHeight() {
+          that.imageConfig.scaleY =
+            that.bannerSize.height / that.inputImage.height;
+          that.imageConfig.scaleX =
+            that.bannerSize.height / that.inputImage.height;
+        },
+        byWidth() {
+          that.imageConfig.scaleY =
+            that.bannerSize.width / that.inputImage.width;
+          that.imageConfig.scaleX =
+            that.bannerSize.width / that.inputImage.width;
+        },
+      };
+      if (positionType) imagePositionTypes[positionType]();
+      this.unselectTransformer();
     },
 
     downloadResult() {
