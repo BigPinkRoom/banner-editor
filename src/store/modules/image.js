@@ -8,6 +8,13 @@ export default {
       width: 0,
       height: 0,
     },
+    // events: {
+    //   resetImagePosition: false,
+    //   downloadResult: false,
+    //   downloadFullResult: false,
+    //   imagePositionByHeight: false,
+    //   imagePositionByWidth: false,
+    // },
   },
   mutations: {
     SET_INPUT_IMAGE(state, payload) {
@@ -16,9 +23,12 @@ export default {
     REMOVE_INPUT_IMAGE(state) {
       state.inputImage = {
         file: '',
-        width: 0,
-        height: 0,
+        width: 1,
+        height: 1,
       };
+    },
+    SET_EVENT(state, payload, value) {
+      state.events[payload] = Boolean(value);
     },
   },
   actions: {

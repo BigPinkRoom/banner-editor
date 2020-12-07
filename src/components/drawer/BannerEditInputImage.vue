@@ -81,6 +81,7 @@
             :disabled="!isImageOnStore"
             class="white--text"
             color="blue-grey"
+            @click="emitImagePositionByWidth"
             >By width</v-btn
           >
         </v-col>
@@ -94,6 +95,7 @@
             :disabled="!isImageOnStore"
             class="white--text"
             color="blue-grey"
+            @click="emitImagePositionByHeight"
             >By height</v-btn
           >
         </v-col>
@@ -105,6 +107,7 @@
             :disabled="!isImageOnStore"
             class="white--text"
             color="blue-grey"
+            @click="emitResetImagePosition"
             >Reset position</v-btn
           >
         </v-col>
@@ -112,8 +115,8 @@
           <p class="mb-0 text-subtitle-2">Remove image from canvas:</p>
           <v-btn
             :disabled="!isImageOnStore"
-            color="red"
             class="white--text"
+            color="red"
             @click="removeImageInStore"
           >
             Remove image
@@ -170,6 +173,18 @@ export default {
     // trigger of upload image
     triggerUpload() {
       this.$refs.fileInput.click();
+    },
+
+    emitResetImagePosition() {
+      this.$root.$emit('resetImagePosition');
+    },
+
+    emitImagePositionByHeight() {
+      this.$root.$emit('imagePositionByHeight');
+    },
+
+    emitImagePositionByWidth() {
+      this.$root.$emit('imagePositionByWidth');
     },
   },
 };

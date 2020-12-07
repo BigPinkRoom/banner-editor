@@ -13,7 +13,7 @@
         mdi-content-copy
       </v-icon>
     </v-btn>
-    <v-btn color="green darken-2" outlined>
+    <v-btn color="green darken-2" outlined @click="emitDownloadResult">
       Download png
       <v-icon>
         mdi-download
@@ -22,5 +22,11 @@
   </v-app-bar>
 </template>
 <script>
-export default {};
+export default {
+  methods: {
+    emitDownloadResult() {
+      this.$root.$emit('downloadResult');
+    },
+  },
+};
 </script>
