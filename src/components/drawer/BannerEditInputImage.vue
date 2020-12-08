@@ -83,7 +83,7 @@
               :disabled="!isImageOnStore"
               class="white--text"
               color="blue-grey"
-              @click="emitChangeImagePosition('byWidth')"
+              @click="emitChangeImageSize('byWidth')"
               >By width</v-btn
             >
           </v-col>
@@ -97,7 +97,7 @@
               :disabled="!isImageOnStore"
               class="white--text"
               color="blue-grey"
-              @click="emitChangeImagePosition('byHeight')"
+              @click="emitChangeImageSize('byHeight')"
               >By height</v-btn
             >
           </v-col>
@@ -109,7 +109,7 @@
               :disabled="!isImageOnStore"
               class="white--text"
               color="blue-grey"
-              @click="emitChangeImagePosition('')"
+              @click="emitChangeImageSize('')"
               >Reset position</v-btn
             >
           </v-col>
@@ -178,8 +178,8 @@ export default {
       this.$refs.fileInput.click();
     },
 
-    emitChangeImagePosition(positionType) {
-      this.$root.$emit('changeImagePosition', positionType);
+    emitChangeImageSize(sizeType) {
+      this.$root.$emit('changeImageSize', sizeType);
     },
   },
 };

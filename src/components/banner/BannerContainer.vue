@@ -41,6 +41,7 @@ export default {
     ...mapState('frame', ['bannerFrame']),
     ...mapState('size', ['bannerSize']),
     ...mapState('text', ['textSettingsArray']),
+    ...mapState('background', ['']),
     ...mapGetters('shared', [
       'booleanloadingUrlImage',
       'booleanLoadingResultImage',
@@ -56,14 +57,13 @@ export default {
     ...mapActions('shared', ['increaseLoading', 'decreaseLoading']),
 
     async downloadResult() {
-      this.$refs.bannerCanvas.unselectTransformer();
-
-      await new Promise((resolve) => {
-        setTimeout(() => resolve(), 1000);
-      });
-
       try {
         this.increaseLoading('loadingImageResult');
+        this.$refs.bannerCanvas.updateCanvas();
+
+        await new Promise((resolve) => {
+          setTimeout(() => resolve(), 1000);
+        });
 
         let node = this.$refs.bannerContainer;
         let dataUrl = await domToImage.toPng(node);
@@ -82,6 +82,18 @@ export default {
         this.decreaseLoading('loadingImageResult');
       }
     },
+
+    bannerToHtml() {},
+    bannerSettings() {
+      return {
+        size: this.bannerSize,
+        background: '',
+        image: '',
+        text: '',
+        frame: '',
+      };
+    },
+    bannerSettingsToJson() {},
   },
 };
 </script>

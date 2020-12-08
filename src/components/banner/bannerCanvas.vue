@@ -26,7 +26,7 @@ import {
   handleTransformEnd,
   handleStageMouseDown,
   updateTransformer,
-  unselectTransformer,
+  updateCanvas,
 } from '../../js/utils/konva';
 
 export default {
@@ -86,56 +86,70 @@ export default {
     inputImage: {
       handler() {
         this.imageConfig.image = this.inputImage.file;
-        this.changeImagePosition('byWidth');
+        this.changeImageSize('byWidth');
       },
       deep: true,
     },
   },
   created() {
+    // create listener on keydown event
     window.addEventListener('keydown', (event) => this.escapeListener(event));
   },
   mounted() {
     this.stage = this.$refs.stage.getNode();
 
-    this.$root.$on('changeImagePosition', (positionType) => {
-      this.changeImagePosition(positionType);
+    // create listener on custom 'changeImagePosition' event.
+    this.$root.$on('changeImageSize', (sizeType) => {
+      this.changeImageSize(sizeType);
     });
   },
   beforeDestroy() {
-    this.$root.$off('changeImagePosition');
+    // delete listener on custom 'changeImagePosition' event (before destroy this component)
+    this.$root.$off('changeImageSize');
   },
   methods: {
+    // handlers for konva
     handleTransformEnd,
     handleStageMouseDown,
     updateTransformer,
-    unselectTransformer,
+    updateCanvas,
 
-    changeImagePosition(positionType) {
-      const that = this;
+    // change image size on canvas
+    changeImageSize(sizeType) {
       const imageCanvas = this.$refs.imageCanvas.getNode();
+
+      // reset image position on canvas
       imageCanvas.position({ x: 0, y: 0 });
+
+      // reset image rotation on canvas
       this.imageConfig.rotation = 0;
 
-      const imagePositionMethods = {
+      const imageSizeMethods = {
+        // change image size by canvas height
         byHeight() {
-          that.imageConfig.scaleY =
-            that.bannerSize.height / that.inputImage.height;
-          that.imageConfig.scaleX =
-            that.bannerSize.height / that.inputImage.height;
+          this.imageConfig.scaleY =
+            this.bannerSize.height / this.inputImage.height;
+          this.imageConfig.scaleX =
+            this.bannerSize.height / this.inputImage.height;
         },
+
+        // change image size by canvas width
         byWidth() {
-          that.imageConfig.scaleY =
-            that.bannerSize.width / that.inputImage.width;
-          that.imageConfig.scaleX =
-            that.bannerSize.width / that.inputImage.width;
+          this.imageConfig.scaleY =
+            this.bannerSize.width / this.inputImage.width;
+          this.imageConfig.scaleX =
+            this.bannerSize.width / this.inputImage.width;
         },
       };
-      if (positionType) imagePositionMethods[positionType]();
-      this.unselectTransformer();
+
+      if (sizeType) imageSizeMethods[sizeType].bind(this)();
+
+      // updateCanvas
+      this.updateCanvas();
     },
 
     downloadResult() {
-      this.unselectTransformer();
+      this.updateCanvas();
       const link = document.createElement('a');
       link.download = 'filename.png';
 
@@ -149,9 +163,7 @@ export default {
     // remove transformer frame (on selected image)
     escapeListener(event) {
       if (event.key === 'Escape') {
-        this.eventMessage = 'test-A';
-        console.log(this.eventMessage);
-        this.unselectTransformer();
+        this.updateCanvas();
       }
     },
   },

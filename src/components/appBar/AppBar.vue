@@ -1,5 +1,14 @@
 <template>
   <v-app-bar app flat color="grey lighten-3" height="67" dark>
+    <v-row>
+      <v-col>
+        <p class="ma-0 text-uppercase blue--text">
+          Final size (with borders): W
+          {{ bannerSize.width + bannerFrame.frameSize * 2 }}; H
+          {{ bannerSize.height + bannerFrame.frameSize * 2 }}
+        </p>
+      </v-col>
+    </v-row>
     <v-spacer></v-spacer>
     <v-btn color="blue" outlined class="mr-2">
       Json
@@ -27,10 +36,12 @@
   </v-app-bar>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 
 export default {
   computed: {
+    ...mapState('size', ['bannerSize']),
+    ...mapState('frame', ['bannerFrame']),
     ...mapGetters('shared', ['booleanLoadingResultImage']),
   },
   methods: {

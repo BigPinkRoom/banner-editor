@@ -46,10 +46,6 @@ export function updateTransformer() {
   const { selectedImageName } = this;
 
   const selectedNode = stageTransformer.findOne('.' + selectedImageName);
-  // do nothing if selected node is already attached
-  if (selectedNode === transformerNode.node()) {
-    return;
-  }
 
   if (selectedNode) {
     // attach to another node (if we have several images)
@@ -61,7 +57,7 @@ export function updateTransformer() {
   transformerNode.getLayer().batchDraw();
 }
 
-export function unselectTransformer() {
+export function updateCanvas() {
   this.selectedImageName = '';
   this.updateTransformer();
 }
