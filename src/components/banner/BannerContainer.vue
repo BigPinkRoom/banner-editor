@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
+import { mapActions, mapState, mapGetters } from 'vuex';
 import domToImage from 'dom-to-image';
 import BannerCanvas from './BannerCanvas';
 import BannerTextModule from './BannerTextModule';
@@ -41,6 +41,10 @@ export default {
     ...mapState('frame', ['bannerFrame']),
     ...mapState('size', ['bannerSize']),
     ...mapState('text', ['textSettingsArray']),
+    ...mapGetters('shared', [
+      'booleanloadingUrlImage',
+      'booleanLoadingResultImage',
+    ]),
     ...mapGetters('frame', ['getFrameColorRGBAString']),
   },
   mounted() {
@@ -49,6 +53,8 @@ export default {
     });
   },
   methods: {
+    ...mapActions('shared', ['increaseLoading', 'decreaseLoading']),
+
     async downloadResult() {
       this.$refs.bannerCanvas.unselectTransformer();
 
@@ -56,21 +62,24 @@ export default {
         setTimeout(() => resolve(), 1000);
       });
 
-      const link = document.createElement('a');
-      link.download = 'NewBanner.png';
-
       try {
+        this.increaseLoading('loadingImageResult');
+
         let node = this.$refs.bannerContainer;
         let dataUrl = await domToImage.toPng(node);
         await (function() {
           const img = new Image();
           img.src = dataUrl;
 
+          const link = document.createElement('a');
+          link.download = 'NewBanner.png';
           link.href = dataUrl;
           link.click();
         })();
+        this.decreaseLoading('loadingImageResult');
       } catch (error) {
         console.error('something went wrong!', error);
+        this.decreaseLoading('loadingImageResult');
       }
     },
   },

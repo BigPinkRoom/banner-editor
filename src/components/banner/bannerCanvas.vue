@@ -116,7 +116,7 @@ export default {
       imageCanvas.position({ x: 0, y: 0 });
       this.imageConfig.rotation = 0;
 
-      const imagePositionTypes = {
+      const imagePositionMethods = {
         byHeight() {
           that.imageConfig.scaleY =
             that.bannerSize.height / that.inputImage.height;
@@ -130,7 +130,7 @@ export default {
             that.bannerSize.width / that.inputImage.width;
         },
       };
-      if (positionType) imagePositionTypes[positionType]();
+      if (positionType) imagePositionMethods[positionType]();
       this.unselectTransformer();
     },
 

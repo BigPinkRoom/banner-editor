@@ -65,9 +65,9 @@ export default {
         frameSize: 1,
         frameRadius: 7,
         frameColorRGBA: {
-          r: 0,
-          g: 0,
-          b: 0,
+          r: 210,
+          g: 210,
+          b: 210,
           a: 1,
         },
       },
