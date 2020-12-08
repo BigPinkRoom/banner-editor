@@ -109,8 +109,10 @@ export default {
     async bannerSettingsToJson() {
       const bannerSettings = await this.getBannerSettings();
       const bannerSettingsJSON = JSON.stringify(bannerSettings);
-
       console.log(bannerSettingsJSON);
+      setTimeout(() => {
+        this.$clipboard(bannerSettingsJSON);
+      }, 5000);
     },
   },
 };

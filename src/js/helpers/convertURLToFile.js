@@ -8,6 +8,7 @@ export async function convertURLToFile(imageURL) {
     let response = await fetch(
       `https://cors-anywhere.herokuapp.com/${imageURL}`
     );
+    console.log(response);
     if (!response.ok) {
       throw new Error(
         'For this link, can not download the image. Please insert another link.'

@@ -149,7 +149,7 @@ export default {
     },
 
     async returnProcessedImage() {
-      this.updateCanvas();
+      // this.updateCanvas();
       const link = document.createElement('a');
       link.download = 'filename.png';
 
