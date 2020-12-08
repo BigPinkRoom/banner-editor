@@ -5,16 +5,10 @@ export default {
   state: {
     inputImage: {
       file: '',
+      processedFile: '',
       width: 0,
       height: 0,
     },
-    // events: {
-    //   resetImagePosition: false,
-    //   downloadResult: false,
-    //   downloadFullResult: false,
-    //   imagePositionByHeight: false,
-    //   imagePositionByWidth: false,
-    // },
   },
   mutations: {
     SET_INPUT_IMAGE(state, payload) {
@@ -23,6 +17,7 @@ export default {
     REMOVE_INPUT_IMAGE(state) {
       state.inputImage = {
         file: '',
+        processedFile: '',
         width: 1,
         height: 1,
       };
@@ -63,6 +58,7 @@ export default {
             'SET_INPUT_IMAGE',
             new InputImage({
               file: image,
+              processedFile: '',
               width: imageWidth,
               height: imageHeight,
             })

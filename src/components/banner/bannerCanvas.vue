@@ -148,7 +148,7 @@ export default {
       this.updateCanvas();
     },
 
-    downloadResult() {
+    async returnProcessedImage() {
       this.updateCanvas();
       const link = document.createElement('a');
       link.download = 'filename.png';
@@ -157,7 +157,7 @@ export default {
         pixelRatio: 1,
         mimeType: 'image/png',
       });
-      link.click();
+      return link.href;
     },
 
     // remove transformer frame (on selected image)

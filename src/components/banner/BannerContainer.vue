@@ -18,6 +18,7 @@
       :index="index"
       :textElement="textElement"
     ></app-banner-text-module>
+    <v-btn @click="bannerSettingsToJson">Show object</v-btn>
     <app-banner-canvas ref="bannerCanvas"></app-banner-canvas>
   </div>
 </template>
@@ -39,9 +40,14 @@ export default {
   },
   computed: {
     ...mapState('frame', ['bannerFrame']),
+    ...mapState('image', ['inputImage']),
     ...mapState('size', ['bannerSize']),
     ...mapState('text', ['textSettingsArray']),
-    ...mapState('background', ['']),
+    ...mapState('background', [
+      'backgroundType',
+      'backgroundSolidSettings',
+      'backgroundGradientSettings',
+    ]),
     ...mapGetters('shared', [
       'booleanloadingUrlImage',
       'booleanLoadingResultImage',
@@ -84,16 +90,28 @@ export default {
     },
 
     bannerToHtml() {},
-    bannerSettings() {
-      return {
+    async getBannerSettings() {
+      const processedImage = await this.$refs.bannerCanvas.returnProcessedImage();
+      let bannerSettings = {
         size: this.bannerSize,
-        background: '',
-        image: '',
-        text: '',
-        frame: '',
+        background: {
+          backgroundType: this.backgroundType,
+          backgroundSolidSettings: this.backgroundSolidSettings,
+          backgroundGradientSettings: this.backgroundGradientSettings,
+        },
+        image: this.inputImage,
+        text: this.textSettingsArray,
+        frame: this.bannerFrame,
       };
+      bannerSettings.image.processedFile = processedImage;
+      return bannerSettings;
     },
-    bannerSettingsToJson() {},
+    async bannerSettingsToJson() {
+      const bannerSettings = await this.getBannerSettings();
+      const bannerSettingsJSON = JSON.stringify(bannerSettings);
+
+      console.log(bannerSettingsJSON);
+    },
   },
 };
 </script>

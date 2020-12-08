@@ -13,6 +13,7 @@
     "core-js": "^3.6.5",
     "dom-to-image": "^2.6.0",
     "konva": "^7.1.9",
+    "v-clipboard": "^2.2.3",
     "vue": "^2.6.11",
     "vue-color-gradient-picker": "^0.1.2",
     "vue-konva": "^2.1.6",
