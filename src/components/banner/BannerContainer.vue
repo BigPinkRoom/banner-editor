@@ -18,7 +18,6 @@
       :index="index"
       :textElement="textElement"
     ></app-banner-text-module>
-    <v-btn @click="bannerSettingsToJson">Show object</v-btn>
     <app-banner-canvas ref="bannerCanvas"></app-banner-canvas>
   </div>
 </template>
@@ -26,6 +25,7 @@
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex';
 import domToImage from 'dom-to-image';
+import { sendImageToImgbb } from '../../js/helpers/sendImageToImgbb';
 import BannerCanvas from './BannerCanvas';
 import BannerTextModule from './BannerTextModule';
 
@@ -58,6 +58,12 @@ export default {
     this.$root.$on('downloadResult', () => {
       this.downloadResult();
     });
+    this.$root.$on('copyBannerHTMLToClipboard', () => {
+      this.copyBannerHTMLToClipboard();
+    });
+    this.$root.$on('copySettingsJSONToClipboard', () => {
+      this.copySettingsJSONToClipboard();
+    });
   },
   methods: {
     ...mapActions('shared', ['increaseLoading', 'decreaseLoading']),
@@ -89,30 +95,46 @@ export default {
       }
     },
 
-    bannerToHtml() {},
-    async getBannerSettings() {
-      const processedImage = await this.$refs.bannerCanvas.returnProcessedImage();
-      let bannerSettings = {
-        size: this.bannerSize,
-        background: {
-          backgroundType: this.backgroundType,
-          backgroundSolidSettings: this.backgroundSolidSettings,
-          backgroundGradientSettings: this.backgroundGradientSettings,
-        },
-        image: this.inputImage,
-        text: this.textSettingsArray,
-        frame: this.bannerFrame,
-      };
-      bannerSettings.image.processedFile = processedImage;
-      return bannerSettings;
+    copyBannerHTMLToClipboard() {},
+
+    async getBannerSettingsJSON() {
+      try {
+        const processedImage = await this.$refs.bannerCanvas.returnProcessedImage();
+
+        const processedImageURL = await sendImageToImgbb(processedImage);
+        setTimeout(() => {
+          console.log(processedImageURL);
+        }, 1000);
+        let bannerSettings = {
+          size: this.bannerSize,
+          background: {
+            backgroundType: this.backgroundType,
+            backgroundSolidSettings: this.backgroundSolidSettings,
+            backgroundGradientSettings: this.backgroundGradientSettings,
+          },
+          image: this.inputImage,
+          text: this.textSettingsArray,
+          frame: this.bannerFrame,
+        };
+
+        // set to bannerSettings object, processed image URL
+        bannerSettings.image.processedFile = processedImageURL;
+
+        // return JSON string of bannerSettings;
+        return JSON.stringify(bannerSettings);
+      } catch (error) {
+        console.log(error);
+        throw error;
+      }
     },
-    async bannerSettingsToJson() {
-      const bannerSettings = await this.getBannerSettings();
-      const bannerSettingsJSON = JSON.stringify(bannerSettings);
-      console.log(bannerSettingsJSON);
-      setTimeout(() => {
-        this.$clipboard(bannerSettingsJSON);
-      }, 5000);
+
+    async copySettingsJSONToClipboard() {
+      try {
+        const settingsObject = await this.getBannerSettingsJSON();
+        await this.$copyText(settingsObject);
+      } catch (error) {
+        console.error(error);
+      }
     },
   },
 };

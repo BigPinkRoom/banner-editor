@@ -4,9 +4,9 @@ import router from './router';
 import store from './store';
 import vuetify from './plugins/vuetify';
 import VueKonva from 'vue-konva';
-import Clipboard from 'v-clipboard';
+import VueClipboard from 'vue-clipboard2';
 
-Vue.use(Clipboard);
+Vue.use(VueClipboard);
 Vue.use(VueKonva);
 Vue.config.productionTip = false;
 

@@ -1,5 +1,12 @@
 <template>
-  <v-app-bar app flat color="grey lighten-3" height="67" dark>
+  <v-app-bar
+    app
+    color="grey lighten-3"
+    dark
+    flat
+    height="67"
+    @click="emitBannerHTMLClipboard"
+  >
     <v-row>
       <v-col>
         <p class="ma-0 text-uppercase blue--text">
@@ -10,7 +17,7 @@
       </v-col>
     </v-row>
     <v-spacer></v-spacer>
-    <v-btn color="blue" outlined class="mr-2">
+    <v-btn color="blue" outlined class="mr-2" @click="emitSettingsToClipboard">
       Json
       <v-icon class="ml-1">
         mdi-content-copy
@@ -45,6 +52,12 @@ export default {
     ...mapGetters('shared', ['booleanLoadingResultImage']),
   },
   methods: {
+    emitBannerHTMLClipboard() {
+      this.$root.$emit('copyBannerHTMLToClipboard');
+    },
+    emitSettingsToClipboard() {
+      this.$root.$emit('copySettingsJSONToClipboard');
+    },
     emitDownloadResult() {
       this.$root.$emit('downloadResult');
     },

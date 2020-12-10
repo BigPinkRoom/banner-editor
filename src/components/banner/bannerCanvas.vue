@@ -28,6 +28,7 @@ import {
   updateTransformer,
   updateCanvas,
 } from '../../js/utils/konva';
+import { removeMimeType } from '../../js/helpers/removeMimeType';
 
 export default {
   name: 'BannerCanvas',
@@ -83,7 +84,7 @@ export default {
       },
       deep: true,
     },
-    inputImage: {
+    'inputImage.file': {
       handler() {
         this.imageConfig.image = this.inputImage.file;
         this.changeImageSize('byWidth');
@@ -149,15 +150,27 @@ export default {
     },
 
     async returnProcessedImage() {
-      // this.updateCanvas();
-      const link = document.createElement('a');
-      link.download = 'filename.png';
+      // const image = this.$refs.imageCanvas.getNode();
+      // console.log(image);
+      // const layer = this.$refs.layer.getNode();
+      // console.log(layer);
+      return new Promise((resolve, reject) => {
+        this.updateCanvas();
+        let link = document.createElement('a');
+        link.download = 'filename.png';
 
-      link.href = this.stage.toDataURL({
-        pixelRatio: 1,
-        mimeType: 'image/png',
+        link.href = this.stage.toDataURL({
+          pixelRatio: 1,
+          mimeType: 'image/png',
+        });
+
+        const imageBase64 = removeMimeType(link.href);
+        if (imageBase64) {
+          resolve(imageBase64);
+        } else {
+          reject(new Error('Error in creating processed image'));
+        }
       });
-      return link.href;
     },
 
     // remove transformer frame (on selected image)
