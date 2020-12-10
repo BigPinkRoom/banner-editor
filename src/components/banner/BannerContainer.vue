@@ -10,6 +10,7 @@
       overflow: 'hidden',
       backgroundColor: '#ffffff',
       boxSizing: 'content-box',
+      transform: `scale(${scale})`,
     }"
   >
     <app-banner-text-module
@@ -17,6 +18,7 @@
       :key="index"
       :index="index"
       :textElement="textElement"
+      :zoomModifier="zoomModifier"
     ></app-banner-text-module>
     <app-banner-canvas ref="bannerCanvas"></app-banner-canvas>
   </div>
@@ -35,8 +37,13 @@ export default {
     AppBannerCanvas: BannerCanvas,
     AppBannerTextModule: BannerTextModule,
   },
+  props: {
+    zoomModifier: Number,
+  },
   data() {
-    return {};
+    return {
+      scale: 1,
+    };
   },
   computed: {
     ...mapState('frame', ['bannerFrame']),
@@ -47,10 +54,6 @@ export default {
       'backgroundType',
       'backgroundSolidSettings',
       'backgroundGradientSettings',
-    ]),
-    ...mapGetters('shared', [
-      'booleanloadingUrlImage',
-      'booleanLoadingResultImage',
     ]),
     ...mapGetters('frame', ['getFrameColorRGBAString']),
   },
@@ -66,11 +69,17 @@ export default {
     });
   },
   methods: {
-    ...mapActions('shared', ['increaseLoading', 'decreaseLoading']),
+    ...mapActions('shared', [
+      'increaseLoading',
+      'decreaseLoading',
+      'clearError',
+      'setError',
+    ]),
 
     async downloadResult() {
+      this.clearError();
+      this.increaseLoading('loadingImageResult');
       try {
-        this.increaseLoading('loadingImageResult');
         this.$refs.bannerCanvas.updateCanvas();
 
         await new Promise((resolve) => {
@@ -90,8 +99,11 @@ export default {
         })();
         this.decreaseLoading('loadingImageResult');
       } catch (error) {
-        console.error('something went wrong!', error);
         this.decreaseLoading('loadingImageResult');
+        this.setError(
+          `Something went wrong on download image! Error:${error.message}`
+        );
+        console.error(error);
       }
     },
 
@@ -129,10 +141,18 @@ export default {
     },
 
     async copySettingsJSONToClipboard() {
+      this.clearError();
+      this.increaseLoading('loadingSettingsToJSON');
+
       try {
         const settingsObject = await this.getBannerSettingsJSON();
         await this.$copyText(settingsObject);
+        this.decreaseLoading('loadingSettingsToJSON');
       } catch (error) {
+        this.decreaseLoading('loadingSettingsToJSON');
+        this.setError(
+          `Something went wrong on copy JSON logic! Error:${error.message}`
+        );
         console.error(error);
       }
     },

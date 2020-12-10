@@ -53,7 +53,6 @@ export default {
     };
   },
   computed: {
-    ...mapState('shared', ['loading']),
     ...mapState('image', ['inputImage']),
     ...mapState('size', ['bannerSize']),
     ...mapState('background', ['backgroundGradientSettings', 'backgroundType']),

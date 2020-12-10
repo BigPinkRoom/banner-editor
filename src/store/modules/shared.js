@@ -4,6 +4,8 @@ export default {
     error: null,
     loadingImageUrl: 0,
     loadingImageResult: 0,
+    loadingSettingsToJSON: 0,
+    loadingBannerToHTML: 0,
   },
   mutations: {
     CLEAR_ERROR(state) {
@@ -42,11 +44,17 @@ export default {
   },
   getters: {
     // convert number to boolean status loading image to url
-    booleanloadingUrlImage(state) {
+    booleanloadingImageURL(state) {
       return Boolean(state.loadingImageUrl);
     },
-    booleanLoadingResultImage(state) {
+    booleanLoadingImageResult(state) {
       return Boolean(state.loadingImageResult);
+    },
+    booleanLoadingSettingsToJSON(state) {
+      return Boolean(state.loadingSettingsToJSON);
+    },
+    booleanLoadingBannerToHTML(state) {
+      return Boolean(state.loadingSettingsToJSON);
     },
   },
 };

@@ -60,8 +60,8 @@
             <v-row>
               <v-col class="">
                 <v-btn
-                  :disabled="$v.$invalid || booleanloadingUrlImage"
-                  :loading="booleanloadingUrlImage"
+                  :disabled="$v.$invalid || booleanloadingImageURL"
+                  :loading="booleanloadingImageURL"
                   class="white--text"
                   color="green"
                   @click="loadImageURL"
@@ -150,7 +150,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('shared', ['booleanloadingUrlImage']),
+    ...mapGetters('shared', ['booleanloadingImageURL']),
     ...mapGetters('image', ['isImageOnStore']),
 
     // VUETIFY. Validation errors

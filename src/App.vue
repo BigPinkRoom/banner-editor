@@ -5,6 +5,7 @@
     <v-main class="app__v-main">
       <app-view-banner></app-view-banner>
     </v-main>
+
     <app-snack-bar-error></app-snack-bar-error>
   </v-app>
 </template>

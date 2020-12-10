@@ -29,6 +29,7 @@ export default {
   props: {
     textElement: Object,
     index: Number,
+    zoomModifier: Number,
   },
   data() {
     return {};
@@ -40,7 +41,7 @@ export default {
     ...mapActions('text', ['submitElementPositionToStore']),
 
     dragText(event) {
-      dragAndDrop(event, event.target);
+      dragAndDrop(event, event.target, this.zoomModifier);
     },
 
     textRGBAString(index) {

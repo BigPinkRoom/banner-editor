@@ -17,7 +17,13 @@
       </v-col>
     </v-row>
     <v-spacer></v-spacer>
-    <v-btn color="blue" outlined class="mr-2" @click="emitSettingsToClipboard">
+    <v-btn
+      color="blue"
+      outlined
+      class="mr-2"
+      @click="emitSettingsToClipboard"
+      :loading="booleanLoadingSettingsToJSON"
+    >
       Json
       <v-icon class="ml-1">
         mdi-content-copy
@@ -32,7 +38,7 @@
     <v-btn
       color="green darken-2"
       outlined
-      :loading="booleanLoadingResultImage"
+      :loading="booleanLoadingImageResult"
       @click="emitDownloadResult"
     >
       Download png
@@ -49,7 +55,11 @@ export default {
   computed: {
     ...mapState('size', ['bannerSize']),
     ...mapState('frame', ['bannerFrame']),
-    ...mapGetters('shared', ['booleanLoadingResultImage']),
+    ...mapGetters('shared', [
+      'booleanLoadingImageResult',
+      'booleanLoadingSettingsToJSON',
+      'booleanLoadingBannerToHTML',
+    ]),
   },
   methods: {
     emitBannerHTMLClipboard() {

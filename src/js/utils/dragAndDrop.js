@@ -1,4 +1,4 @@
-export function dragAndDrop(event, dragElement) {
+export function dragAndDrop(event, dragElement, zoomModifier = 1) {
   // initial parent element
   const parent = event.target.parentElement;
 
@@ -55,26 +55,26 @@ export function dragAndDrop(event, dragElement) {
     let newY = clientY - shiftY;
 
     // top owerflow behaviour
-    if (newY + dragElement.offsetHeight / 2.5 <= parentTopEdge) {
-      newY = parentTopEdge - dragElement.offsetHeight / 2.5;
+    if (newY + dragElement.offsetHeight / 5 <= parentTopEdge) {
+      newY = parentTopEdge - dragElement.offsetHeight / 5;
     }
 
     // left owerflow behaviour
-    if (newX + dragElement.offsetWidth / 8 < parentLeftEdge) {
-      newX = parentLeftEdge - dragElement.offsetWidth / 8;
+    if (newX + dragElement.offsetWidth / 10 <= parentLeftEdge) {
+      newX = parentLeftEdge - dragElement.offsetWidth / 10;
     }
 
     // bottom owerflow behaviour
-    if (newY + dragElement.offsetHeight / 1.5 >= parentBottomEdge) {
-      newY = parentBottomEdge - dragElement.offsetHeight / 1.5;
+    if (newY + dragElement.offsetHeight >= parentBottomEdge) {
+      newY = parentBottomEdge - dragElement.offsetHeight;
     }
 
     // right owerflow behaviour
-    if (newX + dragElement.offsetWidth / 1.1 > parentRightEdge) {
-      newX = parentRightEdge - dragElement.offsetWidth / 1.1;
+    if (newX + dragElement.offsetWidth >= parentRightEdge) {
+      newX = parentRightEdge - dragElement.offsetWidth;
     }
 
-    dragElement.style.left = newX - parentLeftEdge + 'px';
-    dragElement.style.top = newY - parentTopEdge + 'px';
+    dragElement.style.left = (newX - parentLeftEdge) / zoomModifier + 'px';
+    dragElement.style.top = (newY - parentTopEdge) / zoomModifier + 'px';
   }
 }
