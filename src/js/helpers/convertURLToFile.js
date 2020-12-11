@@ -29,7 +29,11 @@ export async function convertURLToFile(imageURL) {
     this.$store.dispatch('shared/decreaseLoading', 'loadingImageUrl', {
       root: true,
     });
-    this.$store.dispatch('shared/setError', error.message, { root: true });
+    this.$store.dispatch(
+      'shared/setError',
+      `Proxy is not work. Please try again later. Error: ${error.message}`,
+      { root: true }
+    );
     throw error;
   }
 }
