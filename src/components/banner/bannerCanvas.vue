@@ -1,32 +1,34 @@
 <template>
-  <div>
-    <v-stage
-      id="stageContainer"
-      ref="stage"
-      :config="stageConfig"
-      @mousedown="handleStageMouseDown"
-      @touchstart="handleStageMouseDown"
-    >
-      <v-layer ref="layer">
-        <v-image
-          ref="imageCanvas"
-          :config="imageConfig"
-          @transformend="handleTransformEnd"
-        />
-        <v-transformer ref="transformer" :config="transformerConfig" />
-      </v-layer>
-    </v-stage>
-  </div>
+  <!-- main container of konva.js plugin -->
+  <v-stage
+    id="stageContainer"
+    ref="stage"
+    :config="stageConfig"
+    @mousedown="handleStageMouseDown"
+    @touchstart="handleStageMouseDown"
+  >
+    <v-layer ref="layer">
+      <!-- show uploaded image -->
+      <v-image
+        ref="imageCanvas"
+        :config="imageConfig"
+        @transformend="handleTransformEnd"
+      />
+
+      <!-- block for transform uploaded image -->
+      <v-transformer ref="transformer" :config="transformerConfig" />
+    </v-layer>
+  </v-stage>
 </template>
 
 <script>
 import { mapState, mapGetters } from 'vuex';
 import { StageConfig } from '../../js/entities/stageConfig';
 import {
-  handleTransformEnd,
   handleStageMouseDown,
-  updateTransformer,
+  handleTransformEnd,
   updateCanvas,
+  updateTransformer,
 } from '../../js/utils/konva';
 import { removeMimeType } from '../../js/helpers/removeMimeType';
 
@@ -34,30 +36,41 @@ export default {
   name: 'BannerCanvas',
   data() {
     return {
+      // main container node
       stage: null,
+
+      // configuration data for upload image module
       imageConfig: {
-        rotation: 0,
         x: 0,
         y: 0,
+        rotation: 0,
         scaleX: 1,
         scaleY: 1,
+        draggable: true,
         image: null,
         name: 'imageName',
-        draggable: true,
       },
       transformerConfig: {
-        centeredScaling: true,
         borderEnabled: true,
+        centeredScaling: true,
       },
+
+      // name of current selected image
       selectedImageName: '',
     };
   },
   computed: {
+    ...mapState('background', [
+      'backgroundGradientSettings',
+      'backgroundSolidSettings',
+      'backgroundType',
+    ]),
     ...mapState('image', ['inputImage']),
     ...mapState('size', ['bannerSize']),
-    ...mapState('background', ['backgroundGradientSettings', 'backgroundType']),
+
     ...mapGetters('background', ['getBackgroundSolidRGBAString']),
 
+    // configuration data for konva main container: v-stage
     stageConfig() {
       return new StageConfig({
         width: this.bannerSize.width,
@@ -67,6 +80,7 @@ export default {
     },
   },
   watch: {
+    // watch for changes background type
     backgroundType() {
       if (this.backgroundType === 'solid') {
         this.stage.container().style.background = this.getBackgroundSolidRGBAString;
@@ -74,15 +88,21 @@ export default {
         this.stage.container().style.background = this.backgroundGradientSettings.style;
       }
     },
-    getBackgroundSolidRGBAString() {
+
+    // watch for changes solid background type
+    backgroundSolidSettings() {
       this.stage.container().style.background = this.getBackgroundSolidRGBAString;
     },
+
+    // watch for changes gradient background type
     backgroundGradientSettings: {
       handler() {
         this.stage.container().style.background = this.backgroundGradientSettings.style;
       },
       deep: true,
     },
+
+    // watch for changed input image
     'inputImage.file': {
       handler() {
         this.imageConfig.image = this.inputImage.file;
@@ -96,6 +116,7 @@ export default {
     window.addEventListener('keydown', (event) => this.escapeListener(event));
   },
   mounted() {
+    // set main stage node for konva.js
     this.stage = this.$refs.stage.getNode();
 
     // create listener on custom 'changeImagePosition' event.
@@ -148,6 +169,7 @@ export default {
       this.updateCanvas();
     },
 
+    // returning only image with transparent background. Image size = size banner
     async returnProcessedImage() {
       return new Promise((resolve, reject) => {
         this.updateCanvas();
