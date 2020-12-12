@@ -1,6 +1,6 @@
 # banner-editor. Редактор баннеров
 
-## <a href="https://itc-ads-33610.web.app/">Ссылка на приложение</a>
+## <a href="https://banner-editor-31e75.web.app/">Ссылка на приложение</a>
 
 ![alt text](screenshots/banner-editor-preview.jpg)
 
