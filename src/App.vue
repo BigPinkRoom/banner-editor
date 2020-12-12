@@ -1,7 +1,13 @@
 <template>
+  <!-- main app -->
   <v-app>
+    <!-- drawer component -->
     <app-drawer></app-drawer>
+
+    <!-- app-bar component -->
     <app-app-bar></app-app-bar>
+
+    <!-- banner component -->
     <v-main class="app__v-main">
       <app-view-banner></app-view-banner>
     </v-main>
