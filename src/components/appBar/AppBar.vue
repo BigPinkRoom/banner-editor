@@ -1,12 +1,5 @@
 <template>
-  <v-app-bar
-    app
-    color="grey lighten-3"
-    dark
-    flat
-    height="67"
-    @click="emitBannerHTMLClipboard"
-  >
+  <v-app-bar app color="grey lighten-3" dark flat height="67">
     <v-row>
       <v-col>
         <p class="ma-0 text-uppercase blue--text">
@@ -18,27 +11,33 @@
     </v-row>
     <v-spacer></v-spacer>
     <v-btn
+      :loading="booleanLoadingSettingsToJSON"
+      class="mr-2"
       color="blue"
       outlined
-      class="mr-2"
       @click="emitSettingsToClipboard"
-      :loading="booleanLoadingSettingsToJSON"
     >
       Json
       <v-icon class="ml-1">
         mdi-content-copy
       </v-icon>
     </v-btn>
-    <v-btn color="blue" outlined class="mr-2">
+    <v-btn
+      :loading="booleanLoadingBannerToHTML"
+      class="mr-2"
+      color="blue"
+      outlined
+      @click="emitBannerHTMLClipboard"
+    >
       Html
       <v-icon class="ml-1">
         mdi-content-copy
       </v-icon>
     </v-btn>
     <v-btn
+      :loading="booleanLoadingImageResult"
       color="green darken-2"
       outlined
-      :loading="booleanLoadingImageResult"
       @click="emitDownloadResult"
     >
       Download png

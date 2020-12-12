@@ -1,18 +1,19 @@
 <template>
+  <!-- main banner container. Shows the final result -->
   <div
     ref="bannerContainer"
     :style="{
       position: 'relative',
       width: `${bannerSize.width}px`,
       height: `${bannerSize.height}px`,
-      border: `${bannerFrame.frameSize}px solid ${getFrameColorRGBAString}`,
-      borderRadius: `${bannerFrame.frameRadius}px`,
+      boxSizing: 'content-box',
       overflow: 'hidden',
       backgroundColor: '#ffffff',
-      boxSizing: 'content-box',
-      transform: `scale(${scale})`,
+      border: `${bannerFrame.frameSize}px solid ${getFrameColorRGBAString}`,
+      borderRadius: `${bannerFrame.frameRadius}px`,
     }"
   >
+    <!-- text modules -->
     <app-banner-text-module
       v-for="(textElement, index) in textSettingsArray"
       :key="index"
@@ -30,6 +31,7 @@ import domToImage from 'dom-to-image';
 import { sendImageToImgbb } from '../../js/helpers/sendImageToImgbb';
 import BannerCanvas from './BannerCanvas';
 import BannerTextModule from './BannerTextModule';
+import { getCurrentDate } from '../../js/helpers/getCurrentDate';
 
 export default {
   name: 'BannerContainer',
@@ -38,13 +40,10 @@ export default {
     AppBannerTextModule: BannerTextModule,
   },
   props: {
+    // modifier current zoom
     zoomModifier: Number,
   },
-  data() {
-    return {
-      scale: 1,
-    };
-  },
+
   computed: {
     ...mapState('frame', ['bannerFrame']),
     ...mapState('image', ['inputImage']),
@@ -78,27 +77,36 @@ export default {
       'setError',
     ]),
 
+    // download finished banner
     async downloadResult() {
       this.clearError();
       this.increaseLoading('loadingImageResult');
       try {
         this.$refs.bannerCanvas.updateCanvas();
 
+        // wait for Konva ready. !!!Remake in the future
         await new Promise((resolve) => {
           setTimeout(() => resolve(), 1000);
         });
 
         let node = this.$refs.bannerContainer;
-        let dataUrl = await domToImage.toPng(node);
-        await (function() {
-          const img = new Image();
-          img.src = dataUrl;
 
-          const link = document.createElement('a');
-          link.download = 'NewBanner.png';
-          link.href = dataUrl;
-          link.click();
-        })();
+        //
+
+        // convert all banner container (with all tags and modules) to base64
+        let dataUrl = await domToImage.toPng(node);
+
+        const img = new Image();
+        img.src = dataUrl;
+
+        // create unique name for file
+        const fileName = `Banner_${getCurrentDate()}`;
+
+        const link = document.createElement('a');
+        link.download = `${fileName}.png`;
+        link.href = dataUrl;
+        link.click();
+
         this.decreaseLoading('loadingImageResult');
       } catch (error) {
         this.decreaseLoading('loadingImageResult');
@@ -109,18 +117,27 @@ export default {
       }
     },
 
+    // convert banner to HTML and copy to clipboard
     async copyBannerHTMLToClipboard() {
       this.clearError();
       this.increaseLoading('loadingBannerToHTML');
       try {
+        // get processed image
         const processedImage = await this.$refs.bannerCanvas.returnProcessedImage();
+
+        // send image to server and get URL to this image
         const processedImageURL = await sendImageToImgbb(processedImage);
+
+        // convert to HTML
         let bannerHTML = `
           <div style="position: relative; box-sizing: content-box; height: ${this.bannerSize.height}px; width: ${this.bannerSize.width}px; overflow: hidden; background: url('${processedImageURL}'), ${this.getCurrentBackgroundRGBAString}; background-repeat: no-repeat; border: ${this.bannerFrame.frameSize}px solid ${this.getFrameColorRGBAString}; border-radius: ${this.bannerFrame.frameRadius}px;">
           ${this.getAllTextModulesToHTML}
           </div>
         `;
-        console.log(bannerHTML);
+
+        // copy to clipboard
+        await this.$copyText(bannerHTML);
+
         this.decreaseLoading('loadingBannerToHTML');
       } catch (error) {
         this.decreaseLoading('loadingBannerToHTML');
@@ -131,12 +148,19 @@ export default {
       }
     },
 
-    async getBannerSettingsJSON() {
+    // convert banner settings of image to JSON and copy to clipboard
+    async copySettingsJSONToClipboard() {
+      this.clearError();
+      this.increaseLoading('loadingSettingsToJSON');
+
       try {
+        // get processed image
         const processedImage = await this.$refs.bannerCanvas.returnProcessedImage();
 
+        // send image to server and get URL to this image
         const processedImageURL = await sendImageToImgbb(processedImage);
 
+        // create banner settings object
         let bannerSettings = {
           size: this.bannerSize,
           background: {
@@ -149,24 +173,15 @@ export default {
           frame: this.bannerFrame,
         };
 
-        // set to bannerSettings object, processed image URL
+        // add processed image to objectSettings
         bannerSettings.image.processedFile = processedImageURL;
 
-        // return JSON string of bannerSettings;
-        return JSON.stringify(bannerSettings);
-      } catch (error) {
-        console.error(error);
-        throw error;
-      }
-    },
+        // create JSON string from bannerSettings;
+        const bannerSettingsJSON = JSON.stringify(bannerSettings);
 
-    async copySettingsJSONToClipboard() {
-      this.clearError();
-      this.increaseLoading('loadingSettingsToJSON');
+        // copy to clipboard
+        await this.$copyText(bannerSettingsJSON);
 
-      try {
-        const settingsObject = await this.getBannerSettingsJSON();
-        await this.$copyText(settingsObject);
         this.decreaseLoading('loadingSettingsToJSON');
       } catch (error) {
         this.decreaseLoading('loadingSettingsToJSON');

@@ -35,7 +35,6 @@ export default {
 
     setError({ commit }, payload) {
       commit('SET_ERROR', payload);
-      console.error(payload);
     },
 
     increaseLoading({ commit }, payload) {
@@ -54,7 +53,7 @@ export default {
       return Boolean(state.loadingSettingsToJSON);
     },
     booleanLoadingBannerToHTML(state) {
-      return Boolean(state.loadingSettingsToJSON);
+      return Boolean(state.loadingBannerToHTML);
     },
   },
 };
