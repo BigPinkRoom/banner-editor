@@ -1,3 +1,4 @@
+// send image to imgbb via API
 export async function sendImageToImgbb(imageBase64) {
   return new Promise(function(resolve, reject) {
     let formData = new FormData();

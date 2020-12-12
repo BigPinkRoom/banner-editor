@@ -1,3 +1,4 @@
+// get current date from number type
 export function getCurrentDate() {
   const rawDate = new Date();
   const year = rawDate.getFullYear();
