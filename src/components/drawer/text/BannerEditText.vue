@@ -108,8 +108,8 @@
           <v-col>
             <v-btn
               block
-              color="green"
               class="white--text"
+              color="green"
               @click="addTextBlock"
             >
               + Add text</v-btn
