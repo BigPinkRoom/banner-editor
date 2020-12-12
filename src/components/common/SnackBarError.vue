@@ -2,10 +2,10 @@
   <!-- snackbar for errors -->
   <v-snackbar
     v-if="error"
-    color="error"
     :timeout="20000"
-    @click.native="clearError"
     :value="true"
+    color="error"
+    @click.native="clearError"
   >
     {{ error }}
     <template v-slot:action>
