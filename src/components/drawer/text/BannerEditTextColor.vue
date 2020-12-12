@@ -3,7 +3,7 @@
     <!-- modal window -->
     <v-dialog eager width="320" v-model="colorPickerModal">
       <template v-slot:activator="{ on, attrs }">
-        <!-- activete button -->
+        <!-- activate button -->
         <v-btn
           v-bind="attrs"
           :color="colorRGBAToString()"
