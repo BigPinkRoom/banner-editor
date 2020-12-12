@@ -27,6 +27,7 @@ export default {
     },
   },
   actions: {
+    // submit current uploaded image to store
     submitImageToStore({ commit, dispatch }, payload) {
       dispatch('shared/clearError', null, { root: true });
 
@@ -67,6 +68,7 @@ export default {
       };
     },
 
+    // remove image from store
     removeImageInStore({ commit }) {
       commit('REMOVE_INPUT_IMAGE');
     },

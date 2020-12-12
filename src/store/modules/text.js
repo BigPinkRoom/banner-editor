@@ -27,6 +27,8 @@ export default {
         return `rgba(${state.textSettingsArray[textSettingsObjectId].color.selectedColorRGBA.r}, ${state.textSettingsArray[textSettingsObjectId].color.selectedColorRGBA.g}, ${state.textSettingsArray[textSettingsObjectId].color.selectedColorRGBA.b}, ${state.textSettingsArray[textSettingsObjectId].color.selectedColorRGBA.a})`;
       };
     },
+
+    // get all text modules to html
     getAllTextModulesToHTML(state, getters) {
       let textTagsArray = [];
       const textRGBAFunction = getters.getTextRGBAString;
