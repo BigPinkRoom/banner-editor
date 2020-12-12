@@ -27,7 +27,13 @@ export default {
 };
 </script>
 <style lang="scss">
-/* main */
+/* body */
+body {
+  min-width: 1160px;
+  background-color: #fafafa;
+}
+
+/* main vue */
 // v-main background
 .app__v-main {
   background-color: rgb(250, 250, 250);

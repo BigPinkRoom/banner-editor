@@ -1,5 +1,6 @@
 <template>
   <v-app-bar app color="grey lighten-3" dark flat height="67">
+    <!-- show current size of banner with borders -->
     <v-row>
       <v-col>
         <p class="ma-0 text-uppercase blue--text">
@@ -10,6 +11,8 @@
       </v-col>
     </v-row>
     <v-spacer></v-spacer>
+
+    <!-- download banner settings is JSON -->
     <v-btn
       :loading="booleanLoadingSettingsToJSON"
       class="mr-2"
@@ -22,6 +25,8 @@
         mdi-content-copy
       </v-icon>
     </v-btn>
+
+    <!-- download banner is HTML -->
     <v-btn
       :loading="booleanLoadingBannerToHTML"
       class="mr-2"
@@ -34,6 +39,8 @@
         mdi-content-copy
       </v-icon>
     </v-btn>
+
+    <!-- download banner on user device -->
     <v-btn
       :loading="booleanLoadingImageResult"
       color="green darken-2"
@@ -55,17 +62,18 @@ export default {
     ...mapState('size', ['bannerSize']),
     ...mapState('frame', ['bannerFrame']),
     ...mapGetters('shared', [
-      'booleanLoadingImageResult',
       'booleanLoadingSettingsToJSON',
       'booleanLoadingBannerToHTML',
+      'booleanLoadingImageResult',
     ]),
   },
   methods: {
-    emitBannerHTMLClipboard() {
-      this.$root.$emit('copyBannerHTMLToClipboard');
-    },
+    // emit event to main component
     emitSettingsToClipboard() {
       this.$root.$emit('copySettingsJSONToClipboard');
+    },
+    emitBannerHTMLClipboard() {
+      this.$root.$emit('copyBannerHTMLToClipboard');
     },
     emitDownloadResult() {
       this.$root.$emit('downloadResult');
