@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div :style="{ transform: `scale(${zoomModifier})` }">
+    <div
+      :style="{ transform: `scale(${zoomModifier})`, transformOrigin: 'top' }"
+    >
       <v-container class="d-flex justify-center align-center">
         <v-row class="d-flex justify-center">
           <v-col class="col-auto">

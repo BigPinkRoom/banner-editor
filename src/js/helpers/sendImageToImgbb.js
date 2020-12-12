@@ -7,7 +7,7 @@ export async function sendImageToImgbb(imageBase64) {
     let xhr = new XMLHttpRequest();
     xhr.open(
       'POST',
-      'https://api.imgbb.com/1/upload?expiration=600&key=***REMOVED***'
+      'https://api.imgbb.com/1/upload?key=***REMOVED***'
     );
     xhr.send(formData);
 

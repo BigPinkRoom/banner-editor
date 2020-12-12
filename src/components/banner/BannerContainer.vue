@@ -116,7 +116,7 @@ export default {
         const processedImage = await this.$refs.bannerCanvas.returnProcessedImage();
         const processedImageURL = await sendImageToImgbb(processedImage);
         let bannerHTML = `
-          <div style="position: relative; box-sizing: content-box; height: ${this.bannerSize.height}px; width: ${this.bannerSize.width}px; overflow: hidden; background-image: url('${processedImageURL}'), ${this.getCurrentBackgroundRGBAString}; background-repeat: no-repeat; border: ${this.bannerFrame.frameSize}px solid ${this.getFrameColorRGBAString}; border-radius: ${this.bannerFrame.frameRadius}px;">
+          <div style="position: relative; box-sizing: content-box; height: ${this.bannerSize.height}px; width: ${this.bannerSize.width}px; overflow: hidden; background: url('${processedImageURL}'), ${this.getCurrentBackgroundRGBAString}; background-repeat: no-repeat; border: ${this.bannerFrame.frameSize}px solid ${this.getFrameColorRGBAString}; border-radius: ${this.bannerFrame.frameRadius}px;">
           ${this.getAllTextModulesToHTML}
           </div>
         `;
