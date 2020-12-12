@@ -157,8 +157,8 @@ export default {
     ...validationBannerEditInputImage.errorMessages,
   },
   methods: {
-    ...mapActions('image', ['submitImageToStore', 'removeImageInStore']),
     ...mapMutations('shared', ['increaseLoading', 'decreaseLoading']),
+    ...mapActions('image', ['submitImageToStore', 'removeImageInStore']),
 
     // load file from user device to 'Banner Edit"
     async loadImageFile(event) {
