@@ -13,7 +13,7 @@ export async function sendImageToImgbb(imageBase64) {
 
     xhr.onload = function() {
       if (xhr.status != 200) {
-        // show error if statue not equal to '200'
+        // show error if status not equal to '200'
 
         reject(
           new Error(

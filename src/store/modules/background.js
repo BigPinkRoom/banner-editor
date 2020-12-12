@@ -34,5 +34,12 @@ export default {
     getBackgroundSolidRGBAString(state) {
       return `rgba(${state.backgroundSolidSettings.r}, ${state.backgroundSolidSettings.g}, ${state.backgroundSolidSettings.b}, ${state.backgroundSolidSettings.a})`;
     },
+    getCurrentBackgroundRGBAString(state) {
+      if (state.backgroundType === 'solid') {
+        return `rgba(${state.backgroundSolidSettings.r}, ${state.backgroundSolidSettings.g}, ${state.backgroundSolidSettings.b}, ${state.backgroundSolidSettings.a})`;
+      } else {
+        return `${state.backgroundGradientSettings.style})`;
+      }
+    },
   },
 };

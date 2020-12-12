@@ -3,8 +3,8 @@
     ref="bannerContainer"
     :style="{
       position: 'relative',
-      width: bannerSize.width + 'px',
-      height: bannerSize.height + 'px',
+      width: `${bannerSize.width}px`,
+      height: `${bannerSize.height}px`,
       border: `${bannerFrame.frameSize}px solid ${getFrameColorRGBAString}`,
       borderRadius: `${bannerFrame.frameRadius}px`,
       overflow: 'hidden',
@@ -56,6 +56,8 @@ export default {
       'backgroundGradientSettings',
     ]),
     ...mapGetters('frame', ['getFrameColorRGBAString']),
+    ...mapGetters('background', ['getCurrentBackgroundRGBAString']),
+    ...mapGetters('text', ['getAllTextModulesToHTML']),
   },
   mounted() {
     this.$root.$on('downloadResult', () => {
@@ -108,24 +110,25 @@ export default {
     },
 
     async copyBannerHTMLToClipboard() {
-      // this.clearError();
-      // this.increaseLoading('loadingBannerToHTML');
-      // try {
-      //   const processedImage = await this.$refs.bannerCanvas.returnProcessedImage();
-      //   const processedImageURL = await sendImageToImgbb(processedImage);
-      //   let bannerHTML = `
-      //     <div style="height: ${this.bannerSize.height}px; width: ${this.bannerSize.width}px; background-image: url(${processedImageURL}); background-repeat: no-repeat;">
-      //     </div>
-      //   `;
-      //   console.log(bannerHTML);
-      //   this.decreaseLoading('loadingBannerToHTML');
-      // } catch (error) {
-      //   this.decreaseLoading('loadingBannerToHTML');
-      //   this.setError(
-      //     `Something went wrong on copy bannerToHTML logic! Error:${error.message}`
-      //   );
-      //   console.error(error);
-      // }
+      this.clearError();
+      this.increaseLoading('loadingBannerToHTML');
+      try {
+        const processedImage = await this.$refs.bannerCanvas.returnProcessedImage();
+        const processedImageURL = await sendImageToImgbb(processedImage);
+        let bannerHTML = `
+          <div style="position: relative; box-sizing: content-box; height: ${this.bannerSize.height}px; width: ${this.bannerSize.width}px; overflow: hidden; background-image: url('${processedImageURL}'), ${this.getCurrentBackgroundRGBAString}; background-repeat: no-repeat; border: ${this.bannerFrame.frameSize}px solid ${this.getFrameColorRGBAString}; border-radius: ${this.bannerFrame.frameRadius}px;">
+          ${this.getAllTextModulesToHTML}
+          </div>
+        `;
+        console.log(bannerHTML);
+        this.decreaseLoading('loadingBannerToHTML');
+      } catch (error) {
+        this.decreaseLoading('loadingBannerToHTML');
+        this.setError(
+          `Something went wrong on copy bannerToHTML logic! Error:${error.message}`
+        );
+        console.error(error);
+      }
     },
 
     async getBannerSettingsJSON() {

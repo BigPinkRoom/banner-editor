@@ -149,10 +149,6 @@ export default {
     },
 
     async returnProcessedImage() {
-      // const image = this.$refs.imageCanvas.getNode();
-      // console.log(image);
-      // const layer = this.$refs.layer.getNode();
-      // console.log(layer);
       return new Promise((resolve, reject) => {
         this.updateCanvas();
         let link = document.createElement('a');

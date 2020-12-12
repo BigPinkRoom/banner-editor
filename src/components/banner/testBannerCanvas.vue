@@ -323,9 +323,6 @@ export default {
   },
   mounted() {
     this.stage = this.$refs.stage.getNode();
-    // const stage = this.$refs.stage.getNode();
-    // const dataURL = stage.toDataURL({ pixelRatio: 1 });
-    // console.log(dataURL);
   },
 };
 </script>
