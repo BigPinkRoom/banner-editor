@@ -1,34 +1,53 @@
-# banner-editor
+# banner-editor. Редактор баннеров
 
-## Project setup
+## <a href="https://itc-ads-33610.web.app/">Ссылка на приложение</a>
+
+![alt text](screenshots/banner-editor-preview.jpg)
+
+## Banner-editor
+
+Приложение для быстрого создания баннеров на фреймворке Vue.
+На данный момент, при экспорте баннера в HTML, ссылка на изображение работает только 24 часа!
+
+### Возможности:
+
+- Изменение размера баннера
+- Фон: сплошной цвет или градиент
+- Вставка изображения: с устройства пользователя или по ссылке
+- Текст: вставка текстовых модулей, в необходимом количестве. Изменение цвета, размера, шрифта, веса текста
+- Рамка: регулировка цвета, толщины и радиуса скругления
+- Масштаб: для работы с большими размерами баннера
+- Скачивание в виде файла
+- Копирование в буфер: текущих настроек баннера, баннер как HTML код
+- Отображение текущего размера баннера, включая толщину рамки
+
+### При разработке пользовался:
+
+- Vue
+- Vuex
+- Vuetify
+- Vue-cli
+- Firebase (хостинг)
+- CSS фреймворк SASS
+- Vue-Konva
+- Dom-to-image
+- Vuelidate
+- Vue-clipboard2
+
+## Настройка проекта и установка необходимых пакетов
+
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Компиляция и запуск на localhost:3999
+
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Компиляция и минимизация
+
 ```
 npm run build
 ```
-
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Run your end-to-end tests
-```
-npm run test:e2e
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
