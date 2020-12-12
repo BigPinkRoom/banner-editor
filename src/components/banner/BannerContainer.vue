@@ -108,29 +108,24 @@ export default {
     },
 
     async copyBannerHTMLToClipboard() {
-      this.clearError();
-      this.increaseLoading('loadingBannerToHTML');
-
-      try {
-        const processedImage = await this.$refs.bannerCanvas.returnProcessedImage();
-        const processedImageURL = await sendImageToImgbb(processedImage);
-
-        let bannerHTML = `
-          <div style="height: ${this.bannerSize.height}px; width: ${this.bannerSize.width}px; background-image: url(${processedImageURL}); background-repeat: no-repeat;">
-
-          </div>
-        `;
-
-        console.log(bannerHTML);
-
-        this.decreaseLoading('loadingBannerToHTML');
-      } catch (error) {
-        this.decreaseLoading('loadingBannerToHTML');
-        this.setError(
-          `Something went wrong on copy bannerToHTML logic! Error:${error.message}`
-        );
-        console.error(error);
-      }
+      // this.clearError();
+      // this.increaseLoading('loadingBannerToHTML');
+      // try {
+      //   const processedImage = await this.$refs.bannerCanvas.returnProcessedImage();
+      //   const processedImageURL = await sendImageToImgbb(processedImage);
+      //   let bannerHTML = `
+      //     <div style="height: ${this.bannerSize.height}px; width: ${this.bannerSize.width}px; background-image: url(${processedImageURL}); background-repeat: no-repeat;">
+      //     </div>
+      //   `;
+      //   console.log(bannerHTML);
+      //   this.decreaseLoading('loadingBannerToHTML');
+      // } catch (error) {
+      //   this.decreaseLoading('loadingBannerToHTML');
+      //   this.setError(
+      //     `Something went wrong on copy bannerToHTML logic! Error:${error.message}`
+      //   );
+      //   console.error(error);
+      // }
     },
 
     async getBannerSettingsJSON() {

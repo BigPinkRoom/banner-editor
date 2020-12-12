@@ -17,7 +17,7 @@ export async function sendImageToImgbb(imageBase64) {
 
         reject(
           new Error(
-            `Error ${xhr.status}: ${xhr.statusText}. Full message: ${xhr.response}`
+            `Error${xhr.status}: ${xhr.statusText}. Full message: ${xhr.response}`
           )
         );
       } else {
@@ -27,7 +27,9 @@ export async function sendImageToImgbb(imageBase64) {
     };
 
     xhr.onerror = function() {
-      reject(new Error('Request failed'));
+      reject(
+        new Error(`Request failed! Error${xhr.status}: ${xhr.statusText}.`)
+      );
     };
   });
 }
