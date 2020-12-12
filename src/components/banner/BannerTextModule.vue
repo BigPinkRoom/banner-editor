@@ -1,4 +1,5 @@
 <template>
+  <!-- module of text -->
   <p
     :style="{
       position: 'absolute',
@@ -40,15 +41,18 @@ export default {
   methods: {
     ...mapActions('text', ['submitElementPositionToStore']),
 
+    // initial drag-and-drop functional
     dragText(event) {
       dragAndDrop(event, event.target, this.zoomModifier);
     },
 
+    // convert RGBA text color to string
     textRGBAString(index) {
       const textRGBAFunction = this.getTextRGBAString;
       return textRGBAFunction(index);
     },
 
+    // submit current text module position to store
     submitPosition(event) {
       this.submitElementPositionToStore({
         numberArray: this.index,
