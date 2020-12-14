@@ -1,4 +1,4 @@
-import { InputImage } from '../../js/entities/InputImage';
+import { InputImage } from '../../js/entities/inputImage';
 
 export default {
   namespaced: true,
