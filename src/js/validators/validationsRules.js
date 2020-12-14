@@ -1,8 +1,4 @@
 import {
-  // alpha,
-  // email,
-  // maxLength,
-  // minLength,
   maxValue,
   minValue,
   numeric,
