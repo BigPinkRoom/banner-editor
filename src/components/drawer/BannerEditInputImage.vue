@@ -84,8 +84,9 @@
               class="white--text"
               color="blue-grey"
               @click="emitChangeImageSize('byWidth')"
-              >By width</v-btn
             >
+              By width
+            </v-btn>
           </v-col>
 
           <!-- change image height by banner height -->
@@ -98,8 +99,9 @@
               class="white--text"
               color="blue-grey"
               @click="emitChangeImageSize('byHeight')"
-              >By height</v-btn
             >
+              By height
+            </v-btn>
           </v-col>
 
           <!-- reset position image -->
@@ -110,8 +112,9 @@
               class="white--text"
               color="blue-grey"
               @click="emitChangeImageSize('')"
-              >Reset position</v-btn
             >
+              Reset position
+            </v-btn>
           </v-col>
           <v-col>
             <p class="mb-0 text-subtitle-2">Remove image from canvas:</p>

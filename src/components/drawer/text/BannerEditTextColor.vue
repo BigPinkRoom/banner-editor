@@ -13,19 +13,19 @@
           v-on="on"
           @click="colorPickerModal = true"
         >
-          color</v-btn
-        >
+          color
+        </v-btn>
       </template>
 
       <!-- color picker container -->
       <v-container>
         <!-- color picker -->
         <v-row class="d-flex flex-column">
-          <v-col
-            ><p class="text-uppercase white--text mb-0">
+          <v-col>
+            <p class="text-uppercase white--text mb-0">
               Change text color:
-            </p></v-col
-          >
+            </p>
+          </v-col>
           <v-col>
             <v-color-picker
               v-model="colorRGBA"
@@ -45,8 +45,9 @@
               class="white--text"
               color="blue-grey"
               @click="submitColorRGBAToParent"
-              >Ok</v-btn
             >
+              Ok
+            </v-btn>
           </v-col>
         </v-row>
       </v-container>

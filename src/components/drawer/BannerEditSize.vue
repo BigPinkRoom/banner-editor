@@ -33,9 +33,9 @@
 
       <!-- change banner size button -->
       <v-col class="pt-0">
-        <v-btn class="white--text" color="green" @click="changeBannerSize"
-          >Change size</v-btn
-        >
+        <v-btn class="white--text" color="green" @click="changeBannerSize">
+          Change size
+        </v-btn>
       </v-col>
     </v-row>
   </v-container>

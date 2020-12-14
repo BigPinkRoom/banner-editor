@@ -3,9 +3,9 @@
     <!-- frame size  -->
     <v-row>
       <v-col class="pa-0">
-        <v-subheader class="banner-edit-frame-settings__subheader"
-          >Border size</v-subheader
-        >
+        <v-subheader class="banner-edit-frame-settings__subheader">
+          Border size
+        </v-subheader>
         <v-slider
           v-model="bannerFrame.frameSize"
           max="150"
@@ -19,9 +19,9 @@
     <!-- frame radius  -->
     <v-row>
       <v-col class="pa-0">
-        <v-subheader class="banner-edit-frame-settings__subheader"
-          >Border radius</v-subheader
-        >
+        <v-subheader class="banner-edit-frame-settings__subheader">
+          Border radius
+        </v-subheader>
         <v-slider
           v-model="bannerFrame.frameRadius"
           max="150"
@@ -35,9 +35,9 @@
     <!-- frame color  -->
     <v-row>
       <v-col class="pa-0">
-        <v-subheader class="banner-edit-frame-settings__subheader"
-          >Border color</v-subheader
-        >
+        <v-subheader class="banner-edit-frame-settings__subheader">
+          Border color
+        </v-subheader>
         <v-color-picker
           v-model="bannerFrame.frameColorRGBA"
           dot-size="30"

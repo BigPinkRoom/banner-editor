@@ -3,11 +3,11 @@
     <!-- logo -->
     <v-list-item class="elevation-3">
       <v-list-item-content>
-        <v-list-item-title class="title text-uppercase"
-          >Banner-editor</v-list-item-title
-        >
+        <v-list-item-title class="title text-uppercase">
+          Banner-editor
+        </v-list-item-title>
         <v-list-item-subtitle class="text-uppercase">
-          absolutely free
+          Absolutely free
         </v-list-item-subtitle>
       </v-list-item-content>
     </v-list-item>
