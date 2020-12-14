@@ -32,27 +32,33 @@ export default {
     index: Number,
     zoomModifier: Number,
   },
-  data() {
-    return {};
-  },
   computed: {
     ...mapGetters('text', ['getTextRGBAString']),
   },
   methods: {
     ...mapActions('text', ['submitElementPositionToStore']),
 
-    // initial drag-and-drop functional
+    /**
+     * initial drag-and-drop functional
+     * @prop {Object} event - mouse event
+     */
     dragText(event) {
       dragAndDrop(event, event.target, this.zoomModifier);
     },
 
-    // convert RGBA text color to string
+    /**
+     * convert RGBA text color to string
+     * @prop {Number} index - current index of text array
+     * @return {String} RGBA color string
+     */
     textRGBAString(index) {
-      const textRGBAFunction = this.getTextRGBAString;
-      return textRGBAFunction(index);
+      return this.getTextRGBAString(index);
     },
 
-    // submit current text module position to store
+    /**
+     * submit current text module position to the store
+     * @prop {Object} event - mouse event
+     */
     submitPosition(event) {
       this.submitElementPositionToStore({
         numberArray: this.index,

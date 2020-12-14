@@ -163,20 +163,27 @@ export default {
     ...mapMutations('shared', ['increaseLoading', 'decreaseLoading']),
     ...mapActions('image', ['submitImageToStore', 'removeImageInStore']),
 
-    // load file from user device to 'Banner Edit"
+    /**
+     * load file from user device to 'Banner Edit"
+     * @prop {Object} event - mouse event
+     */
     async loadImageFile(event) {
       const imageFile = event.target.files[0];
       await this.submitImageToStore(imageFile);
     },
 
-    // load file from URL link to 'Banner Edit"
+    /**
+     * load file from URL link to 'Banner Edit"
+     */
     async loadImageURL() {
       const fileURL = await this.convertURLToFile(this.imageURL);
       this.submitImageToStore(fileURL);
       this.imageURL = '';
     },
 
-    // trigger of upload image
+    /**
+     * trigger of upload image
+     */
     triggerUpload() {
       this.$refs.fileInput.click();
     },

@@ -1,4 +1,7 @@
-// function for konva. End tranform image
+/**
+ * function for konva. End tranform image
+ * @prop {Object} event - mouse event
+ */
 export function handleTransformEnd(event) {
   // image is transformed, let us save new attrs back to the node
   // find element in our state
@@ -11,7 +14,10 @@ export function handleTransformEnd(event) {
   image.scaleY = event.target.scaleY();
 }
 
-// function for konva. Mouse down event
+/**
+ * function for konva. Mouse down event
+ * @prop {Object} event - mouse event
+ */
 export function handleStageMouseDown(event) {
   // clicked on stage (outside to image) - clear selection
   if (event.target === event.target.getStage()) {
@@ -20,14 +26,18 @@ export function handleStageMouseDown(event) {
     return;
   }
 
-  // clicked on transformer - do nothing
+  /**
+   * clicked on transformer - do nothing
+   */
   const clickedOnTransformer =
     event.target.getParent().className === 'Transformer';
   if (clickedOnTransformer) {
     return;
   }
 
-  // find clicked image by its name
+  /**
+   * find clicked image by its name
+   */
   const name = event.target.name();
   const image = this.imageConfig;
   if (image) {
@@ -38,7 +48,9 @@ export function handleStageMouseDown(event) {
   this.updateTransformer();
 }
 
-// update tranformer
+/**
+ * update tranformer
+ */
 export function updateTransformer() {
   // here we need to manually attach or detach Transformer node
   const transformerNode = this.$refs.transformer.getNode();
@@ -57,6 +69,9 @@ export function updateTransformer() {
   transformerNode.getLayer().batchDraw();
 }
 
+/**
+ * update all canvas
+ */
 export function updateCanvas() {
   this.selectedImageName = '';
   this.updateTransformer();

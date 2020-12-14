@@ -21,9 +21,6 @@ import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'SnackBarError',
-  data() {
-    return {};
-  },
   computed: {
     ...mapState('shared', ['error']),
   },

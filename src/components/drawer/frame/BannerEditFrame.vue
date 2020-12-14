@@ -18,8 +18,5 @@ export default {
   components: {
     AppBannerEditFrameSettings: BannerEditFrameSettings,
   },
-  data() {
-    return {};
-  },
 };
 </script>

@@ -78,13 +78,17 @@ export default {
     ...mapGetters('text', ['getTextRGBAString']),
   },
   methods: {
-    // convert color RGBA object to string
+    /**
+     * convert color RGBA object to string
+     * @returns {string}
+     */
     colorRGBAToString() {
-      let func = this.getTextRGBAString;
-      return func(this.currentEditTextModuleIndex);
+      return this.getTextRGBAString(this.currentEditTextModuleIndex);
     },
 
-    // submit event (change color) to parent
+    /**
+     * submit event (change color) to parent
+     */
     submitColorRGBAToParent() {
       this.colorPickerModal = false;
       this.$emit('changeColorRGBA', { selectedColorRGBA: this.colorRGBA });

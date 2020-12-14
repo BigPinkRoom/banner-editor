@@ -67,7 +67,6 @@ export default {
     ]),
   },
   methods: {
-    // emit event to main component
     emitSettingsToClipboard() {
       this.$root.$emit('copySettingsJSONToClipboard');
     },

@@ -68,7 +68,9 @@ export default {
   methods: {
     ...mapActions('size', ['submitBannerSizeToStore']),
 
-    // validate and submit banner size to store
+    /**
+     * validate and submit banner size to store
+     */
     changeBannerSize() {
       this.$v.bannerWidth.$touch();
       this.$v.bannerHeight.$touch();

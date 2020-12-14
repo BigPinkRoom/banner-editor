@@ -23,13 +23,11 @@
         </v-row>
 
         <!-- solid background module -->
-        <app-banner-edit-background-solid
-          v-if="editBackgroundType === 'solid'"
-        />
+        <app-banner-edit-background-solid v-if="isBackgroundTypeSolid()" />
 
         <!-- gradient background module -->
         <app-banner-edit-background-gradient
-          v-if="editBackgroundType === 'gradient'"
+          v-if="isBackgroundTypeGradient()"
         />
       </v-col>
     </v-row>
@@ -53,6 +51,22 @@ export default {
   },
   methods: {
     ...mapActions('background', ['submitBackgroundTypeToStore']),
+
+    /**
+     * convert RGBA text color to string
+     * @return {Boolean} background type
+     */
+    isBackgroundTypeSolid() {
+      return this.editBackgroundType === 'solid';
+    },
+
+    /**
+     * convert RGBA text color to string
+     * @return {Boolean} background type
+     */
+    isBackgroundTypeGradient() {
+      return this.editBackgroundType === 'gradient';
+    },
   },
 };
 </script>

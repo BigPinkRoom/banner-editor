@@ -30,16 +30,14 @@ import {
   updateCanvas,
   updateTransformer,
 } from '../../js/utils/konva';
-import { removeMimeType } from '../../js/helpers/removeMimeType';
+import { getDataBase64 } from '../../js/helpers/getDataBase64';
 
 export default {
   name: 'BannerCanvas',
   data() {
     return {
-      // main container node
       stage: null,
 
-      // configuration data for upload image module
       imageConfig: {
         x: 0,
         y: 0,
@@ -55,7 +53,6 @@ export default {
         centeredScaling: true,
       },
 
-      // name of current selected image
       selectedImageName: '',
     };
   },
@@ -70,7 +67,6 @@ export default {
 
     ...mapGetters('background', ['getBackgroundSolidRGBAString']),
 
-    // configuration data for konva main container: v-stage
     stageConfig() {
       return new StageConfig({
         width: this.bannerSize.width,
@@ -80,7 +76,6 @@ export default {
     },
   },
   watch: {
-    // watch for changes background type
     backgroundType() {
       if (this.backgroundType === 'solid') {
         this.stage.container().style.background = this.getBackgroundSolidRGBAString;
@@ -89,12 +84,10 @@ export default {
       }
     },
 
-    // watch for changes solid background type
     backgroundSolidSettings() {
       this.stage.container().style.background = this.getBackgroundSolidRGBAString;
     },
 
-    // watch for changes gradient background type
     backgroundGradientSettings: {
       handler() {
         this.stage.container().style.background = this.backgroundGradientSettings.style;
@@ -102,7 +95,6 @@ export default {
       deep: true,
     },
 
-    // watch for changed input image
     'inputImage.file': {
       handler() {
         this.imageConfig.image = this.inputImage.file;
@@ -112,41 +104,39 @@ export default {
     },
   },
   created() {
-    // create listener on keydown event
     window.addEventListener('keydown', (event) => this.escapeListener(event));
   },
   mounted() {
-    // set main stage node for konva.js
     this.stage = this.$refs.stage.getNode();
 
-    // create listener on custom 'changeImagePosition' event.
     this.$root.$on('changeImageSize', (sizeType) => {
       this.changeImageSize(sizeType);
     });
   },
   beforeDestroy() {
-    // delete listener on custom 'changeImagePosition' event (before destroy this component)
     this.$root.$off('changeImageSize');
   },
   methods: {
-    // handlers for konva
+    /**
+     * handlers of conva
+     */
     handleTransformEnd,
     handleStageMouseDown,
     updateTransformer,
     updateCanvas,
 
-    // change image size on canvas
+    /**
+     * change image size on canvas
+     * @prop {String} sizeType - type of image size
+     */
     changeImageSize(sizeType) {
       const imageCanvas = this.$refs.imageCanvas.getNode();
 
-      // reset image position on canvas
       imageCanvas.position({ x: 0, y: 0 });
 
-      // reset image rotation on canvas
       this.imageConfig.rotation = 0;
 
       const imageSizeMethods = {
-        // change image size by canvas height
         byHeight() {
           this.imageConfig.scaleY =
             this.bannerSize.height / this.inputImage.height;
@@ -154,7 +144,6 @@ export default {
             this.bannerSize.height / this.inputImage.height;
         },
 
-        // change image size by canvas width
         byWidth() {
           this.imageConfig.scaleY =
             this.bannerSize.width / this.inputImage.width;
@@ -165,12 +154,14 @@ export default {
 
       if (sizeType) imageSizeMethods[sizeType].bind(this)();
 
-      // updateCanvas
       this.updateCanvas();
     },
 
-    // returning only image with transparent background. Image size = size banner
-    async returnProcessedImage() {
+    /**
+     * returning only image with transparent background. Image size === size banner
+     * @returns {String} base64 image without mime data
+     */
+    async getProcessedImage() {
       return new Promise((resolve, reject) => {
         this.updateCanvas();
         let link = document.createElement('a');
@@ -181,7 +172,7 @@ export default {
           mimeType: 'image/png',
         });
 
-        const imageBase64 = removeMimeType(link.href);
+        const imageBase64 = getDataBase64(link.href);
         if (imageBase64) {
           resolve(imageBase64);
         } else {
@@ -190,7 +181,9 @@ export default {
       });
     },
 
-    // remove transformer frame (on selected image)
+    /**
+     * remove transformer frame (on selected image)
+     */
     escapeListener(event) {
       if (event.key === 'Escape') {
         this.updateCanvas();

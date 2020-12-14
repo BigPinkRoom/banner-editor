@@ -21,14 +21,20 @@ export default {
     },
   },
   getters: {
-    // convert text color of text module (on id) to string
+    /**
+     * convert text color of text module (on id) to string
+     * @returns {Function}
+     */
     getTextRGBAString(state) {
       return function(textSettingsObjectId) {
         return `rgba(${state.textSettingsArray[textSettingsObjectId].color.selectedColorRGBA.r}, ${state.textSettingsArray[textSettingsObjectId].color.selectedColorRGBA.g}, ${state.textSettingsArray[textSettingsObjectId].color.selectedColorRGBA.b}, ${state.textSettingsArray[textSettingsObjectId].color.selectedColorRGBA.a})`;
       };
     },
 
-    // get all text modules to html
+    /**
+     * get all text modules to html
+     * @returns {String}
+     */
     getAllTextModulesToHTML(state, getters) {
       let textTagsArray = [];
       const textRGBAFunction = getters.getTextRGBAString;

@@ -34,7 +34,6 @@ export default {
     ...mapState('background', ['backgroundSolidSettings']),
   },
   watch: {
-    // watch on solid color change
     colorRGBA() {
       this.submitBackgroundSolidSettingsToStore(this.colorRGBA.rgba);
     },

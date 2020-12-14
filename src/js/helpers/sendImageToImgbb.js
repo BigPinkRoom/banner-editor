@@ -1,4 +1,8 @@
-// send image to imgbb via API
+/**
+ * send image to imgbb via API
+ * @prop {String} imageBase64 - Base64 image data
+ * @returns {String} URL adress of uploaded image
+ */
 export async function sendImageToImgbb(imageBase64) {
   return new Promise(function(resolve, reject) {
     let formData = new FormData();

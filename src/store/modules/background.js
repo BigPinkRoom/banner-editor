@@ -30,11 +30,16 @@ export default {
     },
   },
   getters: {
-    // convert RGBA color object to string
+    /**
+     * convert RGBA color object to string
+     */
     getBackgroundSolidRGBAString(state) {
       return `rgba(${state.backgroundSolidSettings.r}, ${state.backgroundSolidSettings.g}, ${state.backgroundSolidSettings.b}, ${state.backgroundSolidSettings.a})`;
     },
-    // convert to RGBA color from current background type
+
+    /**
+     * convert to RGBA color from current background type
+     */
     getCurrentBackgroundRGBAString(state) {
       if (state.backgroundType === 'solid') {
         return `rgba(${state.backgroundSolidSettings.r}, ${state.backgroundSolidSettings.g}, ${state.backgroundSolidSettings.b}, ${state.backgroundSolidSettings.a})`;

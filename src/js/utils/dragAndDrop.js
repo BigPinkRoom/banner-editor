@@ -1,11 +1,14 @@
+/**
+ * drag and drop function
+ * @prop {Object} event - mouse event
+ * @prop {Object} dragElement - draggable tag
+ * @prop {number} zoomModifier - modifier of current zoom
+ */
 export function dragAndDrop(event, dragElement, zoomModifier = 1) {
-  // initial parent element
   const parent = event.target.parentElement;
 
-  // initial parent element coordinates by getBoundingClientRect object
   let parentCoords = parent.getBoundingClientRect();
 
-  // initial parent edges (with border)
   let parentTopEdge = parentCoords.top + parent.clientTop;
   let parentRightEdge =
     parentCoords.left + parent.offsetWidth - parent.clientLeft;
@@ -13,23 +16,18 @@ export function dragAndDrop(event, dragElement, zoomModifier = 1) {
     parentCoords.top + parent.offsetHeight - parent.clientTop;
   let parentLeftEdge = parentCoords.left + parent.clientLeft;
 
-  // initial correct (with position on drag element) mouse coordinates
   let shiftX, shiftY;
 
-  // function to start drag
   startDrag(dragElement, event.clientX, event.clientY);
 
-  // function to mouse up
   function onMouseUp() {
     finishDrag();
   }
 
-  // function to mouse move
   function onMouseMove(event) {
     moveAt(event.clientX, event.clientY);
   }
 
-  // events to start drag element
   function startDrag(element, clientX, clientY) {
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
@@ -40,7 +38,6 @@ export function dragAndDrop(event, dragElement, zoomModifier = 1) {
     moveAt(clientX, clientY);
   }
 
-  // events to finish drag element
   function finishDrag() {
     dragElement.style.top = parseInt(dragElement.style.top) + 'px';
     dragElement.style.left = parseInt(dragElement.style.left) + 'px';
@@ -49,7 +46,6 @@ export function dragAndDrop(event, dragElement, zoomModifier = 1) {
     document.removeEventListener('mouseup', onMouseUp);
   }
 
-  // events to move drag element
   function moveAt(clientX, clientY) {
     let newX = clientX - shiftX;
     let newY = clientY - shiftY;
@@ -65,13 +61,13 @@ export function dragAndDrop(event, dragElement, zoomModifier = 1) {
     }
 
     // bottom owerflow behaviour
-    if (newY + dragElement.offsetHeight >= parentBottomEdge) {
-      newY = parentBottomEdge - dragElement.offsetHeight;
+    if (newY + dragElement.offsetHeight / 1.2 >= parentBottomEdge) {
+      newY = parentBottomEdge - dragElement.offsetHeight / 1.2;
     }
 
     // right owerflow behaviour
-    if (newX + dragElement.offsetWidth >= parentRightEdge) {
-      newX = parentRightEdge - dragElement.offsetWidth;
+    if (newX + dragElement.offsetWidth / 1.1 >= parentRightEdge) {
+      newX = parentRightEdge - dragElement.offsetWidth / 1.1;
     }
 
     dragElement.style.left = (newX - parentLeftEdge) / zoomModifier + 'px';

@@ -5,9 +5,9 @@
       <app-color-picker
         :gradient="gradient"
         :isGradient="true"
-        :onChange="(color) => onChange(color, 'change')"
-        :onEndChange="(color) => onChange(color, 'end')"
-        :onStartChange="(color) => onChange(color, 'start')"
+        :onChange="onChange"
+        :onEndChange="onChange"
+        :onStartChange="onChange"
       />
     </v-col>
   </v-row>
@@ -49,9 +49,12 @@ export default {
   methods: {
     ...mapActions('background', ['submitBackgroundGradientSettingsToStore']),
 
-    // change gradient on change in color picker
-    onChange(attrs) {
-      this.submitBackgroundGradientSettingsToStore(attrs);
+    /**
+     * change gradient on change in color picker
+     * @prop {Object} color - object of 'vue-color-gradient-picker' plugin
+     */
+    onChange(color) {
+      this.submitBackgroundGradientSettingsToStore(color);
     },
   },
 };

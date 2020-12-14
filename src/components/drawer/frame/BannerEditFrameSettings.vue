@@ -74,7 +74,6 @@ export default {
     };
   },
   watch: {
-    // watch to change frame settings
     bannerFrame: {
       handler() {
         this.submitBannerFrameToStore(this.bannerFrame);

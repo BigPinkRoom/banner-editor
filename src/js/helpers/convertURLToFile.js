@@ -1,4 +1,8 @@
-// converting url link to image file
+/**
+ * converting url link to image file
+ * @prop {String} imageUrl - string to URL adress of image
+ * @returns {Object} image file object
+ */
 export async function convertURLToFile(imageURL) {
   this.$store.dispatch('shared/clearError', null, { root: true });
   this.$store.dispatch('shared/increaseLoading', 'loadingImageUrl', {

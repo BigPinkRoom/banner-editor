@@ -27,7 +27,10 @@ export default {
     },
   },
   actions: {
-    // submit current uploaded image to store
+    /**
+     * submit current uploaded image to store
+     * @param {Object} payload - image object
+     */
     submitImageToStore({ commit, dispatch }, payload) {
       dispatch('shared/clearError', null, { root: true });
 
@@ -68,14 +71,18 @@ export default {
       };
     },
 
-    // remove image from store
+    /**
+     * remove image from store
+     */
     removeImageInStore({ commit }) {
       commit('REMOVE_INPUT_IMAGE');
     },
   },
 
   getters: {
-    // return boolean - is image on store
+    /**
+     * return boolean - is image on store
+     */
     isImageOnStore(state) {
       return Boolean(state.inputImage.file);
     },

@@ -56,7 +56,7 @@
                     <v-col class="col-6 py-0 pl-0 pr-1">
                       <v-select
                         v-model="EditTextModule.settings.fontFamily"
-                        :items="fontFamilies"
+                        :items="params.fontFamilies"
                         dense
                         label="Font family"
                         outlined
@@ -78,7 +78,7 @@
                     <v-col class="col-6 py-0 pl-0 pr-1">
                       <v-select
                         v-model="EditTextModule.settings.size"
-                        :items="fontSizes"
+                        :items="params.fontSizes"
                         dense
                         label="Size"
                         outlined
@@ -90,7 +90,7 @@
                     <v-col class="col-6 py-0 pl-1 pr-0">
                       <v-select
                         v-model="EditTextModule.settings.weight"
-                        :items="fontWeight"
+                        :items="params.fontWeight"
                         dense
                         label="Weight"
                         outlined
@@ -123,7 +123,8 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import BannerEditTextColor from './BannerEditTextColor';
-import { TextBlock } from '../../../js/entities/textBlock';
+import params from '@/params';
+import { TextBlock } from '@/js/entities/textBlock';
 
 export default {
   name: 'BannerEditText',
@@ -132,24 +133,10 @@ export default {
   },
   data() {
     return {
+      params,
       editTextModules: [],
-      fontFamilies: ['sans-serif', 'serif', 'monospace', 'cursive'],
-      fontSizes: [...Array(250).keys()].map((x) => ++x),
-      fontWeight: [
-        '100',
-        '200',
-        '300',
-        '400',
-        '500',
-        '600',
-        '700',
-        '800',
-        '900',
-      ],
     };
   },
-
-  // watch to change text modules
   watch: {
     editTextModules: {
       handler() {
@@ -164,7 +151,9 @@ export default {
   methods: {
     ...mapActions('text', ['submitTextSettingsToStore']),
 
-    // add new text block to 'editTextModules' array
+    /**
+     * add new text block to 'editTextModules' array
+     */
     addTextBlock() {
       let textBlock = new TextBlock({
         position: {
@@ -189,12 +178,18 @@ export default {
       this.editTextModules.push(textBlock);
     },
 
-    // delete text block (to index)
+    /**
+     * delete text block (to index)
+     * @prop {number} indexTextModule - index the text module
+     */
     deleteTextBlock(indexTextModule) {
       this.editTextModules.splice(indexTextModule, 1);
     },
 
-    // correct text module position after change font size
+    /**
+     * correct text module position after change font size
+     * @prop {Object} textModule - the text module
+     */
     correctPositionTextModule(textModule) {
       if (textModule.position.x < 0 || textModule.position.y < 0) {
         textModule.position.x = 0;

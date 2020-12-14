@@ -23,7 +23,9 @@ export default {
     },
   },
   getters: {
-    // convert RGBA color object to string
+    /**
+     * convert RGBA color object to string
+     */
     getFrameColorRGBAString(state) {
       return `rgba(${state.bannerFrame.frameColorRGBA.r}, ${state.bannerFrame.frameColorRGBA.g}, ${state.bannerFrame.frameColorRGBA.b}, ${state.bannerFrame.frameColorRGBA.a})`;
     },
