@@ -1,9 +1,7 @@
 <template>
   <div>
     <!-- banner container zoom tag -->
-    <div
-      :style="{ transform: `scale(${zoomModifier})`, transformOrigin: 'top' }"
-    >
+    <div :style="zoomContainerStyle">
       <v-container class="d-flex justify-center align-center">
         <v-row class="d-flex justify-center">
           <v-col class="col-auto">
@@ -46,6 +44,14 @@ export default {
     return {
       zoomModifier: 1,
     };
+  },
+  computed: {
+    zoomContainerStyle() {
+      return {
+        transform: `scale(${this.zoomModifier})`,
+        transformOrigin: 'top',
+      };
+    },
   },
 };
 </script>

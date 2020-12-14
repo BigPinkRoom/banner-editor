@@ -1,19 +1,7 @@
 <template>
   <!-- module of text -->
   <p
-    :style="{
-      position: 'absolute',
-      zIndex: 1,
-      top: textElement.position.y,
-      left: textElement.position.x,
-      color: textRGBAString(index),
-      fontSize: `${textElement.settings.size}px`,
-      fontFamily: textElement.settings.fontFamily,
-      fontWeight: textElement.settings.weight,
-      lineHeight: '1',
-      whiteSpace: 'nowrap',
-      cursor: 'pointer',
-    }"
+    :style="textModuleStyle"
     @mousedown.prevent="dragText"
     @mouseup="submitPosition"
   >
@@ -34,6 +22,22 @@ export default {
   },
   computed: {
     ...mapGetters('text', ['getTextRGBAString']),
+
+    textModuleStyle() {
+      return {
+        position: 'absolute',
+        zIndex: 1,
+        top: this.textElement.position.y,
+        left: this.textElement.position.x,
+        color: this.textRGBAString(this.index),
+        fontSize: `${this.textElement.settings.size}px`,
+        fontFamily: this.textElement.settings.fontFamily,
+        fontWeight: this.textElement.settings.weight,
+        lineHeight: '1',
+        whiteSpace: 'nowrap',
+        cursor: 'pointer',
+      };
+    },
   },
   methods: {
     ...mapActions('text', ['submitElementPositionToStore']),

@@ -1,18 +1,6 @@
 <template>
   <!-- main banner container. Shows the final result -->
-  <div
-    ref="bannerContainer"
-    :style="{
-      position: 'relative',
-      width: `${bannerSize.width}px`,
-      height: `${bannerSize.height}px`,
-      boxSizing: 'content-box',
-      overflow: 'hidden',
-      backgroundColor: '#ffffff',
-      border: `${bannerFrame.frameSize}px solid ${getFrameColorRGBAString}`,
-      borderRadius: `${bannerFrame.frameRadius}px`,
-    }"
-  >
+  <div ref="bannerContainer" :style="bannerContainerStyle">
     <!-- text modules -->
     <app-banner-text-module
       v-for="(textElement, index) in textSettingsArray"
@@ -55,6 +43,19 @@ export default {
     ...mapGetters('frame', ['getFrameColorRGBAString']),
     ...mapGetters('background', ['getCurrentBackgroundRGBAString']),
     ...mapGetters('text', ['getAllTextModulesToHTML']),
+
+    bannerContainerStyle() {
+      return {
+        position: 'relative',
+        width: `${this.bannerSize.width}px`,
+        height: `${this.bannerSize.height}px`,
+        boxSizing: 'content-box',
+        overflow: 'hidden',
+        backgroundColor: '#ffffff',
+        border: `${this.bannerFrame.frameSize}px solid ${this.getFrameColorRGBAString}`,
+        borderRadius: `${this.bannerFrame.frameRadius}px`,
+      };
+    },
   },
   mounted() {
     this.$root.$on('downloadResult', () => {
