@@ -10,9 +10,9 @@ import {
   // sameAs,
 } from 'vuelidate/lib/validators';
 
-/* -----------------------------
-Validation on 'EditInputImage.vue' 
-------------------------------*/
+/**
+ * Validation on 'EditInputImage.vue'
+ */
 
 export const validationEditInputImage = {
   validations: {
@@ -31,9 +31,9 @@ export const validationEditInputImage = {
   },
 };
 
-/* -----------------------------
-Validation on 'EditSize.vue' 
-------------------------------*/
+/**
+ * Validation on 'EditSize.vue'
+ */
 
 export const validationEditSize = {
   validations: {
