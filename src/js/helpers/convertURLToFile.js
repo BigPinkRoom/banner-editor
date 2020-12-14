@@ -1,5 +1,5 @@
 /**
- * converting url link to image file
+ * converting URL link to image file
  * @prop {String} imageUrl - string to URL adress of image
  * @returns {Object} image file object
  */

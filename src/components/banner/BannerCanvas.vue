@@ -77,11 +77,16 @@ export default {
   },
   watch: {
     backgroundType() {
-      if (this.backgroundType === 'solid') {
-        this.stage.container().style.background = this.getBackgroundSolidRGBAString;
-      } else {
-        this.stage.container().style.background = this.backgroundGradientSettings.style;
-      }
+      const typesObject = {
+        solid: () => {
+          this.stage.container().style.background = this.getBackgroundSolidRGBAString;
+        },
+        gradient: () => {
+          this.stage.container().style.background = this.backgroundGradientSettings.style;
+        },
+      };
+
+      typesObject[this.backgroundType]();
     },
 
     backgroundSolidSettings() {
