@@ -4,9 +4,8 @@
     <v-row>
       <v-col>
         <p class="ma-0 text-uppercase blue--text">
-          Final size (with borders): W
-          {{ bannerSize.width + bannerFrame.frameSize * 2 }}; H
-          {{ bannerSize.height + bannerFrame.frameSize * 2 }}
+          Final size (with borders): W {{ getFinalSize('width') }}; H
+          {{ getFinalSize('height') }}
         </p>
       </v-col>
     </v-row>
@@ -77,6 +76,17 @@ export default {
     },
     emitDownloadResult() {
       this.$root.$emit('downloadResult');
+    },
+
+    /**
+     * calculates the final size
+     * @returns {Number}
+     */
+    getFinalSize(type) {
+      return {
+        width: this.bannerSize.width + this.bannerFrame.frameSize * 2,
+        height: this.bannerSize.height + this.bannerFrame.frameSize * 2,
+      }[type];
     },
   },
 };
