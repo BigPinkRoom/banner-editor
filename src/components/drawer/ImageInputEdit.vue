@@ -136,18 +136,18 @@
 import { mapActions, mapGetters, mapMutations } from 'vuex';
 import { validationMixin } from 'vuelidate';
 import { convertURLToFile } from '../../js/helpers/convertURLToFile';
-import { validationBannerEditInputImage } from '../../js/validators/validationsRules';
+import { validationEditInputImage } from '../../js/validators/validationsRules';
 
 export default {
-  name: 'BannerEditInputImage',
+  name: 'EditInputImage',
   mixins: [validationMixin],
 
   // VUETIFY. Validations rules
-  validations: validationBannerEditInputImage.validations,
+  validations: validationEditInputImage.validations,
 
   data() {
     return {
-      name: 'BannerEditInputImage',
+      name: 'EditInputImage',
       convertURLToFile,
       imageURL: '',
     };
@@ -157,7 +157,7 @@ export default {
     ...mapGetters('image', ['isImageOnStore']),
 
     // VUETIFY. Validation errors
-    ...validationBannerEditInputImage.errorMessages,
+    ...validationEditInputImage.errorMessages,
   },
   methods: {
     ...mapMutations('shared', ['increaseLoading', 'decreaseLoading']),

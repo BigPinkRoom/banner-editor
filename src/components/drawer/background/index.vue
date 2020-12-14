@@ -23,26 +23,24 @@
         </v-row>
 
         <!-- solid background module -->
-        <app-banner-edit-background-solid v-if="isBackgroundTypeSolid()" />
+        <app-background-solid-edit v-if="isBackgroundTypeSolid()" />
 
         <!-- gradient background module -->
-        <app-banner-edit-background-gradient
-          v-if="isBackgroundTypeGradient()"
-        />
+        <app-background-gradient-edit v-if="isBackgroundTypeGradient()" />
       </v-col>
     </v-row>
   </v-container>
 </template>
 <script>
 import { mapActions } from 'vuex';
-import BannerEditBackgroundSolid from './BannerEditBackgroundSolid';
-import BannerEditBackgroundGradient from './BannerEditBackroundGradient';
+import BackgroundSolidEdit from './BackgroundSolidEdit';
+import BackgroundGradientEdit from './BackgroundGradientEdit';
 
 export default {
-  name: 'BannerEditBackground',
+  name: 'EditBackground',
   components: {
-    AppBannerEditBackgroundSolid: BannerEditBackgroundSolid,
-    AppBannerEditBackgroundGradient: BannerEditBackgroundGradient,
+    AppBackgroundSolidEdit: BackgroundSolidEdit,
+    AppBackgroundGradientEdit: BackgroundGradientEdit,
   },
   data() {
     return {

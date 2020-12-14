@@ -7,16 +7,16 @@
         <v-divider color="green"></v-divider>
       </v-col>
     </v-row>
-    <app-banner-edit-frame-settings></app-banner-edit-frame-settings>
+    <app-frame-settings-edit />
   </v-container>
 </template>
 <script>
-import BannerEditFrameSettings from './BannerEditFrameSettings';
+import FrameSettingsEdit from './FrameSettingsEdit';
 
 export default {
-  name: 'BannerEditFrame',
+  name: 'EditFrame',
   components: {
-    AppBannerEditFrameSettings: BannerEditFrameSettings,
+    AppFrameSettingsEdit: FrameSettingsEdit,
   },
 };
 </script>

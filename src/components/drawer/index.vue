@@ -65,19 +65,19 @@
       <v-col>
         <v-tabs-items vertical v-model="tab">
           <v-tab-item>
-            <app-banner-edit-size></app-banner-edit-size>
+            <app-size-edit />
           </v-tab-item>
           <v-tab-item>
-            <app-banner-edit-background></app-banner-edit-background>
+            <app-background-edit />
           </v-tab-item>
           <v-tab-item>
-            <app-banner-edit-input-image></app-banner-edit-input-image>
+            <app-image-input-edit />
           </v-tab-item>
           <v-tab-item>
-            <app-banner-edit-text></app-banner-edit-text>
+            <app-text-edit />
           </v-tab-item>
           <v-tab-item>
-            <app-banner-edit-frame></app-banner-edit-frame>
+            <app-frame-edit />
           </v-tab-item>
         </v-tabs-items>
       </v-col>
@@ -85,20 +85,20 @@
   </v-navigation-drawer>
 </template>
 <script>
-import AppBannerEditBackground from './background/BannerEditBackground';
-import AppBannerEditFrame from './frame/BannerEditFrame';
-import AppBannerEditInputImage from './BannerEditInputImage';
-import AppBannerEditSize from './BannerEditSize';
-import AppBannerEditText from './text/BannerEditText';
+import AppBackgroundEdit from './background';
+import AppFrameEdit from './frame';
+import AppImageInputEdit from './ImageInputEdit';
+import AppSizeEdit from './SizeEdit';
+import AppTextEdit from './text';
 
 export default {
   name: 'Drawer',
   components: {
-    AppBannerEditBackground,
-    AppBannerEditFrame,
-    AppBannerEditInputImage,
-    AppBannerEditSize,
-    AppBannerEditText,
+    AppBackgroundEdit,
+    AppFrameEdit,
+    AppImageInputEdit,
+    AppSizeEdit,
+    AppTextEdit,
   },
   data() {
     return {

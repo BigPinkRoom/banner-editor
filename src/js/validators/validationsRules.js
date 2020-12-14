@@ -11,10 +11,10 @@ import {
 } from 'vuelidate/lib/validators';
 
 /* -----------------------------
-Validation on 'BannerEditInputImage.vue' 
+Validation on 'EditInputImage.vue' 
 ------------------------------*/
 
-export const validationBannerEditInputImage = {
+export const validationEditInputImage = {
   validations: {
     imageURL: {
       required,
@@ -32,10 +32,10 @@ export const validationBannerEditInputImage = {
 };
 
 /* -----------------------------
-Validation on 'BannerEditSize.vue' 
+Validation on 'EditSize.vue' 
 ------------------------------*/
 
-export const validationBannerEditSize = {
+export const validationEditSize = {
   validations: {
     bannerWidth: {
       maxValue: maxValue(5000),

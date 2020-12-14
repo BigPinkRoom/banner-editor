@@ -20,8 +20,8 @@
       :index="index"
       :textElement="textElement"
       :zoomModifier="zoomModifier"
-    ></app-banner-text-module>
-    <app-banner-canvas ref="bannerCanvas"></app-banner-canvas>
+    />
+    <app-banner-canvas ref="bannerCanvas" />
   </div>
 </template>
 

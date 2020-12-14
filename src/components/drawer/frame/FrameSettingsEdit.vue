@@ -58,7 +58,7 @@
 import { mapActions } from 'vuex';
 
 export default {
-  name: 'BannerEditFrameSettings',
+  name: 'EditFrameSettings',
   data() {
     return {
       bannerFrame: {

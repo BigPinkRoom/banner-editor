@@ -63,7 +63,7 @@
                       ></v-select>
                     </v-col>
                     <v-col class="col-6 py-0 pl-1 pr-0">
-                      <app-banner-edit-text-color
+                      <app-text-color-edit
                         :currentEditTextModuleIndex="index"
                         @changeColorRGBA="
                           (selectedColorRGBA) =>
@@ -122,14 +122,14 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import BannerEditTextColor from './BannerEditTextColor';
+import TextColorEdit from './TextColorEdit';
 import params from '@/params';
 import { TextBlock } from '@/js/entities/textBlock';
 
 export default {
   name: 'BannerEditText',
   components: {
-    AppBannerEditTextColor: BannerEditTextColor,
+    AppTextColorEdit: TextColorEdit,
   },
   data() {
     return {

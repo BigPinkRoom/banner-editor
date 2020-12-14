@@ -18,7 +18,7 @@ import { mapActions } from 'vuex';
 import { ColorPicker } from 'vue-color-gradient-picker';
 
 export default {
-  name: 'BannerEditBackgroundGradient',
+  name: 'EditBackgroundGradient',
   components: {
     AppColorPicker: ColorPicker,
   },

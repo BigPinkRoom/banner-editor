@@ -22,7 +22,7 @@
 import { mapActions, mapState } from 'vuex';
 
 export default {
-  name: 'BannerEditBackgroundSolid',
+  name: 'EditBackgroundSolid',
   data() {
     return {
       colorRGBA: {

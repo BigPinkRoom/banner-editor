@@ -44,14 +44,14 @@
 import { mapActions, mapState } from 'vuex';
 import { validationMixin } from 'vuelidate';
 import { BannerSize } from '../../js/entities/bannerSize';
-import { validationBannerEditSize } from '../../js/validators/validationsRules';
+import { validationEditSize } from '../../js/validators/validationsRules';
 
 export default {
-  name: 'BannerEditSize',
+  name: 'EditSize',
   mixins: [validationMixin],
 
   // VUETIFY. Validations rules
-  validations: validationBannerEditSize.validations,
+  validations: validationEditSize.validations,
 
   data() {
     return {
@@ -63,7 +63,7 @@ export default {
     ...mapState('size', ['bannerSize']),
 
     // VUETIFY. Validation errors
-    ...validationBannerEditSize.errorMessages,
+    ...validationEditSize.errorMessages,
   },
   methods: {
     ...mapActions('size', ['submitBannerSizeToStore']),

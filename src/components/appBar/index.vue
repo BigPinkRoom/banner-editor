@@ -57,6 +57,7 @@
 import { mapGetters, mapState } from 'vuex';
 
 export default {
+  name: 'AppBar',
   computed: {
     ...mapState('size', ['bannerSize']),
     ...mapState('frame', ['bannerFrame']),

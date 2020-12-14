@@ -2,14 +2,14 @@
   <!-- main app -->
   <v-app>
     <!-- drawer component -->
-    <app-drawer></app-drawer>
+    <app-drawer />
 
     <!-- app-bar component -->
-    <app-app-bar></app-app-bar>
+    <app-app-bar />
 
     <!-- banner component -->
     <v-main class="app__v-main">
-      <app-view-banner></app-view-banner>
+      <app-view-banner />
     </v-main>
 
     <app-snack-bar-error></app-snack-bar-error>
@@ -17,13 +17,13 @@
 </template>
 
 <script>
-import AppBar from './components/appBar/AppBar';
-import Drawer from './components/drawer/Drawer';
+import AppBar from './components/appBar';
+import Drawer from './components/drawer';
 import SnackBarError from './components/common/SnackBarError';
-import ViewBanner from './components/banner/ViewBanner';
+import ViewBanner from './components/banner';
 
 export default {
-  name: 'App',
+  name: 'MainApp',
   components: {
     AppAppBar: AppBar,
     AppDrawer: Drawer,

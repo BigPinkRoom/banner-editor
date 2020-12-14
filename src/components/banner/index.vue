@@ -8,8 +8,7 @@
         <v-row class="d-flex justify-center">
           <v-col class="col-auto">
             <!-- banner container -->
-            <app-banner-container :zoomModifier="zoomModifier">
-            </app-banner-container>
+            <app-banner-container :zoomModifier="zoomModifier" />
           </v-col>
         </v-row>
       </v-container>
@@ -39,7 +38,7 @@
 import BannerContainer from './BannerContainer';
 
 export default {
-  name: 'ViewBanner',
+  name: 'BannerView',
   components: {
     AppBannerContainer: BannerContainer,
   },
