@@ -125,11 +125,7 @@ export default {
 
         const processedImageURL = await sendImageToImgbb(processedImage);
 
-        let bannerHTML = `
-          <div style="position: relative; box-sizing: content-box; height: ${this.bannerSize.height}px; width: ${this.bannerSize.width}px; overflow: hidden; background: url('${processedImageURL}'), ${this.getCurrentBackgroundRGBAString}; background-repeat: no-repeat; border: ${this.bannerFrame.frameSize}px solid ${this.getFrameColorRGBAString}; border-radius: ${this.bannerFrame.frameRadius}px;">
-          ${this.getAllTextModulesToHTML}
-          </div>
-        `;
+        let bannerHTML = `<div style="position: relative; box-sizing: content-box; height: ${this.bannerSize.height}px; width: ${this.bannerSize.width}px; overflow: hidden; background: url('${processedImageURL}'), ${this.getCurrentBackgroundRGBAString}; background-repeat: no-repeat; border: ${this.bannerFrame.frameSize}px solid ${this.getFrameColorRGBAString}; border-radius: ${this.bannerFrame.frameRadius}px;">${this.getAllTextModulesToHTML}</div>`;
 
         await this.$copyText(bannerHTML);
 
@@ -171,7 +167,7 @@ export default {
 
         const bannerSettingsJSON = JSON.stringify(bannerSettings);
 
-        await this.$copyText(bannerSettingsJSON);
+        this.$copyText(bannerSettingsJSON);
 
         this.decreaseLoading('loadingSettingsToJSON');
       } catch (error) {
