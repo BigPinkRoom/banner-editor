@@ -5,6 +5,7 @@ node_modules
 .firebase
 firebase
 /dist
+package-lock.json
 
 /tests/e2e/videos/
 /tests/e2e/screenshots/
