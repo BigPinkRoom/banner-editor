@@ -1,6 +1,13 @@
 export class InputImage {
-  constructor({ file = '', processedFile = '', width = 0, height = 0 }) {
+  constructor({
+    file = '',
+    fileName = '',
+    processedFile = '',
+    width = 0,
+    height = 0,
+  }) {
     this.file = file;
+    this.fileName = fileName;
     this.processedFile = processedFile;
     this.width = width;
     this.height = height;

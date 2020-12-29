@@ -9,7 +9,6 @@ import {
 /**
  * Validation on 'EditInputImage.vue'
  */
-
 export const validationEditInputImage = {
   validations: {
     imageURL: {
@@ -30,7 +29,6 @@ export const validationEditInputImage = {
 /**
  * Validation on 'EditSize.vue'
  */
-
 export const validationEditSize = {
   validations: {
     bannerWidth: {

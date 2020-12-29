@@ -5,6 +5,7 @@ export default {
   state: {
     inputImage: {
       file: '',
+      fileName: '',
       processedFile: '',
       width: 0,
       height: 0,
@@ -17,13 +18,11 @@ export default {
     REMOVE_INPUT_IMAGE(state) {
       state.inputImage = {
         file: '',
+        fileName: '',
         processedFile: '',
         width: 1,
         height: 1,
       };
-    },
-    SET_EVENT(state, payload, value) {
-      state.events[payload] = Boolean(value);
     },
   },
   actions: {
@@ -57,11 +56,11 @@ export default {
         image.onload = function() {
           imageWidth = this.width;
           imageHeight = this.height;
-
           commit(
             'SET_INPUT_IMAGE',
             new InputImage({
               file: image,
+              fileName: payload.name,
               processedFile: '',
               width: imageWidth,
               height: imageHeight,
@@ -82,9 +81,23 @@ export default {
   getters: {
     /**
      * return boolean - is image on store
+     * @returns {Boolean}
      */
     isImageOnStore(state) {
       return Boolean(state.inputImage.file);
+    },
+
+    /**
+     * return object to export settings
+     * @returns {Object}
+     */
+    imageInformation(state) {
+      return {
+        file: state.inputImage.fileName,
+        processedFile: state.inputImage.processedFile,
+        width: state.inputImage.width,
+        height: state.inputImage.height,
+      };
     },
   },
 };

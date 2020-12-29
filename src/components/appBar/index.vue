@@ -17,12 +17,9 @@
       class="mr-2"
       color="blue"
       outlined
-      @click="emitSettingsToClipboard"
+      @click="emitCreateSettingsJSON"
     >
-      Json
-      <v-icon class="ml-1">
-        mdi-content-copy
-      </v-icon>
+      To JSON
     </v-btn>
 
     <!-- download banner is HTML -->
@@ -31,12 +28,9 @@
       class="mr-2"
       color="blue"
       outlined
-      @click="emitBannerHTMLClipboard"
+      @click="emitCreateBannerHTML"
     >
-      Html
-      <v-icon class="ml-1">
-        mdi-content-copy
-      </v-icon>
+      To HTML
     </v-btn>
 
     <!-- download banner on user device -->
@@ -68,11 +62,11 @@ export default {
     ]),
   },
   methods: {
-    emitSettingsToClipboard() {
-      this.$root.$emit('copySettingsJSONToClipboard');
+    emitCreateSettingsJSON() {
+      this.$root.$emit('createSettingsJSON');
     },
-    emitBannerHTMLClipboard() {
-      this.$root.$emit('copyBannerHTMLToClipboard');
+    emitCreateBannerHTML() {
+      this.$root.$emit('createBannerHTML');
     },
     emitDownloadResult() {
       this.$root.$emit('downloadResult');

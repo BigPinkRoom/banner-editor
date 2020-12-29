@@ -169,6 +169,9 @@ export default {
     async getProcessedImage() {
       return new Promise((resolve, reject) => {
         this.updateCanvas();
+        if (!this.imageConfig.image) {
+          resolve('');
+        }
         let link = document.createElement('a');
         link.download = 'filename.png';
 
